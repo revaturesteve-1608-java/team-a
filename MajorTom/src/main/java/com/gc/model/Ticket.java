@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -17,14 +18,20 @@ public class Ticket {
 	@SequenceGenerator(allocationSize=1,name="ticketSeq",sequenceName="TICKET_SEQ")
 	@GeneratedValue(generator="ticketSeq",strategy=GenerationType.SEQUENCE)
 	Integer ticketId;
+	
 	@Column(name="FIRST_NAME")
 	String firstName;
+	
 	@Column(name="LAST_NAME")
 	String lastName;
+	
 	@Column(name="EMAIL", length=1023)
 	String email;
+	
 	@Column(name="PHONE", length=31)
 	String phone;
+	
+	@OneToOne
 	@JoinColumn(name="SEAT_ID")
 	Seat seat;
 	

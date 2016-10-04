@@ -14,7 +14,7 @@ public class SeatType {
 	@Id
 	@Column(name = "SEAT_TYPE_ID")
 	@SequenceGenerator(allocationSize = 1, name = "seatTypeSeq", sequenceName = "SEAT_TYPE_SEQ")
-	@GeneratedValue(generator = "airlineSseatTypeSeqeq", strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(generator = "seatTypeSeq", strategy = GenerationType.SEQUENCE)
 	Integer seatTypeId;
 	@Column(name="SEAT_TYPE_NAME")
 	String seatTypeName;

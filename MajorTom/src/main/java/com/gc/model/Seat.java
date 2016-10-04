@@ -19,8 +19,9 @@ public class Seat {
 	@GeneratedValue(generator = "seatSeq", strategy = GenerationType.SEQUENCE)
 	Integer seatId;
 	
+	@ManyToOne
 	@JoinColumn(name = "SEAT_TYPE_ID")
-	Integer seatType;
+	SeatType seatType;
 	
 	@ManyToOne
 	@JoinColumn(name = "FLIGHT_ID")
@@ -30,7 +31,7 @@ public class Seat {
 	public Seat() {
 		super();
 	}
-	public Seat(Integer seatId, Integer seatType, Flight flight) {
+	public Seat(Integer seatId, SeatType seatType, Flight flight) {
 		super();
 		this.seatId = seatId;
 		this.seatType = seatType;
@@ -43,10 +44,10 @@ public class Seat {
 	public void setSeatId(Integer seatId) {
 		this.seatId = seatId;
 	}
-	public Integer getSeatType() {
+	public SeatType getSeatType() {
 		return seatType;
 	}
-	public void setSeatType(Integer seatType) {
+	public void setSeatType(SeatType seatType) {
 		this.seatType = seatType;
 	}
 	public Flight getFlightId() {

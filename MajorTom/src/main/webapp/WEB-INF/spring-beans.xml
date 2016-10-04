@@ -13,9 +13,10 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
 
 	<!-- Find Spring Beans -->
-	<context:component-scan base-package="com.ex" />
+	<context:component-scan base-package="com.gc" />
 
 	<!-- Enable @Transactional annotation -->
+	<mvc:annotation-driven></mvc:annotation-driven>
 	<tx:annotation-driven />
 
 	<!-- Define DataSource -->
@@ -32,13 +33,14 @@
 	<!-- Because Spring Data doesn't natively support Hibernate (But it does support JPA) -->
 	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="packagesToScan" value="com.ex.domain" />
+		<property name="packagesToScan" value="com.gc.model" />
 		<property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter" />
 		<property name="jpaProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.format_sql">true</prop>
+				<!-- <prop key="hibernate.hbm2ddl.auto">create</prop> -->
 			</props>
 		</property>
 	</bean>

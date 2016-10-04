@@ -23,7 +23,7 @@ public class Airline {
 	@Column(name="AIRLINE_NAME")
 	String name;
 	
-	@OneToMany(mappedBy="airlineId")
+	@OneToMany(mappedBy="airline")
 	Set<Flight> flights;
 	
 	public Airline() {

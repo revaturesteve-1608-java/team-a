@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -22,6 +23,7 @@ public class Flight {
 	@GeneratedValue(generator = "flightSeq", strategy = GenerationType.SEQUENCE)
 	Integer flightId;
 	
+	@ManyToOne
 	@JoinColumn(name = "DESTINATION_ID")
 	Destination destination;
 	
@@ -29,7 +31,7 @@ public class Flight {
 	@JoinColumn(name = "AIRLINE_ID")
 	Airline airline;
 	
-	@OneToMany(mappedBy = "flightId")
+	@OneToMany(mappedBy = "flight")
 	Set<Seat> seats;
 
 	

@@ -1,10 +1,13 @@
 package com.gc.model;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -16,9 +19,12 @@ public class Destination {
 	@SequenceGenerator(allocationSize=1,name="destinationSeq",sequenceName="DESTINATION_SEQ")
 	@GeneratedValue(generator="destinationSeq",strategy=GenerationType.SEQUENCE)
 	Integer destinationID;
+	
 	@Column(name="DESTINATION_NAME")
 	String destinationName;
 	
+	@OneToMany(mappedBy="destination")
+	Set<Flight> flights;
 	
 	public Destination() {
 		super();
@@ -41,9 +47,16 @@ public class Destination {
 	public void setDestinationName(String destinationName) {
 		this.destinationName = destinationName;
 	}
+	public Set<Flight> getFlights() {
+		return flights;
+	}
+	public void setFlights(Set<Flight> flights) {
+		this.flights = flights;
+	}
 	
 	@Override
 	public String toString() {
-		return "Destination [destinationID=" + destinationID + ", destinationName=" + destinationName + "]";
+		return "Destination [destinationID=" + destinationID + ", destinationName=" + destinationName + ", flights="
+				+ flights + "]";
 	}
 }
