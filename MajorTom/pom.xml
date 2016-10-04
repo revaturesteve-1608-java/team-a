@@ -83,6 +83,8 @@
 				<configuration>
 					<url>http://http://ec2-54-162-104-65.compute-1.amazonaws.com:8080/manager/text</url>
 					<server>devserver</server>
+					<username>script</username>
+					<password>welcome1</password>
 					<path>/majortom</path>
 				</configuration>
 			</plugin>
