@@ -35,11 +35,8 @@ public class Flight {
 
 	
 	public Flight() {
-		super();
 	}
-	public Flight(Integer flightId, Destination destination, Airline airline) {
-		super();
-		this.flightId = flightId;
+	public Flight(Destination destination, Airline airline) {
 		this.destination = destination;
 		this.airline = airline;
 	}
