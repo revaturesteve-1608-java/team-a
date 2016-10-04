@@ -11,6 +11,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 @Entity
 @Table(name="AIRLINE")
 public class Airline {
@@ -24,6 +27,7 @@ public class Airline {
 	String name;
 	
 	@OneToMany(mappedBy="airline")
+	@Fetch(FetchMode.JOIN)
 	Set<Flight> flights;
 	
 	public Airline() {

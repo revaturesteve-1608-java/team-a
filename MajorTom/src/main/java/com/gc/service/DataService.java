@@ -18,11 +18,21 @@ public interface DataService {
 	void saveSeatType(SeatType seatType);
 	void saveTicket(Ticket ticket);
 	
-	void findAllAirline();
-	void findAllDestination();
-	void findAllEmployee();
-	void findAllFlight();
-	void findAllSeat();
-	void findAllSeatType();
-	void findAllTicket();
+	void findAllAirlines();
+	void findAllDestinations();
+	void findAllEmployees();
+	void findAllFlights();
+	void findAllSeats();
+	void findAllSeatTypes();
+	void findAllTickets();
+	
+	Airline findAirlineById(Integer id);
+	Destination findDestinationById(Integer id);
+	Employee findEmployeeById(Integer id);
+	Flight findFlightById(Integer id);
+	Seat findSeatById(Integer id);
+	SeatType findSeatTypeById(Integer id);
+	Ticket findTicketById(Integer id);
+	
+	Airline findAirlineByName(String name);
 }
