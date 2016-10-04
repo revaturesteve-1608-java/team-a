@@ -4,6 +4,7 @@
 /MajorTom/*
 !/MajorTom/placeholder.txt
 !/MajorTom/pom.xml
+!/MajorTom/pomdev.xml
 !/MajorTom/src/
 !/MajorTom/src/*
 */Servers/*
