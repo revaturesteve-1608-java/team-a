@@ -27,11 +27,8 @@ public class Airline {
 	Set<Flight> flights;
 	
 	public Airline() {
-		super();
 	}
-	public Airline(Integer airlineId, String name) {
-		super();
-		this.airlineId = airlineId;
+	public Airline(String name) {
 		this.name = name;
 	}
 	

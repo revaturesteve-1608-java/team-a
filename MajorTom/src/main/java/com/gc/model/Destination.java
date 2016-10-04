@@ -23,6 +23,9 @@ public class Destination {
 	@Column(name="DESTINATION_NAME")
 	String destinationName;
 	
+	@Column(name="DESTINATION_CODE", length=4)
+	String destinationCode;
+	
 	@OneToMany(mappedBy="destination")
 	Set<Flight> flights;
 	
@@ -47,6 +50,12 @@ public class Destination {
 	public void setDestinationName(String destinationName) {
 		this.destinationName = destinationName;
 	}
+	public String getDestinationCode() {
+		return destinationCode;
+	}
+	public void setDestinationCode(String destinationCode) {
+		this.destinationCode = destinationCode;
+	}
 	public Set<Flight> getFlights() {
 		return flights;
 	}
@@ -56,7 +65,7 @@ public class Destination {
 	
 	@Override
 	public String toString() {
-		return "Destination [destinationID=" + destinationID + ", destinationName=" + destinationName + ", flights="
-				+ flights + "]";
+		return "Destination [destinationID=" + destinationID + ", destinationName=" + destinationName
+				+ ", destinationCode=" + destinationCode + ", flights=" + flights + "]";
 	}
 }
