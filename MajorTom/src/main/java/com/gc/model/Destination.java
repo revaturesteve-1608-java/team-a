@@ -30,14 +30,14 @@ public class Destination {
 	Set<Flight> flights;
 	
 	public Destination() {
-		super();
-	}
-	public Destination(Integer destinationID, String destinationName) {
-		super();
-		this.destinationID = destinationID;
-		this.destinationName = destinationName;
 	}
 	
+	public Destination(String destinationName, String destinationCode) {
+		this.destinationName = destinationName;
+		this.destinationCode = destinationCode;
+	}
+
+
 	public Integer getDestinationID() {
 		return destinationID;
 	}

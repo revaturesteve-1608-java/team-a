@@ -16,6 +16,13 @@ public class Employee {
 	@SequenceGenerator(allocationSize = 1, name = "employeeSeq", sequenceName = "EMPLOYEE_SEQ")
 	@GeneratedValue(generator = "employeeSeq", strategy = GenerationType.SEQUENCE)
 	Integer EmployeeId;
-	@Column(name="ROLE_NAME")
-	String roleName;
+	@Column(name="USERNAME")
+	String username;
+	@Column(name="PASSWORD")
+	String password;
+	@Column(name="FIRST_NAME")
+	String firstName;
+	@Column(name="LAST_NAME")
+	String lastName;
+	
 }

@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.gc.dao.AirlineRepo;
 import com.gc.dao.DestinationRepo;
 import com.gc.dao.EmployeeRepo;
-import com.gc.dao.EmployeeRoleRepo;
 import com.gc.dao.FlightRepo;
 import com.gc.dao.SeatRepo;
 import com.gc.dao.SeatTypeRepo;
@@ -15,7 +14,6 @@ import com.gc.dao.TicketRepo;
 import com.gc.model.Airline;
 import com.gc.model.Destination;
 import com.gc.model.Employee;
-import com.gc.model.EmployeeRole;
 import com.gc.model.Flight;
 import com.gc.model.Seat;
 import com.gc.model.SeatType;
@@ -31,8 +29,6 @@ public class DataServiceImpl implements DataService{
 	@Autowired
 	EmployeeRepo employeeRepo;
 	@Autowired
-	EmployeeRoleRepo employeeRoleRepo;
-	@Autowired
 	FlightRepo flightRepo;
 	@Autowired
 	SeatRepo seatRepo;
@@ -41,6 +37,9 @@ public class DataServiceImpl implements DataService{
 	@Autowired
 	TicketRepo ticketRepo;
 
+	/*
+	 * Save All methods for every object
+	 */
 	@Override
 	public void saveAirline(Airline airline) {
 		airlineRepo.save(airline);
@@ -52,10 +51,6 @@ public class DataServiceImpl implements DataService{
 	@Override
 	public void saveEmployee(Employee employee) {
 		employeeRepo.save(employee);
-	}
-	@Override
-	public void saveEmployeeRole(EmployeeRole employeeRole) {
-		employeeRoleRepo.save(employeeRole);
 	}
 	@Override
 	public void saveFlight(Flight flight) {
@@ -75,4 +70,35 @@ public class DataServiceImpl implements DataService{
 	}
 	
 	
+	/*
+	 * Find All methods for every object
+	 */
+	@Override
+	public void findAllAirline() {
+		airlineRepo.findAll();
+	}
+	@Override
+	public void findAllDestination() {
+		destinationRepo.findAll();
+	}
+	@Override
+	public void findAllEmployee() {
+		employeeRepo.findAll();
+	}
+	@Override
+	public void findAllFlight() {
+		flightRepo.findAll();
+	}
+	@Override
+	public void findAllSeat() {
+		seatRepo.findAll();
+	}
+	@Override
+	public void findAllSeatType() {
+		seatTypeRepo.findAll();
+	}
+	@Override
+	public void findAllTicket() {
+		ticketRepo.findAll();
+	}
 }
