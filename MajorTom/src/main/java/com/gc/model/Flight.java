@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -20,10 +21,14 @@ public class Flight {
 	@SequenceGenerator(allocationSize = 1, name = "flightSeq", sequenceName = "FLIGHT_SEQ")
 	@GeneratedValue(generator = "flightSeq", strategy = GenerationType.SEQUENCE)
 	Integer flightId;
+	
 	@JoinColumn(name = "DESTINATION_ID")
 	Destination destination;
+	
+	@ManyToOne
 	@JoinColumn(name = "AIRLINE_ID")
 	Airline airline;
+	
 	@OneToMany(mappedBy = "flightId")
 	Set<Seat> seats;
 
@@ -62,9 +67,10 @@ public class Flight {
 	public void setSeats(Set<Seat> seats) {
 		this.seats = seats;
 	}
-
+	
 	@Override
 	public String toString() {
-		return "Flight [flightId=" + flightId + ", destination=" + destination + ", airline=" + airline + "]";
+		return "Flight [flightId=" + flightId + ", destination=" + destination + ", airline=" + airline + ", seats="
+				+ seats + "]";
 	}
 }

@@ -18,21 +18,23 @@ public class Seat {
 	@SequenceGenerator(allocationSize = 1, name = "seatSeq", sequenceName = "SEAT_SEQ")
 	@GeneratedValue(generator = "seatSeq", strategy = GenerationType.SEQUENCE)
 	Integer seatId;
+	
 	@JoinColumn(name = "SEAT_TYPE_ID")
 	Integer seatType;
+	
 	@ManyToOne
 	@JoinColumn(name = "FLIGHT_ID")
-	Integer flightId;
+	Flight flight;
 	
 	
 	public Seat() {
 		super();
 	}
-	public Seat(Integer seatId, Integer seatType, Integer flightId) {
+	public Seat(Integer seatId, Integer seatType, Flight flight) {
 		super();
 		this.seatId = seatId;
 		this.seatType = seatType;
-		this.flightId = flightId;
+		this.flight = flight;
 	}
 	
 	public Integer getSeatId() {
@@ -47,15 +49,15 @@ public class Seat {
 	public void setSeatType(Integer seatType) {
 		this.seatType = seatType;
 	}
-	public Integer getFlightId() {
-		return flightId;
+	public Flight getFlightId() {
+		return flight;
 	}
-	public void setFlightId(Integer flightId) {
-		this.flightId = flightId;
+	public void setFlightId(Flight flight) {
+		this.flight = flight;
 	}
 	
 	@Override
 	public String toString() {
-		return "Seat [seatId=" + seatId + ", seatType=" + seatType + ", flightId=" + flightId + "]";
+		return "Seat [seatId=" + seatId + ", seatType=" + seatType + ", flight=" + flight + "]";
 	}
 }

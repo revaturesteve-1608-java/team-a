@@ -21,9 +21,9 @@ public class Ticket {
 	String firstName;
 	@Column(name="LAST_NAME")
 	String lastName;
-	@Column(name="EMAIL")
+	@Column(name="EMAIL", length=1023)
 	String email;
-	@Column(name="PHONE")
+	@Column(name="PHONE", length=31)
 	String phone;
 	@JoinColumn(name="SEAT_ID")
 	Seat seat;
