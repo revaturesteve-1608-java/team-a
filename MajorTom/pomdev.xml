@@ -85,7 +85,7 @@
 					<server>devserver</server>
 					<username>script</username>
 					<password>welcome1</password>
-					<path>/majortomdevelopment</path>
+					<path>/majortomdev</path>
 				</configuration>
 			</plugin>
 		</plugins>
