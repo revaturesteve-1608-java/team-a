@@ -1,0 +1,50 @@
+@CHARSET "UTF-8";
+
+body
+{
+	background-color:#BBDDFF;
+	color:#880077;
+}
+
+.panel
+{
+	background-color:#880077;
+	color:#DDDDDD;
+}
+
+.jumbotron
+{
+	margin:0px;
+	padding:0.15em 0.15em 0.2em 2em;
+	border-width:0.1em;
+	border-color:#000000;
+	text-size:14pt;
+}
+
+#ReceiptModal
+{
+	float:left;
+	display:inline-block;
+	background-color:#FFFFFF;
+	color:#000000;
+	margin: 1em 1em 2em 0.5em;
+	padding: 1em 0.5em 4em 0.5em;
+	border-radius:0;
+	border-width:0.01em;
+	border-color:#000000;
+	font-size:12pt;
+	font-family:"Courier New", Courier, monospace;
+	font-weight:bold;
+	line-height:100%;
+}
+#ReceiptModal > p
+{
+	margin:0.05em 0.5em 0.05em 0.5em;
+}
+
+#InfoBar
+{
+	border-width:1px;
+	border-color:#000000!important;
+	border-style:solid;
+}
