@@ -35,9 +35,16 @@ public class Flight {
 	@Fetch(FetchMode.JOIN)
 	Airline airline;
 	
+	@ManyToOne
+	@JoinColumn(name = "AIRPLANE_ID")
+	@Fetch(FetchMode.JOIN)
+	Airplane airplane;
+	
 	@OneToMany(mappedBy = "flight")
 	@Fetch(FetchMode.JOIN)
 	Set<Seat> seats;
+	
+	
 
 	
 	public Flight() {
