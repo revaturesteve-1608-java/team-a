@@ -1,5 +1,7 @@
 package com.gc.service;
 
+import java.util.List;
+
 import com.gc.model.Airline;
 import com.gc.model.Destination;
 import com.gc.model.Employee;
@@ -36,4 +38,5 @@ public interface DataService {
 	
 	Airline findAirlineByName(String name);
 	Ticket findTicketBySeat(Seat seat);
+	List<Seat> findSeatsByFlight(Flight flight);
 }
