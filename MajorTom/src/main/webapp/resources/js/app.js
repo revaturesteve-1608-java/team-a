@@ -24,9 +24,9 @@ app.controller('mainCtrl', function($scope, dataService){
 	})
 	.service('dataService', function($http){
 		this.findFlight = function(flightId){
-			$http.get('rest/findFlight', flightId).then(
+			$http.get('rest/findFlight/'+flightId, flightId).then(
 				function(response){
-					console.log(response + "YAY!")
+					console.log(response.data.flightId)
 				}
 			)
 		}
