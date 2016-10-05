@@ -18,8 +18,8 @@
 	<div id="ReceiptModal" class="panel" data-ng-controller="receiptController">
 		<airline-login-btn></airline-login-btn>
 		<div data-ng-hide="loginVisible">
-			<p>Ticket Number:</p><p>&nbsp#AABBCCDDEEFF</p>
-			<p>Passenger Name:</p><p>&nbspJohn Smith</p>
+			<p>Ticket Number:</p><p>&nbsp#{{ticket.ticketId}}</p>
+			<p>Passenger Name:</p><p>&nbsp{{ticket.firstName}} {{ticket.lastName}}</p>
 		</div>
 		<div data-ng-show="loginVisible">
 			<enter-ticket-info></enter-ticket-info>

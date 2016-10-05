@@ -28,11 +28,7 @@ app.controller('mainCtrl', function($scope, dataService){
 			$http.get('rest/findFlight/'+flightId, flightId).then(callback)
 				
 		}
-		this.findTicket = function(flightId){
-			$http.get('rest/findTicket/'+flightId, flightId).then(
-				function(response){
-					console.log(response.data.flightId)
-				}
-			)
+		this.findTicket = function(ticketId, callback){
+			$http.get('rest/findTicket/'+ticketId, ticketId).then(callback);
 		}
 	}); 
