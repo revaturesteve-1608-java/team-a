@@ -12,6 +12,12 @@ body
 	color:#DDDDDD;
 }
 
+.farbutton
+{
+	text-align:right;
+	float:right;
+}
+
 .jumbotron
 {
 	margin:0px;

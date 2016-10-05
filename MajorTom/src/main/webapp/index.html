@@ -11,12 +11,19 @@
 	<script defer src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
 	<script defer src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.js"></script>
 	<script defer src="resources/js/app.js"></script>
+	<script defer src="resources/js/swap-receipt-modal.js"></script>
 </head>
 <body data-ng-app="airline">
 	<h1 class="jumbotron panel">Major Tom Seat Reservation System</h1>
-	<div id="ReceiptModal" class="panel">
-		<p>Ticket Number: #AABBCCDDEEFF</p>
-		<p>Passenger Name: John Smith</p>
+	<div id="ReceiptModal" class="panel" data-ng-controller="receiptController">
+		<airline-login-btn></airline-login-btn>
+		<div data-ng-hide="loginVisible">
+			<p>Ticket Number:</p><p>&nbsp#AABBCCDDEEFF</p>
+			<p>Passenger Name:</p><p>&nbspJohn Smith</p>
+		</div>
+		<div data-ng-show="loginVisible">
+			<p>Login Stuff</p>
+		</div>
 	</div>
 	<div id="InfoBar" class="panel">
 		<h2>Flight Number: #1122334455</h2>
