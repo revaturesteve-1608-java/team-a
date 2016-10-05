@@ -1,0 +1,25 @@
+@CHARSET "UTF-8";
+
+body
+{
+	background-color:#BBDDFF;
+	color:#880077;
+}
+
+.panel
+{
+	background-color:#880077;
+	color:#DDDDDD;
+}
+
+#ReceiptModal
+{
+	float:left;
+	display:inline-block;
+}
+
+.jumbotron
+{
+	margin:1px!important;
+	padding:10px!important;
+}

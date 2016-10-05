@@ -6,10 +6,13 @@ var app = angular.module("airline", ["ngRoute"]);
 
 app.config(function($routeProvider) {
 	$routeProvider.when("/", {
-		templateUrl : "landing.html"
+		templateUrl : "pages/landing.html"
 	})
 	.when("/flight", {
-		templateUrl : "flightInfo.html"
+		templateUrl : "pages/flightInfo.html"
+	})
+	.otherwise({
+		redirectTo : "/"
 	})
 
 }); 
