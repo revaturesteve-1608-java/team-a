@@ -4,6 +4,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,9 +27,9 @@ public class Airline {
 	@Column(name="AIRLINE_NAME")
 	String name;
 	
-	@OneToMany(mappedBy="airline")
-	@Fetch(FetchMode.JOIN)
-	Set<Flight> flights;
+//	@OneToMany(fetch=FetchType.LAZY, mappedBy="airline")
+//	@Fetch(FetchMode.JOIN)
+//	Set<Flight> flights;
 	
 	public Airline() {
 	}
@@ -48,16 +49,18 @@ public class Airline {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Set<Flight> getFlights() {
-		return flights;
-	}
-	public void setFlights(Set<Flight> flights) {
-		this.flights = flights;
-	}
+//	public Set<Flight> getFlights() {
+//		return flights;
+//	}
+//	public void setFlights(Set<Flight> flights) {
+//		this.flights = flights;
+//	}
 	
 	@Override
 	public String toString() {
-		return "Airline [airlineId=" + airlineId + ", name=" + name + ", flights=" + flights + "]";
+		return "Airline [airlineId=" + airlineId + ", name=" + name + 
+				//", flights=" + flights + 
+				"]";
 	}
 	
 }

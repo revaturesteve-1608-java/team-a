@@ -137,4 +137,9 @@ public class DataServiceImpl implements DataService{
 	public Airline findAirlineByName(String name) {
 		return airlineRepo.findByName(name);
 	}
+	
+	@Override
+	public Ticket findTicketBySeat(Seat seat) {
+		return ticketRepo.findBySeat(seat);
+	}
 }

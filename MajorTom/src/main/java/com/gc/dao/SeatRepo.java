@@ -7,5 +7,5 @@ import com.gc.model.Seat;
 
 @Repository
 public interface SeatRepo extends JpaRepository<Seat, Integer> {
-
+	
 }

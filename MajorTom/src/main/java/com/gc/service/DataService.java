@@ -35,4 +35,5 @@ public interface DataService {
 	Ticket findTicketById(Integer id);
 	
 	Airline findAirlineByName(String name);
+	Ticket findTicketBySeat(Seat seat);
 }

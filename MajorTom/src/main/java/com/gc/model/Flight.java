@@ -4,6 +4,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -40,9 +41,9 @@ public class Flight {
 	@Fetch(FetchMode.JOIN)
 	Airplane airplane;
 	
-	@OneToMany(mappedBy = "flight")
-	@Fetch(FetchMode.JOIN)
-	Set<Seat> seats;
+//	@OneToMany(fetch=FetchType.LAZY, mappedBy = "flight")
+//	@Fetch(FetchMode.JOIN)
+//	Set<Seat> seats;
 	
 	
 
@@ -72,16 +73,17 @@ public class Flight {
 	public void setAirline(Airline airline) {
 		this.airline = airline;
 	}
-	public Set<Seat> getSeats() {
-		return seats;
-	}
-	public void setSeats(Set<Seat> seats) {
-		this.seats = seats;
-	}
+//	public Set<Seat> getSeats() {
+//		return seats;
+//	}
+//	public void setSeats(Set<Seat> seats) {
+//		this.seats = seats;
+//	}
 	
 	@Override
 	public String toString() {
-		return "Flight [flightId=" + flightId + ", destination=" + destination + ", airline=" + airline + ", seats="
-				+ seats + "]";
+		return "Flight [flightId=" + flightId + ", destination=" + destination + ", airline=" + airline +
+				//", seats=" + seats + 
+				"]";
 	}
 }
