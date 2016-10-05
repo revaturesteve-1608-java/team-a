@@ -10,6 +10,16 @@ app.controller('mainCtrl', function($scope, dataService){
 		console.log(flightId);
 		dataService.findFlight(flightId, function(response){$scope.flightInfo = response.data.flightId});
 	}
+	$scope.findTicketBySeat = function(seatId) {
+		$scope.ticketInfo = "Loading..."
+		console.log('Getting ticket, using seat id: ' + seatId);
+		dataService.findTicketBySeat(seatId, function(response){$scope.ticketInfo = JSON.stringify(response)});
+	}
+	$scope.findSeatByFlight = function(flightId) {
+		$scope.seatInfo = "Loading..."
+		console.log('Getting seat, using flight id: ' + flightId);
+		dataService.findSeatsByFlight(flightId, function(response){$scope.seatInfo = JSON.stringify(response)});
+	}
 });
 
 app.controller("planeController", function() {
@@ -68,8 +78,13 @@ app.config(function($routeProvider) {
 });
 
 app.service('dataService', function($http){
-	this.findFlight = function(flightId, callback){
-		$http.get('rest/findFlight/'+flightId, flightId).then(callback)
-			
+	this.findFlight = function(flightId, callback) {
+		$http.get('rest/findFlight/'+flightId, flightId).then(callback);
+	}
+	this.findTicketBySeat = function(seatId, callback) {
+		$http.get('rest/findTicketBySeat/'+seatId, seatId).then(callback);
+	}
+	this.findSeatsByFlight = function(flightId, callback) {
+		$http.get('rest/findSeatsByFlight/'+flightId, flightId).then(callback);
 	}
 }); 

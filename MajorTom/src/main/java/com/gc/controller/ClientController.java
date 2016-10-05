@@ -32,9 +32,9 @@ public class ClientController {
 		}
 	}
 	
-	@RequestMapping(value="findTicketBySeat")
-	public ResponseEntity<Ticket> findTicketBySeat(Seat seat) {
-		Ticket ticket = dataService.findTicketBySeat(seat);
+	@RequestMapping(value="/findTicketBySeat/{seatId}")
+	public ResponseEntity<Ticket> findTicketBySeat(@PathVariable(value="seatId") Integer seatId) {
+		Ticket ticket = dataService.findTicketBySeat(dataService.findSeatById(seatId));
 		if(ticket != null) {
 			System.out.println("Ticket: " + ticket);
 			return new ResponseEntity<Ticket>(ticket, HttpStatus.ACCEPTED);
@@ -43,9 +43,9 @@ public class ClientController {
 		}
 	}
 	
-	@RequestMapping(value="findSeatsByFlight")
-	public ResponseEntity<List<Seat>> findSeatsByFlight(Flight flight) {
-		List<Seat> seats = dataService.findSeatsByFlight(flight);
+	@RequestMapping(value="/findSeatsByFlight/{flightId}")
+	public ResponseEntity<List<Seat>> findSeatsByFlight(@PathVariable(value="flightId") Integer flightId) {
+		List<Seat> seats = dataService.findSeatsByFlight(dataService.findFlightById(flightId));
 		if(seats != null) {
 			for (Seat s : seats) {
 				System.out.println("Seat: " + s);
