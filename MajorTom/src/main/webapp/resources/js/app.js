@@ -6,9 +6,10 @@ var app = angular.module("airline", ["ngRoute"]);
 
 app.controller('mainCtrl', function($scope, dataService){
 		$scope.findFlight = function(flightId){
+			$scope.flightInfo = "Loading..."
 			console.log('About To Get '+flightId);
 			console.log(flightId);
-			dataService.findFlight(flightId);
+			dataService.findFlight(flightId, function(response){$scope.flightInfo = response.data.flightId});
 		}
 	})
 	.config(function($routeProvider) {
@@ -23,11 +24,8 @@ app.controller('mainCtrl', function($scope, dataService){
 		})
 	})
 	.service('dataService', function($http){
-		this.findFlight = function(flightId){
-			$http.get('rest/findFlight/'+flightId, flightId).then(
-				function(response){
-					console.log(response.data.flightId)
-				}
-			)
+		this.findFlight = function(flightId, callback){
+			$http.get('rest/findFlight/'+flightId, flightId).then(callback)
+				
 		}
 	}); 
