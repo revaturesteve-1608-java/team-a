@@ -3,6 +3,15 @@
  */
 var app = angular.module("airline", ["ngRoute"]);
 
+app.controller('mainCtrl', function($scope, dataService){
+	$scope.findFlight = function(flightId){
+		$scope.flightInfo = "Loading..."
+		console.log('About To Get '+flightId);
+		console.log(flightId);
+		dataService.findFlight(flightId, function(response){$scope.flightInfo = response.data.flightId});
+	}
+});
+
 app.controller("planeController", function() {
 	this.pilot = {
 		name: "Major Tom"
@@ -47,16 +56,20 @@ app.controller("planeController", function() {
 	
 });
 
+	
 app.config(function($routeProvider) {
-	$routeProvider
-	.when("/", {
-		templateUrl : "pages/landing.html"
-	})
-	.when("/flight", {
-		templateUrl : "pages/flightInfo.html"
-	})
-	.otherwise({
-		redirectTo : "/"
-	})
+		$routeProvider.when("/", {
+			templateUrl : "pages/landing.html"
+		});
+		
+		$routeProvider.when("/flight", {
+			templateUrl : "pages/flightInfo.html"
+		})
+});
 
+app.service('dataService', function($http){
+	this.findFlight = function(flightId, callback){
+		$http.get('rest/findFlight/'+flightId, flightId).then(callback)
+			
+	}
 }); 
