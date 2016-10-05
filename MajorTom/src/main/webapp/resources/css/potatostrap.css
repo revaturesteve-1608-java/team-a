@@ -14,10 +14,11 @@ body
 
 .jumbotron
 {
-	margin:0px!important;
-	padding:0.15em!important;
+	margin:0px;
+	padding:0.15em 0.15em 0.2em 2em;
 	border-width:0.1em;
 	border-color:#000000;
+	text-size:14pt;
 }
 
 #ReceiptModal
@@ -26,10 +27,8 @@ body
 	display:inline-block;
 	background-color:#FFFFFF;
 	color:#000000;
-	height:20em;
-	margin-top:1em;
-	margin-left:0.5em;
-	margin-right:1em;
+	margin: 1em 1em 2em 0.5em;
+	padding: 1em 0.5em 4em 0.5em;
 	border-radius:0;
 	border-width:0.01em;
 	border-color:#000000;
