@@ -55,10 +55,10 @@ public class Seat {
 	public void setSeatType(SeatType seatType) {
 		this.seatType = seatType;
 	}
-	public Flight getFlightId() {
+	public Flight getFlight() {
 		return flight;
 	}
-	public void setFlightId(Flight flight) {
+	public void setFlight(Flight flight) {
 		this.flight = flight;
 	}
 	

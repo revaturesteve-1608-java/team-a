@@ -4,7 +4,15 @@
 var app = angular.module("airline", ["ngRoute"]);
 
 app.controller('mainCtrl', function($scope, dataService){
-	$scope.findFlight = function(flightId){
+	$scope.selectedTicket = {};
+	$scope.selectedFlight = {};
+	$scope.selectTicket = function(ticket) {
+		$scope.selectedTicket=ticket;
+	}
+	$scope.selectFlight = function(flight) {
+		$scope.selectedFlight=flight;
+	}
+	$scope.findFlight = function(flightId) {
 		$scope.flightInfo = "Loading..."
 		console.log('About To Get '+flightId);
 		console.log(flightId);
@@ -40,6 +48,9 @@ app.config(function($routeProvider) {
 app.service('dataService', function($http){
 	this.findFlight = function(flightId, callback) {
 		$http.get('rest/findFlight/'+flightId, flightId).then(callback);
+	}
+	this.findFlightByTicket = function(ticketId, callback) {
+		$http.get('rest/findFlightByTicket/'+ticketId,ticketId).then(callback);
 	}
 	this.findTicket = function(ticketId, callback){
 		$http.get('rest/findTicket/'+ticketId, ticketId).then(callback);
