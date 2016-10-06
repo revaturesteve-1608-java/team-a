@@ -64,4 +64,9 @@ app.service('dataService', function($http){
 		var data = JSON.stringify({"username": username, "password": password});
 		$http.post('rest/authenticate', data).then(callback, failure);
 	}
+	this.selectSeat = function(ticketId, seatId, callback, failure) {
+		// Set the seat for the ticket
+		var data = JSON.stringify({"ticketId": ticketId, "seatId": seatId});
+		$http.post('rest/selectSeat', data).then(callback, failure);
+	}
 });

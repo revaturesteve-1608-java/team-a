@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gc.dto.AuthenticationDTO;
+import com.gc.dto.SelectSeatDTO;
 import com.gc.model.Employee;
 import com.gc.model.Flight;
 import com.gc.model.Seat;
@@ -90,6 +91,21 @@ public class ClientController {
 			return new ResponseEntity<Employee>(emp, HttpStatus.ACCEPTED);
 		} else {
 			return new ResponseEntity<Employee>(emp, HttpStatus.FORBIDDEN);
+		}
+	}
+	
+	@RequestMapping(value="/selectSeat")
+	public ResponseEntity<Ticket> authenticate(@RequestBody SelectSeatDTO data) {
+		System.out.println(data);
+		Ticket ticket = dataService.findTicketById(data.getTicketId());
+		Seat seat = dataService.findSeatById(data.getSeatId());
+		if (ticket != null && seat != null) {
+			ticket.setSeat(seat);
+			dataService.saveTicket(ticket);
+			System.out.println(ticket);
+			return new ResponseEntity<Ticket>(ticket, HttpStatus.ACCEPTED);
+		} else {
+			return new ResponseEntity<Ticket>(ticket, HttpStatus.BAD_REQUEST);
 		}
 	}
 }
