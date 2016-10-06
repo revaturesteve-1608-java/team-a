@@ -43,7 +43,7 @@ app.controller('mainCtrl', function($scope, dataService){
 	
 app.config(function($routeProvider) {
 	$routeProvider.when("/", {
-		templateUrl : "pages/landing.html"
+		templateUrl : "pages/debugtests.html"
 	});
 	
 	$routeProvider.when("/flight", {
