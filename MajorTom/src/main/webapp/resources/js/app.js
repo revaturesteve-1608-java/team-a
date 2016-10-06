@@ -29,7 +29,7 @@ app.controller('mainCtrl', function($scope, dataService){
 		dataService.findSeatsByFlight(flightId, function(response){$scope.seatInfo = JSON.stringify(response);});
 	}
 	$scope.authenticate = function(username, password) {
-		$scope.seatInfo = "Loading..."
+		$scope.userInfo = "Loading..."
 		console.log('Authenticating, using username: [' + username + "] and password: [" + password + "]");
 		dataService.authenticate(username, password, function(response){
 			console.log("Got a response, status: " + response.status);
