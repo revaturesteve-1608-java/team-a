@@ -19,7 +19,10 @@ app.controller('mainCtrl', function($scope, dataService){
 	$scope.isAdmin = function() {
 		if(!$scope.currentUser){return false;}
 		return !!$scope.currentUser.authenticated;
-	}
+	};
+	$scope.testAdminStatus = function() { /* REMOVE THIS METHOD WHEN DEBUGGING IS FINISHED. */
+		$scope.admintest=$scope.isAdmin();
+	};
 	$scope.findFlight = function(flightId) {
 		$scope.flightInfo = "Loading...";
 		console.log('About To Get '+flightId);
