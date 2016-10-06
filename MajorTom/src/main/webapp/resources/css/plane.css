@@ -8,7 +8,7 @@ body {
 .plane {
 	height: 971px;
 	width: 1920px;
-	background-image: url("../images/737-bg.png");
+	background-image: url("../images/737-bg-transparent.png");
 	background-repeat: no-repeat;
 	background-size: 1920px 971px;
 	position: relative;

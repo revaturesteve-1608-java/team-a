@@ -1,0 +1,59 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Boeing 737-800 Layout</title>
+	
+	<link rel="stylesheet" href="../resources/css/plane.css">
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.js"></script>
+	<script src="../resources/js/app.js"></script>
+	<script src="../resources/js/app-plane.js"></script>
+	<script defer src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script defer src="../resources/js/plane.js"></script>
+</head>
+
+<body ng-app="airline"> -->
+		<div class="plane" ng-controller="planeController as plane">
+			<div class="seat-container">
+				<div class="plane-cockpit">
+					<div class="seat"></div>
+					<div class="seat"></div>
+				</div><!--
+				
+				--><div class="plane-first" ng-repeat="row in plane.firstclass">
+					<div class="seat"></div>
+					<div class="seat"></div>
+					<div class="aisle"></div>
+					<div class="seat"></div>
+					<div class="seat"></div>
+				</div><!--
+				--><div class="row-spacer"></div><!--
+				
+				--><div class="plane-buisness" ng-repeat="row in plane.buisclass">
+					<div class="seat"></div>
+					<div class="seat"></div>
+					<div class="seat"></div>
+					<div class="aisle"></div>
+					<div class="seat"></div>
+					<div class="seat"></div>
+					<div class="seat"></div>
+				</div><!--
+				
+				--><div class="plane-economy" ng-repeat="row in plane.econclass">
+					<div class="seat"></div>
+					<div class="seat"></div>
+					<div class="seat"></div>
+					<div class="aisle"></div>
+					<div class="seat"></div>
+					<div class="seat"></div>
+					<div class="seat"></div>
+				</div>
+			</div>
+		</div>
+		
+	<script src="../resources/js/app-plane.js"></script>
+	<script src="../resources/js/plane.js"></script>
+<!-- </body> -->
+</html>
