@@ -1,50 +1,17 @@
-/**
- * 
- */
-app.controller("planeController", function() {
-	this.pilot = {
-		name: "Major Tom"
-	};
-	this.copilot = {
-		name: "Major Todd"
-	};
-	
-	this.firstclass = [[{
-		name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"
-	}]];
-	
-	this.buisclass = [[{
-		name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"
-	}]];
+var $content = $(".plane");
 
-	this.econclass = [[{
-		name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"
-	}]];
+var $wrapper = $(".wrapper");
 
-	
-});
+window.onresize = resizeContent($(window).width(), $(window).height());
+
+function resizeContent(width, height) {
+
+	var scale, origin;
+	scale = Math.min(width / 1920, height / 971);
+
+	console.log(scale);
+
+	$content.css({
+		transform : "scale(" + scale + ")"
+	});
+}
