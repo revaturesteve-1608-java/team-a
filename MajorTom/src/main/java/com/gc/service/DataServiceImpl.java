@@ -108,7 +108,7 @@ public class DataServiceImpl implements DataService{
 	}
 	@Override
 	public List<SeatType> findAllSeatTypes() {
-		return seatTypeRepo.findAllOrderBySeatTypeIdAsc();
+		return seatTypeRepo.findAll();
 	}
 	@Override
 	public List<Ticket> findAllTickets() {
