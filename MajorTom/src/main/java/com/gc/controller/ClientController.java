@@ -31,6 +31,12 @@ public class ClientController {
 			return new ResponseEntity<Flight>(newFlightInfo, HttpStatus.NOT_FOUND);
 		}
 	}
+	
+	@RequestMapping("/findTicket/{ticketId}")
+	public ResponseEntity<Ticket> findTicket(@PathVariable(value = "ticketId") Integer ticketId){
+		Ticket tick=dataService.findTicketById(ticketId);
+		return new ResponseEntity<Ticket>(tick,tick==null?HttpStatus.NOT_FOUND:HttpStatus.ACCEPTED);
+	}
 
 	@RequestMapping("/findFlightByTicket/{ticketId}")
 	public ResponseEntity<Flight> findFlightByTicket(@PathVariable(value = "ticketId") Integer ticketId) {
