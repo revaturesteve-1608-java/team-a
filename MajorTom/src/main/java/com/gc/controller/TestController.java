@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,6 +17,9 @@ public class TestController {
 
 	@Autowired
 	DataService dataService;
+	
+	@Autowired
+	MailManager mailer;
 
 	@RequestMapping(value = "testSave")
 	public String TestSave() {
@@ -46,10 +49,10 @@ public class TestController {
 	@RequestMapping(value = "sendFakeMail")
 	public void sendMail() {
 		// Create the application context
-		ApplicationContext context = new FileSystemXmlApplicationContext("C:/Users/kyleg_000/JavaBatchSteve/team-ground-control/MajorTom/src/main/webapp/WEB-INF/spring-beans.xml");
+		//ApplicationContext context = new ClassPathXmlApplicationContext("mail-beans.xml");
 
 		// Get the mailer instance
-		MailManager mailer = (MailManager) context.getBean("mailService");
+		//MailManager mailer = (MailManager) context.getBean("mailService");
 
 		// Send a composed mail
 		mailer.sendMail("kyle.garner15@yahoo.com", "Test Subject", "Testing body");
