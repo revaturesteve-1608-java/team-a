@@ -1,5 +1,7 @@
 package com.gc.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -69,36 +71,81 @@ public class DataServiceImpl implements DataService{
 		ticketRepo.save(ticket);
 	}
 	
-	
 	/*
 	 * Find All methods for every object
 	 */
 	@Override
-	public void findAllAirline() {
+	public void findAllAirlines() {
 		airlineRepo.findAll();
 	}
 	@Override
-	public void findAllDestination() {
+	public void findAllDestinations() {
 		destinationRepo.findAll();
 	}
 	@Override
-	public void findAllEmployee() {
+	public void findAllEmployees() {
 		employeeRepo.findAll();
 	}
 	@Override
-	public void findAllFlight() {
+	public void findAllFlights() {
 		flightRepo.findAll();
 	}
 	@Override
-	public void findAllSeat() {
+	public void findAllSeats() {
 		seatRepo.findAll();
 	}
 	@Override
-	public void findAllSeatType() {
+	public void findAllSeatTypes() {
 		seatTypeRepo.findAll();
 	}
 	@Override
-	public void findAllTicket() {
+	public void findAllTickets() {
 		ticketRepo.findAll();
+	}
+	
+	/*
+	 * Find By Id methods for every object
+	 */
+	@Override
+	public Airline findAirlineById(Integer id) {
+		return airlineRepo.findOne(id);
+	}
+	@Override
+	public Destination findDestinationById(Integer id) {
+		return destinationRepo.findOne(id);
+	}
+	@Override
+	public Employee findEmployeeById(Integer id) {
+		return employeeRepo.findOne(id);
+	}
+	@Override
+	public Flight findFlightById(Integer id) {
+		return flightRepo.findOne(id);
+	}
+	@Override
+	public Seat findSeatById(Integer id) {
+		return seatRepo.findOne(id);
+	}
+	@Override
+	public SeatType findSeatTypeById(Integer id) {
+		return seatTypeRepo.findOne(id);
+	}
+	@Override
+	public Ticket findTicketById(Integer id) {
+		return ticketRepo.findOne(id);
+	}
+	
+	@Override
+	public Airline findAirlineByName(String name) {
+		return airlineRepo.findByName(name);
+	}
+	
+	@Override
+	public Ticket findTicketBySeat(Seat seat) {
+		return ticketRepo.findBySeat(seat);
+	}
+	@Override
+	public List<Seat> findSeatsByFlight(Flight flight) {
+		return seatRepo.findByFlight(flight);
 	}
 }

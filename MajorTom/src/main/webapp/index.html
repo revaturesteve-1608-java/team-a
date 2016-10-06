@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Welcome</title>
+	<script defer src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	<link rel="stylesheet" href="resources/css/potatostrap.css">
+	<script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script defer src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+	<script defer src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.js"></script>
+	<script defer src="resources/js/app.js"></script>
+	<script defer src="resources/js/swap-receipt-modal.js"></script>
+</head>
+<body data-ng-app="airline">
+	<h1 class="jumbotron panel">Major Tom Seat Reservation System</h1>
+	<div id="ReceiptModal" class="panel" data-ng-controller="receiptController">
+		<airline-login-btn></airline-login-btn>
+		<div data-ng-hide="loginVisible">
+			<p>Ticket Number:</p><p>&nbsp#{{ticket.ticketId}}</p>
+			<p>Passenger Name:</p><p>&nbsp{{ticket.firstName}} {{ticket.lastName}}</p>
+		</div>
+		<div data-ng-show="loginVisible">
+			<enter-ticket-info></enter-ticket-info>
+		</div>
+	</div>
+	<div id="InfoBar" class="panel">
+		<h2>Flight Number: #1122334455</h2>
+		<p>Plane Specs!</p>
+	</div>
+	<div data-ng-view></div>
+	<div ng-controller="mainCtrl">
+		<button ng-click="findFlight(1)">Click Me!</button>
+		<div>{{flightInfo}}</div>
+		<button ng-click="findTicketBySeat(1)">Find ticket by seat 1!</button>
+		<div>{{ticketInfo}}</div>
+		<button ng-click="findSeatByFlight(1)">Find seat by flight 1!</button>
+		<div>{{seatInfo}}</div>
+	</div>
+</body>
+</html>

@@ -4,12 +4,16 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(name="DESTINATION")
@@ -26,8 +30,9 @@ public class Destination {
 	@Column(name="DESTINATION_CODE", length=4)
 	String destinationCode;
 	
-	@OneToMany(mappedBy="destination")
-	Set<Flight> flights;
+//	@OneToMany(fetch=FetchType.LAZY, mappedBy="destination")
+//	@Fetch(FetchMode.JOIN)
+//	Set<Flight> flights;
 	
 	public Destination() {
 	}
@@ -56,16 +61,19 @@ public class Destination {
 	public void setDestinationCode(String destinationCode) {
 		this.destinationCode = destinationCode;
 	}
-	public Set<Flight> getFlights() {
-		return flights;
-	}
-	public void setFlights(Set<Flight> flights) {
-		this.flights = flights;
-	}
+//	public Set<Flight> getFlights() {
+//		return flights;
+//	}
+//	public void setFlights(Set<Flight> flights) {
+//		this.flights = flights;
+//	}
 	
 	@Override
 	public String toString() {
 		return "Destination [destinationID=" + destinationID + ", destinationName=" + destinationName
-				+ ", destinationCode=" + destinationCode + ", flights=" + flights + "]";
+				+ ", destinationCode=" + destinationCode + 
+				//", flights=" + flights + 
+				"]";
 	}
+	
 }

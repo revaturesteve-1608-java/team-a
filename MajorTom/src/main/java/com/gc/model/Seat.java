@@ -10,6 +10,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 @Entity
 @Table(name = "SEAT")
 public class Seat {
@@ -21,10 +24,12 @@ public class Seat {
 	
 	@ManyToOne
 	@JoinColumn(name = "SEAT_TYPE_ID")
+	@Fetch(FetchMode.JOIN)
 	SeatType seatType;
 	
 	@ManyToOne
 	@JoinColumn(name = "FLIGHT_ID")
+	@Fetch(FetchMode.JOIN)
 	Flight flight;
 	
 	

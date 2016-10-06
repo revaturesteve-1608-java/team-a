@@ -10,6 +10,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 @Entity
 @Table(name="TICKET")
 public class Ticket {
@@ -33,6 +36,7 @@ public class Ticket {
 	
 	@OneToOne
 	@JoinColumn(name="SEAT_ID")
+	@Fetch(FetchMode.JOIN)
 	Seat seat;
 	
 	
