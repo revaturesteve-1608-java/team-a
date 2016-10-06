@@ -36,7 +36,7 @@ app.controller('mainCtrl', function($scope, dataService){
 			$scope.userInfo = JSON.stringify(response);
 		}, function(response) {
 			console.log("Got a response, status: " + response.status);
-			$scope.userInfo = "YOUR LOGIN FAILED!!!";
+			$scope.userInfo = "Invalid login.  Please try again.";
 		});
 	}
 });
