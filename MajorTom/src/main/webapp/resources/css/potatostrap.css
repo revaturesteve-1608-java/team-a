@@ -6,6 +6,15 @@ body
 	color:#880077;
 }
 
+.jumbotron
+{
+	margin:0px;
+	padding:0.15em 0.15em 0.2em 2em;
+	border-width:0.1em;
+	border-color:#000000;
+	text-size:14pt;
+}
+
 .panel
 {
 	background-color:#880077;
@@ -18,15 +27,6 @@ body
 	float:right;
 }
 
-.jumbotron
-{
-	margin:0px;
-	padding:0.15em 0.15em 0.2em 2em;
-	border-width:0.1em;
-	border-color:#000000;
-	text-size:14pt;
-}
-
 .tickerEntry
 {
 	min-width:18em;
@@ -35,6 +35,14 @@ body
 .tickerValue
 {
 	font-weight:normal;
+}
+
+.warning
+{
+	color:darkred;
+	background-color:lightgray;
+	margin:0.1em;
+	padding:0.1em;
 }
 
 #ReceiptModal

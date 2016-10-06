@@ -17,14 +17,27 @@
 	<div ng-controller="mainCtrl">
 		<h1 class="jumbotron panel">Major Tom Seat Reservation System</h1>
 		<div id="ReceiptModal" class="panel" data-ng-controller="receiptController">
-			<airline-login-btn></airline-login-btn>
 			<div data-ng-hide="loginVisible">
-				<p>Ticket Number:</p><p>&nbsp#{{selectedTicket.ticketId}}</p>
-				<p>Passenger Name:</p><p>&nbsp{{selectedTicket.firstName}} {{selectedTicket.lastName}}</p>
+				<div data-ng-show="currentUser==null">
+					<p>Ticket Number:</p><p>&nbsp#{{selectedTicket.ticketId}}</p>
+					<p>Passenger Name:</p><p>&nbsp{{selectedTicket.firstName}} {{selectedTicket.lastName}}</p>
+				</div>
+				<div data-ng-show="currentUser!=null">
+					<p class="warning">Employee Access</p>
+					<p>User: {{currentUser.username}}</p>
+					<p>{{currentUser.firstName}} {{currentUser.lastName}}</p>
+				</div>
 			</div>
 			<div data-ng-show="loginVisible">
-				<enter-ticket-info></enter-ticket-info>
+				<input type='text' id='TicketIDBox' size=20 placeholder='Ticket ID'/><br/>
+				<input type='button' value='Save Ticket' data-ng-click='saveTicketId()'/><br/>
+				<br/>
+				<input type='text' id='EmployeeUsernameBox' placeholder='Username'/><br/>
+				<input type='password' id='EmployeePasswordBox' placeholder='Password'/><br/>
+				<input type='button' value='Login' data-ng-click='employeeLogin()'/><br/>
+				<br/>
 			</div>
+			<airline-login-btn id="airlineLoginBtn"></airline-login-btn>
 		</div>
 		<div id="InfoBar" class="panel">
 			<h2>Flight Number: #{{selectedFlight.flightId}}</h2>
@@ -33,15 +46,10 @@
 			<label class="tickerEntry">Destination: <span class="tickerValue">{{selectedFlight.destination.destinationName}}</span></label>
 		</div>
 		<div data-ng-view></div>
-		<button ng-click="findFlight(1)">Click Me!</button>
-		<div>{{flightInfo}}</div>
 		<button ng-click="findTicketBySeat(1)">Find ticket by seat 1!</button>
 		<div>{{ticketInfo}}</div>
 		<button ng-click="findSeatByFlight(1)">Find seat by flight 1!</button>
 		<div>{{seatInfo}}</div>
-		<button ng-click="authenticate('atlasm','password')">correct login!</button>
-		<button ng-click="authenticate('atlasm','passwords')">bad login!</button>
-		<div>{{userInfo}}</div>
 	</div>
 </body>
 </html>
