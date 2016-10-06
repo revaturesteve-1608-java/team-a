@@ -6,9 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gc.dto.AuthenticationDTO;
+import com.gc.model.Employee;
 import com.gc.model.Flight;
 import com.gc.model.Seat;
 import com.gc.model.Ticket;
@@ -53,6 +57,18 @@ public class ClientController {
 			return new ResponseEntity<List<Seat>>(seats, HttpStatus.ACCEPTED);
 		} else {
 			return new ResponseEntity<List<Seat>>(seats, HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@RequestMapping(value="/authenticate")
+	public ResponseEntity<Employee> authenticate(@RequestBody AuthenticationDTO data) {
+		System.out.println(data);
+		Employee emp = dataService.findEmployeeByUsernameAndPassword(data.getUsername(), data.getPassword());
+		System.out.println(emp);
+		if(emp != null) {
+			return new ResponseEntity<Employee>(emp, HttpStatus.ACCEPTED);
+		} else {
+			return new ResponseEntity<Employee>(emp, HttpStatus.BAD_REQUEST);
 		}
 	}
 	

@@ -148,4 +148,8 @@ public class DataServiceImpl implements DataService{
 	public List<Seat> findSeatsByFlight(Flight flight) {
 		return seatRepo.findByFlight(flight);
 	}
+	@Override
+	public Employee findEmployeeByUsernameAndPassword(String username, String password) {
+		return employeeRepo.findByUsernameAndPassword(username, password);
+	}
 }
