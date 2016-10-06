@@ -89,7 +89,7 @@ public class ClientController {
 		if(emp != null) {
 			return new ResponseEntity<Employee>(emp, HttpStatus.ACCEPTED);
 		} else {
-			return new ResponseEntity<Employee>(emp, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<Employee>(emp, HttpStatus.NOT_FOUND);
 		}
 	}
 }
