@@ -1,16 +1,12 @@
 package com.gc.model;
 
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -50,9 +46,10 @@ public class Flight {
 	
 	public Flight() {
 	}
-	public Flight(Destination destination, Airline airline) {
+	public Flight(Destination destination, Airline airline, Airplane airplane) {
 		this.destination = destination;
 		this.airline = airline;
+		this.airplane = airplane;
 	}
 
 	public Integer getFlightId() {
@@ -73,6 +70,12 @@ public class Flight {
 	public void setAirline(Airline airline) {
 		this.airline = airline;
 	}
+	public Airplane getAirplane() {
+		return airplane;
+	}
+	public void setAirplane(Airplane airplane) {
+		this.airplane = airplane;
+	}
 //	public Set<Seat> getSeats() {
 //		return seats;
 //	}
@@ -82,8 +85,6 @@ public class Flight {
 	
 	@Override
 	public String toString() {
-		return "Flight [flightId=" + flightId + ", destination=" + destination + ", airline=" + airline +
-				//", seats=" + seats + 
-				"]";
+		return "Flight [flightId=" + flightId + ", destination=" + destination + ", airline=" + airline + ", airplane=" + airplane + "]";
 	}
 }
