@@ -44,4 +44,5 @@ public interface DataService {
 	Ticket findTicketBySeat(Seat seat);
 	List<Seat> findSeatsByFlight(Flight flight);
 	Employee findEmployeeByUsernameAndPassword(String username, String password);
+	Airplane findAirplaneByName(String string);
 }

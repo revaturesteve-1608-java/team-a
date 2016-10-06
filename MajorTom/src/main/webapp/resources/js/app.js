@@ -16,6 +16,13 @@ app.controller('mainCtrl', function($scope, dataService){
 	$scope.setCurrentUser = function(user) {
 		$scope.currentUser = user;
 	};
+	$scope.isAdmin = function() {
+		if(!$scope.currentUser){return false;}
+		return !!$scope.currentUser.authenticated;
+	};
+	$scope.testAdminStatus = function() { /* REMOVE THIS METHOD WHEN DEBUGGING IS FINISHED. */
+		$scope.admintest=$scope.isAdmin();
+	};
 	$scope.findFlight = function(flightId) {
 		$scope.flightInfo = "Loading...";
 		console.log('About To Get '+flightId);
@@ -33,10 +40,10 @@ app.controller('mainCtrl', function($scope, dataService){
 		dataService.findSeatsByFlight(flightId, function(response){$scope.seatInfo = JSON.stringify(response);});
 	};
 });
-
+	
 app.config(function($routeProvider) {
 	$routeProvider.when("/", {
-		templateUrl : "pages/landing.html"
+		templateUrl : "pages/debugtests.html"
 	});
 	
 	$routeProvider.when("/flight", {

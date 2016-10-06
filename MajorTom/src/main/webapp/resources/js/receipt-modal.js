@@ -14,7 +14,6 @@ angular.module("airline")
 		var ticketidbox=document.getElementById("TicketIDBox");
 		var ticketid=ticketidbox.value;
 		dataService.findTicket(+ticketid,function(response){
-			response.data.authenticated=true;
 			$scope.selectTicket(response.data);
 		});
 		dataService.findFlightByTicket(+ticketid,function(response){
@@ -28,6 +27,7 @@ angular.module("airline")
 		var password=document.getElementById("EmployeePasswordBox").value;
 		dataService.authenticate(username, password,
 			function(response){
+				response.data.authenticated=true;
 				$scope.setCurrentUser(response.data);
 			}, function(response) {
 				$scope.setCurrentUser($scope.errorUser);
