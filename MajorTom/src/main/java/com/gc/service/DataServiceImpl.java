@@ -168,4 +168,8 @@ public class DataServiceImpl implements DataService{
 	public Employee findEmployeeByUsernameAndPassword(String username, String password) {
 		return employeeRepo.findByUsernameAndPassword(username, password);
 	}
+	@Override
+	public Airplane findAirplaneByName(String name) {
+		return airplaneRepo.findByAirplaneName(name);
+	}
 }
