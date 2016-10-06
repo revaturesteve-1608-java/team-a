@@ -4,7 +4,15 @@
 var app = angular.module("airline", ["ngRoute"]);
 
 app.controller('mainCtrl', function($scope, dataService){
-	$scope.findFlight = function(flightId){
+	$scope.selectedTicket = {};
+	$scope.selectedFlight = {};
+	$scope.selectTicket = function(ticket) {
+		$scope.selectedTicket=ticket;
+	}
+	$scope.selectFlight = function(flight) {
+		$scope.selectedFlight=flight;
+	}
+	$scope.findFlight = function(flightId) {
 		$scope.flightInfo = "Loading..."
 		console.log('About To Get '+flightId);
 		console.log(flightId);
@@ -19,6 +27,11 @@ app.controller('mainCtrl', function($scope, dataService){
 		$scope.seatInfo = "Loading..."
 		console.log('Getting seat, using flight id: ' + flightId);
 		dataService.findSeatsByFlight(flightId, function(response){$scope.seatInfo = JSON.stringify(response)});
+	}
+	$scope.authenticate = function(username, password) {
+		$scope.seatInfo = "Loading..."
+		console.log('Authenticating, using username: [' + username + "] and password: [" + password + "]");
+		dataService.authenticate(username, password, function(response){$scope.userInfo = JSON.stringify(response)});
 	}
 });
 	
@@ -36,6 +49,9 @@ app.service('dataService', function($http){
 	this.findFlight = function(flightId, callback) {
 		$http.get('rest/findFlight/'+flightId, flightId).then(callback);
 	}
+	this.findFlightByTicket = function(ticketId, callback) {
+		$http.get('rest/findFlightByTicket/'+ticketId,ticketId).then(callback);
+	}
 	this.findTicket = function(ticketId, callback){
 		$http.get('rest/findTicket/'+ticketId, ticketId).then(callback);
 	}
@@ -44,5 +60,11 @@ app.service('dataService', function($http){
 	}
 	this.findSeatsByFlight = function(flightId, callback) {
 		$http.get('rest/findSeatsByFlight/'+flightId, flightId).then(callback);
+	}
+	this.authenticate = function(username, password, callback) {
+		console.log("authing...");
+		var data = JSON.stringify({"username": username, "password": password});
+		$http.post('rest/authenticate', data).then(callback);
+		console.log("should be done...");
 	}
 });

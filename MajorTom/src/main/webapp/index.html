@@ -11,32 +11,37 @@
 	<script defer src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
 	<script defer src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.js"></script>
 	<script defer src="resources/js/app.js"></script>
-	<script defer src="resources/js/swap-receipt-modal.js"></script>
+	<script defer src="resources/js/receipt-modal.js"></script>
 </head>
 <body data-ng-app="airline">
-	<h1 class="jumbotron panel">Major Tom Seat Reservation System</h1>
-	<div id="ReceiptModal" class="panel" data-ng-controller="receiptController">
-		<airline-login-btn></airline-login-btn>
-		<div data-ng-hide="loginVisible">
-			<p>Ticket Number:</p><p>&nbsp#{{ticket.ticketId}}</p>
-			<p>Passenger Name:</p><p>&nbsp{{ticket.firstName}} {{ticket.lastName}}</p>
-		</div>
-		<div data-ng-show="loginVisible">
-			<enter-ticket-info></enter-ticket-info>
-		</div>
-	</div>
-	<div id="InfoBar" class="panel">
-		<h2>Flight Number: #1122334455</h2>
-		<p>Plane Specs!</p>
-	</div>
-	<div data-ng-view></div>
 	<div ng-controller="mainCtrl">
+		<h1 class="jumbotron panel">Major Tom Seat Reservation System</h1>
+		<div id="ReceiptModal" class="panel" data-ng-controller="receiptController">
+			<airline-login-btn></airline-login-btn>
+			<div data-ng-hide="loginVisible">
+				<p>Ticket Number:</p><p>&nbsp#{{selectedTicket.ticketId}}</p>
+				<p>Passenger Name:</p><p>&nbsp{{selectedTicket.firstName}} {{selectedTicket.lastName}}</p>
+			</div>
+			<div data-ng-show="loginVisible">
+				<enter-ticket-info></enter-ticket-info>
+			</div>
+		</div>
+		<div id="InfoBar" class="panel">
+			<h2>Flight Number: #{{selectedFlight.flightId}}</h2>
+			<label class="tickerEntry">Airline: <span class="tickerValue">{{selectedFlight.airline.name}}</span></label>
+			<label class="tickerEntry">Model: <span class="tickerValue">{{selectedFlight.airplane.airplaneName}}</span></label>
+			<label class="tickerEntry">Destination: <span class="tickerValue">{{selectedFlight.destination.destinationName}}</span></label>
+		</div>
+		<div data-ng-view></div>
 		<button ng-click="findFlight(1)">Click Me!</button>
 		<div>{{flightInfo}}</div>
 		<button ng-click="findTicketBySeat(1)">Find ticket by seat 1!</button>
 		<div>{{ticketInfo}}</div>
 		<button ng-click="findSeatByFlight(1)">Find seat by flight 1!</button>
 		<div>{{seatInfo}}</div>
+		<button ng-click="authenticate('atlasm','password')">correct login!</button>
+		<button ng-click="authenticate('atlasm','passwords')">bad login!</button>
+		<div>{{userInfo}}</div>
 	</div>
 </body>
 </html>
