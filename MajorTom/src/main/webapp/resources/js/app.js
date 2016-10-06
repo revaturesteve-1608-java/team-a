@@ -13,30 +13,30 @@ app.controller('mainCtrl', function($scope, dataService){
 		$scope.selectedFlight=flight;
 	}
 	$scope.findFlight = function(flightId) {
-		$scope.flightInfo = "Loading..."
+		$scope.flightInfo = "Loading...";
 		console.log('About To Get '+flightId);
 		console.log(flightId);
 		dataService.findFlight(flightId, function(response){$scope.flightInfo = response.data.flightId;});
 	}
 	$scope.findTicketBySeat = function(seatId) {
-		$scope.ticketInfo = "Loading..."
+		$scope.ticketInfo = "Loading...";
 		console.log('Getting ticket, using seat id: ' + seatId);
 		dataService.findTicketBySeat(seatId, function(response){$scope.ticketInfo = JSON.stringify(response);});
 	}
 	$scope.findSeatByFlight = function(flightId) {
-		$scope.seatInfo = "Loading..."
+		$scope.seatInfo = "Loading...";
 		console.log('Getting seat, using flight id: ' + flightId);
 		dataService.findSeatsByFlight(flightId, function(response){$scope.seatInfo = JSON.stringify(response);});
 	}
 	$scope.authenticate = function(username, password) {
-		$scope.seatInfo = "Loading..."
+		$scope.userInfo = "Loading...";
 		console.log('Authenticating, using username: [' + username + "] and password: [" + password + "]");
 		dataService.authenticate(username, password, function(response){
 			console.log("Got a response, status: " + response.status);
 			$scope.userInfo = JSON.stringify(response);
 		}, function(response) {
 			console.log("Got a response, status: " + response.status);
-			$scope.userInfo = "YOUR LOGIN FAILED!!!";
+			$scope.userInfo = "Invalid login.  Please try again.";
 		});
 	}
 });
