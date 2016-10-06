@@ -22,7 +22,8 @@ body {
 	position: relative;
 	height: 400px;
 	top: 284px;
-	margin: 0px 0 0 130px;
+	left:-130px;
+	margin: 0px;
 }
 
 .plane-cockpit {

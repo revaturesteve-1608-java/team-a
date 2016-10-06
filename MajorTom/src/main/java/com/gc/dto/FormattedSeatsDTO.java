@@ -1,5 +1,6 @@
 package com.gc.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.gc.model.Seat;
@@ -11,16 +12,17 @@ public class FormattedSeatsDTO {
 	public FormattedSeatsDTO() {
 	}
 	public FormattedSeatsDTO(List<Seat> seats) {
-		
-	for (Seat seat : seats) {
-		if (seat.getSeatType().getSeatTypeId() == 1)
-			economy.add(seat);
-	}
-		
-		this.first = first;
-		this.buisness = buisness;
-		this.economy = economy;
-	}
+	
+		this.first = new ArrayList<>();
+		for (Seat seat : seats) {
+			if (seat.getSeatType().getSeatTypeId() == 1)
+				economy.add(seat);
+		}
+			
+			this.first = first;
+			this.buisness = buisness;
+			this.economy = economy;
+		}
 	
 	public List<Seat> getFirst() {
 		return first;

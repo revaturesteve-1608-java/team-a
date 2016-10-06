@@ -13,6 +13,8 @@
 	<script defer src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.js"></script>
 	<script defer src="resources/js/app.js"></script>
 	<script defer src="resources/js/receipt-modal.js"></script>
+	<script defer src="resources/js/app-plane.js"></script>
+	<script defer src="resources/js/plane.js"></script>
 </head>
 <body data-ng-app="airline">
 	<div ng-controller="mainCtrl">
@@ -46,7 +48,7 @@
 			<label class="tickerEntry">Model: <span class="tickerValue">{{selectedFlight.airplane.airplaneName}}</span></label>
 			<label class="tickerEntry">Destination: <span class="tickerValue">{{selectedFlight.destination.destinationName}}</span></label>
 		</div>
-		<div data-ng-view></div>
+		<div id="view-container" data-ng-view></div>
 	</div>
 </body>
 </html>
