@@ -18,21 +18,25 @@
 			background-size: 100% 100%;
 		}
 		
+		.seat-container {
+			height:400px;
+			margin: 285px 0 0 130px;
+			border:1px solid black;
+		}
 		
 		.plane-cockpit {
-			position: absolute;
-			top: 41.8%;
-			left: 5%;
+			display: inline-block;
+			padding: 124px 0 0 0;
+			margin-right:220px;
+			height:276px;
+			width:262px;
+			border: 1px solid black;
 		}
-		.plane-cockpit table {
-			border-spacing: 18px;
-    		border-collapse: separate;
-		}
-		.plane-cockpit td {
+		.plane-cockpit .seat {
+			height:48px;
+			margin:15px 0;
 			background-color: #888;
-			border: 2px solid black;
-			width: 32px;
-			height: 48px;
+			border:2px solid black;
 			border-radius: 8px;
 		}
 		
@@ -87,35 +91,33 @@
 		.seat-label {
 			text-align: right;
 		}
+		
+		.aisle {
+			height:40px;
+			border: 1px solid black;
+		}
 	</style>
 </head>
 <body ng-app="airline">
 	<div class="wrapper" ng-controller="planeController as plane">
 		<div class="plane">
-		{{plane.pilot.name}}
-			<div class="plane-cockpit">
-				<table>
-					<tbody>
-						<tr>
-							<td></td>
-						</tr>
-						<tr>
-							<td></td>
-						</tr>
-					</tbody>
-				</table>
+			<div class="seat-container">
+				<div class="plane-cockpit">
+					<div class="seat"></div>
+					<div class="seat"></div>
+				</div>
 			</div>
-			
 			
 			<div class="plane-first">
-				<table>
-					<tbody>
-						<tr ng-repeat="row in plane.firstclassleft">
-							<td class="seat" ng-repeat="seat in row"></td>
-						</tr>
-					</tbody>
-				</table>
+				<div class="plane-first-row" ng-repeat="row in plane.firstclassleft">
+						<div class="seat"></div>
+						<div class="seat"></div>
+						<div class="aisle"></div>
+						<div class="seat"></div>
+						<div class="seat"></div>
+				</div>	
 			</div>
+			
 			<div class="plane-first plane-first-bottom">
 				<table>
 					<tbody>
@@ -126,7 +128,7 @@
 				</table>
 			</div>
 			
-			
+			<!--
 			<div class="plane-buisness">
 				<table>
 					<tbody>
@@ -164,7 +166,7 @@
 						</tr>
 					</tbody>
 				</table>
-			</div>
+			</div> -->
 		</div>
 	</div>
 	
