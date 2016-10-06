@@ -7,5 +7,5 @@ import com.gc.model.Airplane;
 
 @Repository
 public interface AirplaneRepo extends JpaRepository<Airplane, Integer>{
-
+	Airplane findByAirplaneName(String name);
 }
