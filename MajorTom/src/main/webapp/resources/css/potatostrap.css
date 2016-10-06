@@ -27,6 +27,16 @@ body
 	text-size:14pt;
 }
 
+.tickerEntry
+{
+	min-width:18em;
+	font-weight:bold;
+}
+.tickerValue
+{
+	font-weight:normal;
+}
+
 #ReceiptModal
 {
 	float:left;
