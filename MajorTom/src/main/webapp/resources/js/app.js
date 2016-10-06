@@ -34,6 +34,9 @@ app.controller('mainCtrl', function($scope, dataService){
 		dataService.authenticate(username, password, function(response){
 			console.log("Got a response, status: " + response.status);
 			$scope.userInfo = JSON.stringify(response);
+		}, function(response) {
+			console.log("Got a response, status: " + response.status);
+			$scope.userInfo = "YOUR LOGIN FAILED!!!";
 		});
 	}
 });
@@ -64,8 +67,8 @@ app.service('dataService', function($http){
 	this.findSeatsByFlight = function(flightId, callback) {
 		$http.get('rest/findSeatsByFlight/'+flightId, flightId).then(callback);
 	}
-	this.authenticate = function(username, password, callback) {
+	this.authenticate = function(username, password, callback, failure) {
 		var data = JSON.stringify({"username": username, "password": password});
-		$http.post('rest/authenticate', data).then(callback);
+		$http.post('rest/authenticate', data).then(callback, failure);
 	}
 });
