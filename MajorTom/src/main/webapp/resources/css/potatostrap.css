@@ -47,7 +47,8 @@ body
 
 #ReceiptModal
 {
-	z-index:5;
+	z-index:1000;
+	position:relative;
 	float:left;
 	display:inline-block;
 	background-color:#FFFFFF;
