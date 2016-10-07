@@ -1,176 +1,37 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="ISO-8859-1">
-	<title>Boeing 737-800 Layout</title>
-
-	<style>
-		.wrapper{
-			position: static;
-			margin: -8px 0 0 -8px;
-		}
-		.plane {
-			position: absolute;
-			height: 100%;
-			width: 100%;
-			background-image: url("../resources/images/737-bg.png");
-			background-repeat: no-repeat;
-			background-size: 100% 100%;
-		}
+<div class="plane" ng-controller="planeController as plane">
+	<div class="seat-container">
+		<div class="plane-cockpit">
+			<div class="seat"></div>
+			<div class="seat"></div>
+		</div><!--
 		
+		--><div class="plane-first" ng-repeat="row in plane.firstclass">
+			<div class="seat"></div>
+			<div class="seat"></div>
+			<div class="aisle"></div>
+			<div class="seat"></div>
+			<div class="seat"></div>
+		</div><!--
+		--><div class="row-spacer"></div><!--
 		
-		.plane-cockpit {
-			position: absolute;
-			top: 41.8%;
-			left: 5%;
-		}
-		.plane-cockpit table {
-			border-spacing: 18px;
-    		border-collapse: separate;
-		}
-		.plane-cockpit td {
-			background-color: #888;
-			border: 2px solid black;
-			width: 32px;
-			height: 48px;
-			border-radius: 8px;
-		}
+		--><div class="plane-buisness" ng-repeat="row in plane.buisclass">
+			<div class="seat"></div>
+			<div class="seat"></div>
+			<div class="seat"></div>
+			<div class="aisle"></div>
+			<div class="seat"></div>
+			<div class="seat"></div>
+			<div class="seat"></div>
+		</div><!--
 		
-	
-		.plane-first {
-			position: absolute;
-			top: 29%;
-			left: 19%;
-		}
-		.plane-first table {
-			border-spacing: 18px;
-    		border-collapse: separate;
-		}
-		.plane-first td.seat {
-			background-color: #888;
-			border: 2px solid black;
-			width: 32px;
-			height: 48px;
-			border-radius: 8px;
-		}
-		.plane-first-bottom {
-			position: absolute;
-			top: 54.3%;
-			left: 19%;
-		}
-		.seat-label {
-			text-align: right;
-		}
-		
-		
-		.plane-buisness {
-			position: absolute;
-			top: 29.5%;
-			left: 31%;
-		}
-		.plane-buisness table {
-			border-spacing: 30px 8px;
-    		border-collapse: separate;
-		}
-		.plane-buisness td.seat {
-			background-color: #888;
-			border: 2px solid black;
-			width: 24px;
-			height: 38px;
-			border-radius: 8px;
-		}
-		.plane-buisness-bottom {
-			position: absolute;
-			top: 49.6%;
-			left: 38%;
-		}
-		.seat-label {
-			text-align: right;
-		}
-	</style>
-</head>
-<body ng-app="airline">
-	<div class="wrapper" ng-controller="planeController as plane">
-		<div class="plane">
-		{{plane.pilot.name}}
-			<div class="plane-cockpit">
-				<table>
-					<tbody>
-						<tr>
-							<td></td>
-						</tr>
-						<tr>
-							<td></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			
-			
-			<div class="plane-first">
-				<table>
-					<tbody>
-						<tr ng-repeat="row in plane.firstclassleft">
-							<td class="seat" ng-repeat="seat in row"></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			<div class="plane-first plane-first-bottom">
-				<table>
-					<tbody>
-						<tr ng-repeat="row in plane.firstclassright">
-							<td class="seat" ng-repeat="seat in row"></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			
-			
-			<div class="plane-buisness">
-				<table>
-					<tbody>
-						<tr ng-repeat="row in plane.buisclassleft">
-							<td class="seat" ng-repeat="seat in row"></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			<div class="plane-buisness plane-buisness-bottom">
-				<table>
-					<tbody>
-						<tr ng-repeat="row in plane.buisclassright">
-							<td class="seat" ng-repeat="seat in row"></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			
-			
-			<div class="plane-economy">
-				<table>
-					<tbody>
-						<tr ng-repeat="row in plane.econclassleft">
-							<td class="seat" ng-repeat="seat in row"></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			<div class="plane-economy">
-				<table>
-					<tbody>
-						<tr ng-repeat="row in plane.econclassright">
-							<td class="seat" ng-repeat="seat in row"></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
+		--><div class="plane-economy" ng-repeat="row in plane.econclass">
+			<div class="seat"></div>
+			<div class="seat"></div>
+			<div class="seat"></div>
+			<div class="aisle"></div>
+			<div class="seat"></div>
+			<div class="seat"></div>
+			<div class="seat"></div>
 		</div>
 	</div>
-	
-	
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.js"></script>
-	<script src="../resources/js/app.js"></script>
-</body>
-</html>
+</div>
