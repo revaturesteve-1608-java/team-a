@@ -157,10 +157,6 @@ public class DataServiceImpl implements DataService{
 	}
 	
 	@Override
-	public Ticket findTicketBySeat(Seat seat) {
-		return ticketRepo.findBySeat(seat);
-	}
-	@Override
 	public List<Seat> findSeatsByFlight(Flight flight) {
 		return seatRepo.findByFlight(flight);
 	}

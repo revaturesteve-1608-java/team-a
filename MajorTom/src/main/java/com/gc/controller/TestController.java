@@ -31,7 +31,7 @@ public class TestController {
 		System.out.println("test the ticket");
 		Seat s = dataService.findSeatById(1);
 		System.out.println("seat:" + s);
-		System.out.println("ticket:" + dataService.findTicketBySeat(s));
+	//	System.out.println("ticket:" + dataService.findTicketBySeat(s));
 	}
 
 	@RequestMapping(value = "testSeats")

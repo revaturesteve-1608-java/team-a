@@ -59,7 +59,7 @@ public class ClientController {
 
 	@RequestMapping(value = "/findTicketBySeat/{seatId}")
 	public ResponseEntity<Ticket> findTicketBySeat(@PathVariable(value = "seatId") Integer seatId) {
-		Ticket ticket = dataService.findTicketBySeat(dataService.findSeatById(seatId));
+		Ticket ticket = dataService.findSeatById(seatId).getTicket();
 		if (ticket != null) {
 			System.out.println("Ticket: " + ticket);
 			return new ResponseEntity<Ticket>(ticket, HttpStatus.ACCEPTED);
