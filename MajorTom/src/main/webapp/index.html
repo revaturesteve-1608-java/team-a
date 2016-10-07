@@ -18,7 +18,6 @@
 </head>
 <body data-ng-app="airline">
 	<div ng-controller="mainCtrl">
-		<h1 class="jumbotron panel">Major Tom Seat Reservation System</h1>
 		<div id="ReceiptModal" class="panel" data-ng-controller="receiptController">
 			<div data-ng-hide="loginVisible">
 				<div data-ng-show="currentUser==null">
@@ -42,6 +41,7 @@
 			</div>
 			<airline-login-btn id="airlineLoginBtn"></airline-login-btn>
 		</div>
+		<h1 class="jumbotron panel">Major Tom Seat Reservation System</h1>
 		<div id="InfoBar" class="panel">
 			<h2>Flight Number: #{{selectedFlight.flightId}}</h2>
 			<label class="tickerEntry">Airline: <span class="tickerValue">{{selectedFlight.airline.name}}</span></label>
