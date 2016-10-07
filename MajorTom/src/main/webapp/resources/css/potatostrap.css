@@ -46,20 +46,19 @@ body
 {
 	z-index:1000;
 	position:fixed;
-	float:left;
-	display:inline-block;
 	background-color:#FFFFFF;
 	color:#000000;
 	margin:5px;
 	padding:0.5em;
-	border-radius:0;
-	border-width:0.01em;
+	border-style:solid;
+	border-width:2px;
 	border-color:#000000;
 	font-size:12pt;
 	font-family:"Courier New", Courier, monospace;
 	font-weight:bold;
 	line-height:100%;
-	width:240px
+	width:240px;
+	height:400px;
 }
 
 #ReceiptModal > p
@@ -82,4 +81,26 @@ body
 {
 	margin:0;
 	padding:0;
+}
+
+@keyframes slidekeyframe
+{
+	from{top:-360px;}
+	to{top:0;}
+}
+
+.ReceiptAnimIn
+{
+	animation:slidekeyframe 1s forwards;
+	-webkit-animation-name:slidekeyframe 1s forwards;
+	animation-direction:normal;
+	-webkit-animation-direction:normal;
+}
+
+.ReceiptAnimOut
+{
+	animation:slidekeyframe 1s forwards;
+	-webkit-animation-name:slidekeyframe 1s forwards;
+	animation-direction:reverse;
+	-webkit-animation-direction:reverse;
 }
