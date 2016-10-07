@@ -1,13 +1,13 @@
 package com.gc.dto;
 
-public class SelectSeatDTO {
+public class SetSeatDTO {
 
 	private int ticketId;
 	private int seatId;
 	
-	public SelectSeatDTO() {}
+	public SetSeatDTO() {}
 
-	public SelectSeatDTO(int ticketId, int seatId) {
+	public SetSeatDTO(int ticketId, int seatId) {
 		super();
 		this.ticketId = ticketId;
 		this.seatId = seatId;

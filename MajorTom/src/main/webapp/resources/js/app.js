@@ -39,10 +39,10 @@ app.controller('mainCtrl', function($scope, dataService){
 		console.log('Getting seat, using flight id: ' + flightId);
 		dataService.findSeatsByFlight(flightId, function(response){$scope.seatInfo = JSON.stringify(response);});
 	};
-	$scope.selectSeat = function(ticketId, seatId) {
+	$scope.setSeat = function(ticketId, seatId) {
 		$scope.newTicketInfo = "Loading...";
 		console.log('Getting seat, using: ' + ticketId + " " + seatId);
-		dataService.selectSeat(ticketId, seatId, function(response){$scope.newTicketInfo = JSON.stringify(response);});
+		dataService.setSeat(ticketId, seatId, function(response){$scope.newTicketInfo = JSON.stringify(response);});
 	};
 });
 	
@@ -76,9 +76,9 @@ app.service('dataService', function($http){
 		var data = JSON.stringify({"username": username, "password": password});
 		$http.post('rest/authenticate', data).then(callback, failure);
 	}
-	this.selectSeat = function(ticketId, seatId, callback, failure) {
+	this.setSeat = function(ticketId, seatId, callback, failure) {
 		// Set the seat for the ticket
 		var data = JSON.stringify({"ticketId": ticketId, "seatId": seatId});
-		$http.post('rest/selectSeat', data).then(callback, failure);
+		$http.post('rest/setSeat', data).then(callback, failure);
 	}
 });

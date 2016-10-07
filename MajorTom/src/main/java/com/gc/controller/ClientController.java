@@ -8,11 +8,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gc.dto.AuthenticationDTO;
-import com.gc.dto.SelectSeatDTO;
+import com.gc.dto.SetSeatDTO;
 import com.gc.model.Employee;
 import com.gc.model.Flight;
 import com.gc.model.Seat;
@@ -94,8 +93,8 @@ public class ClientController {
 		}
 	}
 	
-	@RequestMapping(value="/selectSeat")
-	public ResponseEntity<Ticket> selectSeat(@RequestBody SelectSeatDTO data) {
+	@RequestMapping(value="/setSeat")
+	public ResponseEntity<Ticket> setSeat(@RequestBody SetSeatDTO data) {
 		System.out.println(data);
 		Ticket ticket = dataService.findTicketById(data.getTicketId());
 		Seat seat = dataService.findSeatById(data.getSeatId());
