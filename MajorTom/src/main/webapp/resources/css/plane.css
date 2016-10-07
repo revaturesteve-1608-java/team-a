@@ -106,3 +106,45 @@ body {
 .aisle {
 	height: 80px;
 }
+
+@keyframes animatedBackground {
+    from {
+        background-position: 100% 0;
+    }
+    to {
+        background-position: 0 0;
+    }
+}
+@-webkit-keyframes animatedBackground {
+    from {
+        background-position: 100% 0;
+    }
+    to {
+        background-position: 0 0;
+    }
+}
+@-ms-keyframes animatedBackground {
+    from {
+        background-position: 100% 0;
+    }
+    to {
+        background-position: 0 0;
+    }
+}
+@-moz-keyframes animatedBackground {
+    from {
+        background-position: 100% 0;
+    }
+    to {
+        background-position: 0 0;
+    }
+}
+
+#bgContainer {
+	background: url("../images/clouds-panorama.jpg") no-repeat fixed;
+    background-size: cover;
+    animation: animatedBackground 60s linear infinite;
+    -ms-animation: animatedBackground 60s linear infinite;
+    -moz-animation: animatedBackground 60s linear infinite;
+    -webkit-animation: animatedBackground 60s linear infinite;
+}

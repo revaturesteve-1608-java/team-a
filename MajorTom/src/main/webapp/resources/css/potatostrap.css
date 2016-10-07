@@ -83,3 +83,30 @@ body
 	margin:0;
 	padding:0;
 }
+
+#info-box
+{
+z-index: 10000;
+position: relative;
+width: 275px;
+height: 80px;
+padding: 15px;
+background: #FFFFFF;
+-webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+border-radius: 10px;
+}
+
+#info-box:after
+{
+z-index: 10000;
+content: '';
+position: absolute;
+border-style: solid;
+border-width: 20px 15px 0;
+border-color: #FFFFFF transparent;
+display: block;
+width: 0;
+bottom: -20px;
+left: 122px;
+}
