@@ -39,6 +39,11 @@ app.controller('mainCtrl', function($scope, dataService){
 		console.log('Getting seat, using flight id: ' + flightId);
 		dataService.findSeatsByFlight(flightId, function(response){$scope.seatInfo = JSON.stringify(response);});
 	};
+	$scope.selectSeat = function(ticketId, seatId) {
+		$scope.newTicketInfo = "Loading...";
+		console.log('Getting seat, using: ' + ticketId + " " + seatId);
+		dataService.selectSeat(ticketId, seatId, function(response){$scope.newTicketInfo = JSON.stringify(response);});
+	};
 });
 	
 app.config(function($routeProvider) {
