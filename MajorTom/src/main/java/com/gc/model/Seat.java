@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -31,6 +32,11 @@ public class Seat {
 	@JoinColumn(name = "FLIGHT_ID")
 	@Fetch(FetchMode.JOIN)
 	Flight flight;
+	
+	@OneToOne
+	@JoinColumn(name="TICKET_ID")
+	@Fetch(FetchMode.JOIN)
+	Ticket ticket;
 	
 	
 	public Seat() {
@@ -57,6 +63,12 @@ public class Seat {
 	}
 	public void setFlight(Flight flight) {
 		this.flight = flight;
+	}
+	public Ticket getTicket() {
+		return ticket;
+	}
+	public void setTicket(Ticket ticket) {
+		this.ticket = ticket;
 	}
 	
 	@Override

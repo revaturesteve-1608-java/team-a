@@ -4,14 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.gc.model.Seat;
+import com.gc.model.Ticket;
 
 public class FormattedSeatsDTO {
 	List<Seat> first;
 	List<Seat> buisness;
 	List<Seat> economy;
+	List<Ticket> tickets;
 	public FormattedSeatsDTO() {
 	}
-	public FormattedSeatsDTO(List<Seat> seats) {
+	public FormattedSeatsDTO(List<Seat> seats, List<Ticket> tickets) {
 	
 		this.first = new ArrayList<>();
 		this.buisness = new ArrayList<>();
@@ -28,6 +30,8 @@ public class FormattedSeatsDTO {
 				this.first.add(seat);
 			}
 		}
+		
+		this.tickets = tickets;
 	}
 	
 	public List<Seat> getFirst() {
@@ -47,6 +51,12 @@ public class FormattedSeatsDTO {
 	}
 	public void setEconomy(List<Seat> economy) {
 		this.economy = economy;
+	}
+	public List<Ticket> getTickets() {
+		return tickets;
+	}
+	public void setTickets(List<Ticket> tickets) {
+		this.tickets = tickets;
 	}
 	
 	@Override

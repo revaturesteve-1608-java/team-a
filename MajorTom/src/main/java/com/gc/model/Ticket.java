@@ -5,13 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(name="TICKET")
@@ -34,23 +29,17 @@ public class Ticket {
 	@Column(name="PHONE", length=31)
 	String phone;
 	
-	@OneToOne
-	@JoinColumn(name="SEAT_ID")
-	@Fetch(FetchMode.JOIN)
-	Seat seat;
-	
 	
 	public Ticket() {
 		super();
 	}
-	public Ticket(Integer ticketId, String firstName, String lastName, String email, String phone, Seat seat) {
+	public Ticket(Integer ticketId, String firstName, String lastName, String email, String phone) {
 		super();
 		this.ticketId = ticketId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.phone = phone;
-		this.seat = seat;
 	}
 	
 	public Integer getTicketId() {
@@ -83,16 +72,11 @@ public class Ticket {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public Seat getSeat() {
-		return seat;
-	}
-	public void setSeat(Seat seat) {
-		this.seat = seat;
-	}
+
 	
 	@Override
 	public String toString() {
 		return "Ticket [ticketId=" + ticketId + ", firstName=" + firstName + ", lastName=" + lastName + ", email="
-				+ email + ", phone=" + phone + ", seat=" + seat + "]";
+				+ email + ", phone=" + phone + "]";
 	}
 }

@@ -172,4 +172,8 @@ public class DataServiceImpl implements DataService{
 	public Airplane findAirplaneByName(String name) {
 		return airplaneRepo.findByAirplaneName(name);
 	}
+	@Override
+	public Seat findSeatByTicket(Ticket tick) {
+		return seatRepo.findByTicket(tick);
+	}
 }
