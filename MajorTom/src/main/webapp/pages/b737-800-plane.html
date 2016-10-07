@@ -1,37 +1,39 @@
-<div class="plane" ng-controller="planeController as plane">
-	<div class="seat-container">
-		<div class="plane-cockpit">
-			<div class="seat"></div>
-			<div class="seat"></div>
-		</div><!--
-		
-		--><div class="plane-first" ng-repeat="row in plane.firstclass">
-			<div class="seat"></div>
-			<div class="seat"></div>
-			<div class="aisle"></div>
-			<div class="seat"></div>
-			<div class="seat"></div>
-		</div><!--
-		--><div class="row-spacer"></div><!--
-		
-		--><div class="plane-buisness" ng-repeat="row in plane.buisclass">
-			<div class="seat"></div>
-			<div class="seat"></div>
-			<div class="seat"></div>
-			<div class="aisle"></div>
-			<div class="seat"></div>
-			<div class="seat"></div>
-			<div class="seat"></div>
-		</div><!--
-		
-		--><div class="plane-economy" ng-repeat="row in plane.econclass">
-			<div class="seat"></div>
-			<div class="seat"></div>
-			<div class="seat"></div>
-			<div class="aisle"></div>
-			<div class="seat"></div>
-			<div class="seat"></div>
-			<div class="seat"></div>
+<div id="bgContainer">
+	<div class="plane" ng-controller="planeController as plane">
+		<div class="seat-container">
+			<div class="plane-cockpit">
+				<div class="seat"></div>
+				<div class="seat"></div>
+			</div><!--
+			
+			--><div class="plane-first" ng-repeat="row in plane.firstclass">
+				<div class="seat"></div>
+				<div class="seat"></div>
+				<div class="aisle"></div>
+				<div class="seat"></div>
+				<div class="seat"></div>
+			</div><!--
+			--><div class="row-spacer"></div><!--
+			
+			--><div class="plane-buisness" ng-repeat="row in plane.buisclass">
+				<div class="seat"></div>
+				<div class="seat"></div>
+				<div class="seat"></div>
+				<div class="aisle"></div>
+				<div class="seat"></div>
+				<div class="seat"></div>
+				<div class="seat"></div>
+			</div><!--
+			
+			--><div class="plane-economy" ng-repeat="row in plane.econclass">
+				<div class="seat"></div>
+				<div class="seat"></div>
+				<div class="seat"></div>
+				<div class="aisle"></div>
+				<div class="seat"></div>
+				<div class="seat"></div>
+				<div class="seat"></div>
+			</div>
 		</div>
 	</div>
 </div>
@@ -46,7 +48,7 @@ window.onload = resizeContent($width, $height);
 
 function resizeContent(width, height) {
 
-	var $content = $(".plane");
+	var $content = $("#plane");
 	console.log($content[0]);
 	
 	var scale;
