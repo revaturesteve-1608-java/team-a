@@ -3,8 +3,7 @@ angular.module("airline")
 	$scope.loginVisible=true;
 	$scope.loadingTicket={ticketId:"Loading...",firstName:"",lastName:""};
 	$scope.selectTicket($scope.loadingTicket);
-	$scope.loadingFlight={flightId:"No flight selected."};
-	$scope.selectFlight($scope.loadingFlight);
+	$scope.selectFlight(null);
 	$scope.loadingUser={username:"Loading...",firstName:"",lastName:"",authenticated:false};
 	$scope.errorUser={username:"Not Found",firstName:"",lastName:"",authenticated:false};
 	$scope.setCurrentUser(null);

@@ -14,7 +14,6 @@
 	<script defer src="resources/js/app.js"></script>
 	<script defer src="resources/js/receipt-modal.js"></script>
 	<script defer src="resources/js/app-plane.js"></script>
-	<!-- <script defer src="resources/js/plane.js"></script> -->
 </head>
 <body data-ng-app="airline">
 	<div ng-controller="mainCtrl">
@@ -44,12 +43,14 @@
 			</div>
 			<airline-login-btn id="airlineLoginBtn"></airline-login-btn>
 		</div>
-		<h1 class="jumbotron panel">Major Tom Seat Reservation System</h1>
-		<div id="InfoBar" class="panel">
-			<h2>Flight Number: #{{selectedFlight.flightId}}</h2>
-			<label class="tickerEntry">Airline: <span class="tickerValue">{{selectedFlight.airline.name}}</span></label>
-			<label class="tickerEntry">Model: <span class="tickerValue">{{selectedFlight.airplane.airplaneName}}</span></label>
-			<label class="tickerEntry">Destination: <span class="tickerValue">{{selectedFlight.destination.destinationName}}</span></label>
+		<div id="HeaderContainer" class="panel">
+			<h1 class="jumbotron" data-ng-show="selectedFlight==null">Major Tom Seat Reservation System</h1>
+			<div data-ng-show="selectedFlight!=null">
+				<h2>Flight Number: #{{selectedFlight.flightId}}</h2>
+				<label class="tickerEntry">Airline: <span class="tickerValue">{{selectedFlight.airline.name}}</span></label>
+				<label class="tickerEntry">Model: <span class="tickerValue">{{selectedFlight.airplane.airplaneName}}</span></label>
+				<label class="tickerEntry">Destination: <span class="tickerValue">{{selectedFlight.destination.destinationName}}</span></label>
+			</div>
 		</div>
 		<div id="view-container" data-ng-view></div>
 	</div>

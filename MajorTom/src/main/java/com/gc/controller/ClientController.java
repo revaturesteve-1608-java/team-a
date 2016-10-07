@@ -46,7 +46,7 @@ public class ClientController {
 	public ResponseEntity<Flight> findFlightByTicket(@PathVariable(value = "ticketId") Integer ticketId) {
 		try {
 			Ticket tick = dataService.findTicketById(ticketId);
-			Seat seat = tick.getSeat();
+			Seat seat = dataService.findSeatByTicket(tick);
 			Flight flight = seat.getFlight();
 			if (flight == null) {
 				throw new NullPointerException();
@@ -59,7 +59,7 @@ public class ClientController {
 
 	@RequestMapping(value = "/findTicketBySeat/{seatId}")
 	public ResponseEntity<Ticket> findTicketBySeat(@PathVariable(value = "seatId") Integer seatId) {
-		Ticket ticket = dataService.findTicketBySeat(dataService.findSeatById(seatId));
+		Ticket ticket = dataService.findSeatById(seatId).getTicket();
 		if (ticket != null) {
 			System.out.println("Ticket: " + ticket);
 			return new ResponseEntity<Ticket>(ticket, HttpStatus.ACCEPTED);
@@ -99,7 +99,7 @@ public class ClientController {
 		Ticket ticket = dataService.findTicketById(data.getTicketId());
 		Seat seat = dataService.findSeatById(data.getSeatId());
 		if (ticket != null && seat != null) {
-			ticket.setSeat(seat);
+			seat.setTicket(ticket);
 			dataService.saveTicket(ticket);
 			System.out.println(ticket);
 			return new ResponseEntity<Ticket>(ticket, HttpStatus.ACCEPTED);
