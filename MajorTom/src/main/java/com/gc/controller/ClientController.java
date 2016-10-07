@@ -95,7 +95,7 @@ public class ClientController {
 	}
 	
 	@RequestMapping(value="/selectSeat")
-	public ResponseEntity<Ticket> authenticate(@RequestBody SelectSeatDTO data) {
+	public ResponseEntity<Ticket> selectSeat(@RequestBody SelectSeatDTO data) {
 		System.out.println(data);
 		Ticket ticket = dataService.findTicketById(data.getTicketId());
 		Seat seat = dataService.findSeatById(data.getSeatId());
@@ -107,5 +107,5 @@ public class ClientController {
 		} else {
 			return new ResponseEntity<Ticket>(ticket, HttpStatus.BAD_REQUEST);
 		}
-	}
+	} 
 }

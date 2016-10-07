@@ -21,24 +21,25 @@ body {
 .seat-container {
 	position: relative;
 	height: 400px;
-	top: 284px;
-	left:-130px;
+	width: 1980px;
+	top: 286px;
+	left:-104px;
 	margin: 0px;
 }
 
 .plane-cockpit {
 	display: inline-block;
-	padding: 124px 0 0 0;
+	padding: 4px 0 0 0;
 	margin-right: 208px;
 	height: 276px;
 	width: 39px;
 }
 
 .plane-cockpit .seat {
-	height: 48px;
+	height: 52px;
 	margin: 15px 0;
 	background-color: #888;
-	border: 2px solid black;
+	border: 3px solid black;
 	border-radius: 8px;
 }
 
@@ -51,9 +52,9 @@ body {
 
 .plane-first .seat {
 	background-color: #FFD700;
-	border: 2px solid black;
+	border: 3px solid black;
 	margin: 18px 0 18px 27px;
-	height: 48px;
+	height: 52px;
 	border-radius: 8px;
 }
 
@@ -66,9 +67,9 @@ body {
 
 .plane-buisness .seat {
 	background-color: #87CEEB;
-	border: 2px solid black;
+	border: 3px solid black;
 	margin: 4.166px 0 4.166px 30px;
-	height: 43px;
+	height: 47px;
 	border-radius: 8px;
 }
 
@@ -81,9 +82,9 @@ body {
 
 .plane-economy .seat {
 	background-color: white;
-	border: 2px solid black;
+	border: 3px solid black;
 	margin: 4.166px 0 4.166px 18px;
-	height: 43px;
+	height: 47px;
 	border-radius: 8px;
 }
 
