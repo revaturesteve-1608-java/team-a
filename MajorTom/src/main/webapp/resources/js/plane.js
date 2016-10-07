@@ -4,10 +4,12 @@ var $height = $(window).height();
 $height = $height - $(".jumbotron").height();
 $height = $height - $("#InfoBar").height();
 
-window.onresize = resizeContent($width, $height);
+window.onload = resizeContent($width, $height);
 
 function resizeContent(width, height) {
 
+	
+	
 	var $content = $(".plane");
 	console.log($content[0]);
 	
