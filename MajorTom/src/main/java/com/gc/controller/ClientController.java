@@ -44,22 +44,21 @@ public class ClientController {
 
 	@RequestMapping("/findFlightByTicket/{ticketId}")
 	public ResponseEntity<Flight> findFlightByTicket(@PathVariable(value = "ticketId") Integer ticketId) {
-		try {
-			Ticket tick = dataService.findTicketById(ticketId);
-			Seat seat = tick.getSeat();
-			Flight flight = seat.getFlight();
-			if (flight == null) {
-				throw new NullPointerException();
-			}
+		Seat seat = dataService.findSeatByTicket(dataService.findTicketById(ticketId));
+		Flight flight = null;
+		// First see if the seat is null, short-circuiting if it is
+		// Then, if it's not null, get the flight from it.  Then check if that's null.
+		// After that, we can return the flight.
+		if (seat != null && (flight = seat.getFlight()) != null) {
 			return new ResponseEntity<Flight>(flight, HttpStatus.ACCEPTED);
-		} catch (NullPointerException e) {
+		} else {
 			return new ResponseEntity<Flight>((Flight) null, HttpStatus.NOT_FOUND);
 		}
 	}
 
 	@RequestMapping(value = "/findTicketBySeat/{seatId}")
 	public ResponseEntity<Ticket> findTicketBySeat(@PathVariable(value = "seatId") Integer seatId) {
-		Ticket ticket = dataService.findTicketBySeat(dataService.findSeatById(seatId));
+		Ticket ticket = dataService.findSeatById(seatId).getTicket();
 		if (ticket != null) {
 			System.out.println("Ticket: " + ticket);
 			return new ResponseEntity<Ticket>(ticket, HttpStatus.ACCEPTED);
@@ -94,17 +93,17 @@ public class ClientController {
 	}
 	
 	@RequestMapping(value="/setSeat")
-	public ResponseEntity<Ticket> setSeat(@RequestBody SetSeatDTO data) {
+	public ResponseEntity<Seat> setSeat(@RequestBody SetSeatDTO data) {
 		System.out.println(data);
 		Ticket ticket = dataService.findTicketById(data.getTicketId());
 		Seat seat = dataService.findSeatById(data.getSeatId());
 		if (ticket != null && seat != null) {
-			ticket.setSeat(seat);
-			dataService.saveTicket(ticket);
-			System.out.println(ticket);
-			return new ResponseEntity<Ticket>(ticket, HttpStatus.ACCEPTED);
+			seat.setTicket(ticket);
+			dataService.saveSeat(seat);
+			System.out.println(seat);
+			return new ResponseEntity<Seat>(seat, HttpStatus.ACCEPTED);
 		} else {
-			return new ResponseEntity<Ticket>(ticket, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<Seat>(seat, HttpStatus.BAD_REQUEST);
 		}
 	} 
 }

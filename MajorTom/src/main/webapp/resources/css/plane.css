@@ -23,7 +23,7 @@ body {
 	height: 400px;
 	width: 1980px;
 	top: 286px;
-	left:-104px;
+	left:134px;
 	margin: 0px;
 }
 
@@ -73,6 +73,7 @@ body {
 	border-radius: 8px;
 }
 
+
 .plane-economy {
 	display: inline-block;
 	padding: 0px;
@@ -88,6 +89,12 @@ body {
 	border-radius: 8px;
 }
 
+.seat:hover {
+	-webkit-box-shadow: 0px 0px 2px 5px #88F;
+	-moz-box-shadow: 0px 0px 2px 5px #88F;
+	box-shadow: 0px 0px 2px 5px #88F;
+}
+
 .row-spacer {
 	display: inline-block;
 	height: 395px;
@@ -98,4 +105,46 @@ body {
 
 .aisle {
 	height: 80px;
+}
+
+@keyframes animatedBackground {
+    from {
+        background-position: 100% 0;
+    }
+    to {
+        background-position: 0 0;
+    }
+}
+@-webkit-keyframes animatedBackground {
+    from {
+        background-position: 100% 0;
+    }
+    to {
+        background-position: 0 0;
+    }
+}
+@-ms-keyframes animatedBackground {
+    from {
+        background-position: 100% 0;
+    }
+    to {
+        background-position: 0 0;
+    }
+}
+@-moz-keyframes animatedBackground {
+    from {
+        background-position: 100% 0;
+    }
+    to {
+        background-position: 0 0;
+    }
+}
+
+#bgContainer {
+	background: url("../images/clouds-panorama.jpg") no-repeat fixed;
+    background-size: cover;
+    animation: animatedBackground 60s linear infinite;
+    -ms-animation: animatedBackground 60s linear infinite;
+    -moz-animation: animatedBackground 60s linear infinite;
+    -webkit-animation: animatedBackground 60s linear infinite;
 }

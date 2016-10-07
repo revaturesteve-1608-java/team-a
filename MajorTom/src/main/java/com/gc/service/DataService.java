@@ -41,8 +41,8 @@ public interface DataService {
 	Ticket findTicketById(Integer id);
 	
 	Airline findAirlineByName(String name);
-	Ticket findTicketBySeat(Seat seat);
 	List<Seat> findSeatsByFlight(Flight flight);
 	Employee findEmployeeByUsernameAndPassword(String username, String password);
 	Airplane findAirplaneByName(String string);
+	Seat findSeatByTicket(Ticket tick);
 }

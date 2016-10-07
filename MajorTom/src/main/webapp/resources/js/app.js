@@ -40,9 +40,14 @@ app.controller('mainCtrl', function($scope, dataService){
 		dataService.findSeatsByFlight(flightId, function(response){$scope.seatInfo = JSON.stringify(response);});
 	};
 	$scope.setSeat = function(ticketId, seatId) {
-		$scope.newTicketInfo = "Loading...";
+		$scope.newSeatInfo = "Loading...";
 		console.log('Getting seat, using: ' + ticketId + " " + seatId);
-		dataService.setSeat(ticketId, seatId, function(response){$scope.newTicketInfo = JSON.stringify(response);});
+		dataService.setSeat(ticketId, seatId, function(response){$scope.newSeatInfo = JSON.stringify(response);});
+	};
+	$scope.findFlightByTicket = function(ticketId) {
+		$scope.flightByTicket = "Loading...";
+		console.log('Getting flight, using: ' + ticketId);
+		dataService.findFlightByTicket(ticketId, function(response){$scope.flightByTicket = JSON.stringify(response);});
 	};
 });
 	
@@ -82,3 +87,31 @@ app.service('dataService', function($http){
 		$http.post('rest/setSeat', data).then(callback, failure);
 	}
 });
+
+
+window.onload = windowResize();
+
+window.onresize = function(event) {
+	windowResize();
+};
+
+function windowResize() {
+	var content = $(".plane");
+	var height = $(window).height();
+	var jumbotron = $(".jumbotron").height();
+	var infobar = $("#InfoBar").height();
+	if (typeof jumbotron === "number" && !isNaN(jumbotron)) {
+		height -= jumbotron;
+	}
+	if (typeof infobar === "number" && !isNaN(infobar)) {
+		height -= infobar;
+	}
+	var width = $(window).width();
+	console.log(width + " " + height);
+	var scale;
+	scale = Math.min(width / 1920, height / 971);
+	content.css({
+		transform : "scale(" + scale + ")" 
+	});
+	content.css("bottom", 0); // change this 0 to a more reasonable number to bring the plane downward
+}

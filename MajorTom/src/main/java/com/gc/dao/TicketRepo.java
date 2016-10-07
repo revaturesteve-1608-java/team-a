@@ -8,6 +8,4 @@ import com.gc.model.Ticket;
 
 @Repository
 public interface TicketRepo extends JpaRepository<Ticket, Integer> {
-	
-	public Ticket findBySeat(Seat seat);
 }

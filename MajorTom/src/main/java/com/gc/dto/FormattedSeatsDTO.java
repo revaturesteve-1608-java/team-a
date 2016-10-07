@@ -14,15 +14,21 @@ public class FormattedSeatsDTO {
 	public FormattedSeatsDTO(List<Seat> seats) {
 	
 		this.first = new ArrayList<>();
+		this.buisness = new ArrayList<>();
+		this.economy = new ArrayList<>();
+		
 		for (Seat seat : seats) {
-			if (seat.getSeatType().getSeatTypeId() == 1)
-				economy.add(seat);
+			if (seat.getSeatType().getSeatTypeId() == 1) {
+				this.economy.add(seat);
+			}
+			else if (seat.getSeatType().getSeatTypeId() == 2) {
+				this.buisness.add(seat);
+			}
+			else if (seat.getSeatType().getSeatTypeId() == 3) {
+				this.first.add(seat);
+			}
 		}
-			
-			this.first = first;
-			this.buisness = buisness;
-			this.economy = economy;
-		}
+	}
 	
 	public List<Seat> getFirst() {
 		return first;
