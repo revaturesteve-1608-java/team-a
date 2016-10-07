@@ -39,7 +39,44 @@
 </div>
 
 <script>
-var $width = $(window).width();
+window.onload = windowResize();
+
+window.onresize = function(event) {
+	windowResize();
+};
+
+function windowResize() {
+	var content = $(".plane");
+	var height = $(".plane").parent().height();
+	var width = $(".plane").parent().width();
+	
+	/* var height = $(window).height();
+	var jumbotron = $(".jumbotron").height();
+	console.log(jumbotron);
+	console.log(width + " " + height);
+	if (typeof jumbotron === "number" && !isNaN(jumbotron)) {
+		height -= jumbotron;
+	}
+	var width = $(window).width(); */
+	console.log(width + " " + height);
+	var scale;
+	hscale = height / 971;
+	wscale = width / 1920;
+	console.log("hscale: " + hscale + " wscale: " + wscale)
+	var hdifference = 0;
+	if (hscale < wscale) {
+		scale = hscale;
+	}
+	else {
+		scale = wscale;
+		hdifference = height - (height*scale);
+	}
+	console.log("scale: " + scale + " diff :" + hdifference);
+	content.css({
+		"transform": "scale(" + scale + ")",
+	});
+}
+/* var $width = $(window).width();
 var $height = $(window).height();
 $height = $height - $(".jumbotron").height();
 $height = $height - $("#InfoBar").height();
@@ -59,5 +96,5 @@ function resizeContent(width, height) {
 	$content.css({
 		transform : "scale(" + scale + ")"
 	});
-}
+}*/
 </script>
