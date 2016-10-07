@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.gc.dao.AirlineRepo;
+import com.gc.dao.AirplaneRepo;
 import com.gc.dao.DestinationRepo;
 import com.gc.dao.EmployeeRepo;
 import com.gc.dao.FlightRepo;
@@ -14,6 +15,7 @@ import com.gc.dao.SeatRepo;
 import com.gc.dao.SeatTypeRepo;
 import com.gc.dao.TicketRepo;
 import com.gc.model.Airline;
+import com.gc.model.Airplane;
 import com.gc.model.Destination;
 import com.gc.model.Employee;
 import com.gc.model.Flight;
@@ -26,6 +28,8 @@ import com.gc.model.Ticket;
 public class DataServiceImpl implements DataService{
 	@Autowired
 	AirlineRepo airlineRepo;
+	@Autowired
+	AirplaneRepo airplaneRepo;
 	@Autowired
 	DestinationRepo destinationRepo;
 	@Autowired
@@ -45,6 +49,10 @@ public class DataServiceImpl implements DataService{
 	@Override
 	public void saveAirline(Airline airline) {
 		airlineRepo.save(airline);
+	}
+	@Override
+	public void saveAirplane(Airplane airplane) {
+		airplaneRepo.save(airplane);
 	}
 	@Override
 	public void saveDestination(Destination destination) {
@@ -75,32 +83,36 @@ public class DataServiceImpl implements DataService{
 	 * Find All methods for every object
 	 */
 	@Override
-	public void findAllAirlines() {
-		airlineRepo.findAll();
+	public List<Airline> findAllAirlines() {
+		return airlineRepo.findAll();
 	}
 	@Override
-	public void findAllDestinations() {
-		destinationRepo.findAll();
+	public List<Airplane> findAllAirplanes() {
+		return airplaneRepo.findAll();
 	}
 	@Override
-	public void findAllEmployees() {
-		employeeRepo.findAll();
+	public List<Destination> findAllDestinations() {
+		return destinationRepo.findAll();
 	}
 	@Override
-	public void findAllFlights() {
-		flightRepo.findAll();
+	public List<Employee> findAllEmployees() {
+		return employeeRepo.findAll();
 	}
 	@Override
-	public void findAllSeats() {
-		seatRepo.findAll();
+	public List<Flight> findAllFlights() {
+		return flightRepo.findAll();
 	}
 	@Override
-	public void findAllSeatTypes() {
-		seatTypeRepo.findAll();
+	public List<Seat> findAllSeats() {
+		return seatRepo.findAll();
 	}
 	@Override
-	public void findAllTickets() {
-		ticketRepo.findAll();
+	public List<SeatType> findAllSeatTypes() {
+		return seatTypeRepo.findAll();
+	}
+	@Override
+	public List<Ticket> findAllTickets() {
+		return ticketRepo.findAll();
 	}
 	
 	/*
@@ -109,6 +121,10 @@ public class DataServiceImpl implements DataService{
 	@Override
 	public Airline findAirlineById(Integer id) {
 		return airlineRepo.findOne(id);
+	}
+	@Override
+	public Airplane findAirplaneById(Integer id) {
+		return airplaneRepo.findOne(id);
 	}
 	@Override
 	public Destination findDestinationById(Integer id) {
@@ -147,5 +163,13 @@ public class DataServiceImpl implements DataService{
 	@Override
 	public List<Seat> findSeatsByFlight(Flight flight) {
 		return seatRepo.findByFlight(flight);
+	}
+	@Override
+	public Employee findEmployeeByUsernameAndPassword(String username, String password) {
+		return employeeRepo.findByUsernameAndPassword(username, password);
+	}
+	@Override
+	public Airplane findAirplaneByName(String name) {
+		return airplaneRepo.findByAirplaneName(name);
 	}
 }

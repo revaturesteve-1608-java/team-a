@@ -8,4 +8,5 @@ import com.gc.model.Employee;
 @Repository
 public interface EmployeeRepo extends JpaRepository<Employee, Integer> {
 
+	public Employee findByUsernameAndPassword(String username, String password);
 }

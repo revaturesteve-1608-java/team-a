@@ -2,20 +2,8 @@
 
 body
 {
-	background-color:#BBDDFF;
+	background-color:#CCEEFF;
 	color:#880077;
-}
-
-.panel
-{
-	background-color:#880077;
-	color:#DDDDDD;
-}
-
-.farbutton
-{
-	text-align:right;
-	float:right;
 }
 
 .jumbotron
@@ -27,8 +15,40 @@ body
 	text-size:14pt;
 }
 
+.panel
+{
+	background-color:#771166;
+	color:#EEEEEE;
+}
+
+.farbutton
+{
+	text-align:right;
+	float:right;
+}
+
+.tickerEntry
+{
+	min-width:18em;
+	font-weight:bold;
+}
+.tickerValue
+{
+	font-weight:normal;
+}
+
+.warning
+{
+	color:darkred;
+	background-color:lightgray;
+	margin:0.1em;
+	padding:0.1em;
+}
+
 #ReceiptModal
 {
+	z-index:1000;
+	position:relative;
 	float:left;
 	display:inline-block;
 	background-color:#FFFFFF;

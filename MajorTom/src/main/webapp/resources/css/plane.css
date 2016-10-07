@@ -1,1 +1,100 @@
 @CHARSET "ISO-8859-1";
+
+body {
+	margin: 0px;
+	overflow: hidden;
+}
+
+.plane {
+	height: 971px;
+	width: 1920px;
+	background-image: url("../images/737-bg-transparent.png");
+	background-repeat: no-repeat;
+	background-size: 1920px 971px;
+	position: relative;
+	top: 50%;
+	bottom: 50%;
+	-webkit-transform-origin: 0% 0%;
+	transform-origin: 0% 0%;
+}
+
+.seat-container {
+	position: relative;
+	height: 400px;
+	top: 284px;
+	left:-130px;
+	margin: 0px;
+}
+
+.plane-cockpit {
+	display: inline-block;
+	padding: 124px 0 0 0;
+	margin-right: 208px;
+	height: 276px;
+	width: 39px;
+}
+
+.plane-cockpit .seat {
+	height: 48px;
+	margin: 15px 0;
+	background-color: #888;
+	border: 2px solid black;
+	border-radius: 8px;
+}
+
+.plane-first {
+	display: inline-block;
+	padding: 0px;
+	height: 400px;
+	width: 64px;
+}
+
+.plane-first .seat {
+	background-color: #FFD700;
+	border: 2px solid black;
+	margin: 18px 0 18px 27px;
+	height: 48px;
+	border-radius: 8px;
+}
+
+.plane-buisness {
+	display: inline-block;
+	padding: 0px;
+	height: 400px;
+	width: 58px;
+}
+
+.plane-buisness .seat {
+	background-color: #87CEEB;
+	border: 2px solid black;
+	margin: 4.166px 0 4.166px 30px;
+	height: 43px;
+	border-radius: 8px;
+}
+
+.plane-economy {
+	display: inline-block;
+	padding: 0px;
+	height: 400px;
+	width: 46px;
+}
+
+.plane-economy .seat {
+	background-color: white;
+	border: 2px solid black;
+	margin: 4.166px 0 4.166px 18px;
+	height: 43px;
+	border-radius: 8px;
+}
+
+.row-spacer {
+	display: inline-block;
+	height: 395px;
+	width: 10px;
+	margin-bottom: 5px;
+	border-right: 4px solid #AAA;
+}
+
+.aisle {
+	height: 80px;
+}

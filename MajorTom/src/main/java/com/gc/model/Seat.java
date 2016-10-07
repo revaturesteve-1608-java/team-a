@@ -34,11 +34,8 @@ public class Seat {
 	
 	
 	public Seat() {
-		super();
 	}
-	public Seat(Integer seatId, SeatType seatType, Flight flight) {
-		super();
-		this.seatId = seatId;
+	public Seat(SeatType seatType, Flight flight) {
 		this.seatType = seatType;
 		this.flight = flight;
 	}
@@ -55,10 +52,10 @@ public class Seat {
 	public void setSeatType(SeatType seatType) {
 		this.seatType = seatType;
 	}
-	public Flight getFlightId() {
+	public Flight getFlight() {
 		return flight;
 	}
-	public void setFlightId(Flight flight) {
+	public void setFlight(Flight flight) {
 		this.flight = flight;
 	}
 	
