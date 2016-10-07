@@ -16,8 +16,13 @@
 	<script defer src="resources/js/app-plane.js"></script>
 </head>
 <body data-ng-app="airline">
-	<div ng-controller="mainCtrl">	
-		<div id="ReceiptModal" class="panel" data-ng-controller="receiptController">
+	<div ng-controller="mainCtrl">
+		<div id="ReceiptModal"
+			class="ReceiptAnim"
+			data-ng-controller="receiptController"
+			data-ng-mouseenter="receiptHover=true;"
+			data-ng-mouseleave="receiptHover=false;"
+			data-ng-class="{ReceiptAnimIn:receiptHover,ReceiptAnimOut:!receiptHover}">
 			<div data-ng-hide="loginVisible">
 				<div data-ng-show="currentUser==null">
 					<p>Ticket Number:</p><p>&nbsp#{{selectedTicket.ticketId}}</p>
