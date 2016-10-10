@@ -24,14 +24,14 @@ public class FormattedSeatsDTO {
 		for (Seat seat : seats) {
 			if (seat.getSeatType().getSeatTypeId() == 1) {
 				rowEconomy.add(seat);
-				if (rowEconomy.size() == 4){
+				if (rowEconomy.size() == 6){
 					this.economy.add(rowEconomy);
 					rowEconomy = new ArrayList<>();
 				}
 			}
 			else if (seat.getSeatType().getSeatTypeId() == 2) {
 				rowBuisness.add(seat);
-				if (rowBuisness.size() == 4){
+				if (rowBuisness.size() == 6){
 					this.buisness.add(rowBuisness);
 					rowBuisness = new ArrayList<>();
 				}

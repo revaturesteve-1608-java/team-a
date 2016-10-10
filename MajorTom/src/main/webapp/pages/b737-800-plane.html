@@ -1,5 +1,8 @@
 <div id="bgContainer">
 	<div class="plane" ng-controller="planeController as plane">
+		<div class="selection-label">
+			{{plane.selectionDisplay}}
+		</div>
 		
 		<div class="seat-container">
 			<div class="plane-cockpit">
@@ -9,7 +12,7 @@
 			
 			--><div class="plane-first" ng-repeat="row in plane.firstclass">
 				<div ng-repeat="seat in row track by $index">
-					<div class="seat"></div>
+					<div class="seat" ng-click="plane.selectSeat(seat)"></div>
 					<div class="aisle" ng-show="$index == 1"></div>
 				</div>
 			</div><!--
@@ -17,14 +20,14 @@
 			
 			--><div class="plane-buisness" ng-repeat="row in plane.buisclass">
 				<div ng-repeat="seat in row track by $index">
-					<div class="seat"></div>
+					<div class="seat" ng-click="plane.selectSeat(seat)"></div>
 					<div class="aisle" ng-show="$index == 2"></div>
 				</div>
 			</div><!--
 			
 			--><div class="plane-economy" ng-repeat="row in plane.econclass">
 				<div ng-repeat="seat in row track by $index">
-					<div class="seat"></div>
+					<div class="seat" ng-click="plane.selectSeat(seat)"></div>
 					<div class="aisle" ng-show="$index == 2"></div>
 				</div>
 			</div>

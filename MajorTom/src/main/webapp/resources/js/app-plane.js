@@ -23,54 +23,55 @@ app.controller("planeController", function(planeDataService) {
 	
 	this.selectionDisplay = "No seat selected";
 	
-//	var me = this;
-//	var flightId = 1402;
-//	planeDataService.getFormattedSeats(flightId, function(response){
-//		me.firstclass = response.data.first;
-//		me.buisclass = response.data.buisness;
-//		me.econclass = response.data.economy;
-//	});
+	var me = this;
+	var flightId = 1402;
+	planeDataService.getFormattedSeats(flightId, function(response){
+		me.firstclass = response.data.first;
+		me.buisclass = response.data.buisness;
+		me.econclass = response.data.economy;
+	});
 	
 	this.selectSeat = function(seat){
+		console.log(seat.toSource());
 		this.selectionDisplay = "Selected seat: " + seat.seatId;
 	};
 	
-	this.firstclass = [[{
-		name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"
-	}]];
-	
-	this.buisclass = [[{
-		name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"
-	}]];
-
-	this.econclass = [[{
-		name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"
-	}]];
+//	this.firstclass = [[{
+//		name: "none"},{name: "none"},{name: "none"},{name: "none"}],
+//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
+//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
+//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"
+//	}]];
+//	
+//	this.buisclass = [[{
+//		name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
+//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
+//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
+//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
+//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
+//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
+//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
+//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"
+//	}]];
+//
+//	this.econclass = [[{
+//		name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
+//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
+//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
+//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
+//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
+//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
+//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
+//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
+//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
+//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
+//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
+//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
+//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
+//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
+//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
+//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"
+//	}]];
 
 });
 
@@ -97,10 +98,4 @@ function windowResize() {
 		transform : "scale(" + scale + ")" 
 	});
 }
-
-app.service('planeDataService', function($http){
-	this.findFlight = function(flightId, callback) {
-		$http.get('rest/findFlight/'+flightId, flightId).then(callback);
-	}
-});
 
