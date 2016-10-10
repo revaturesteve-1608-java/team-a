@@ -3,12 +3,26 @@
  */
 var app = angular.module("airline");
 
-app.controller("planeController", function() {
+app.controller("planeController", function(planeDataService) {
 	this.pilot = {
 		name: "Major Tom"
 	};
 	this.copilot = {
 		name: "Major Todd"
+	};
+	
+	this.selectionDisplay = "No seat selected";
+	
+//	var me = this;
+//	var flightId = 1402;
+//	planeDataService.getFormattedSeats(flightId, function(response){
+//		me.firstclass = response.data.first;
+//		me.buisclass = response.data.buisness;
+//		me.econclass = response.data.economy;
+//	});
+	
+	this.selectSeat = function(seat){
+		this.selectionDisplay = "Selected seat: " + seat.seatId;
 	};
 	
 	this.firstclass = [[{
@@ -50,6 +64,12 @@ app.controller("planeController", function() {
 
 });
 
+app.service("planeDataService", function($http){
+	this.getFormattedSeats = function(flightId, callback) {
+		$http.get("rest/getFormattedSeats/"+flightId, flightId).then(callback);
+	}
+});
+
 window.onload = windowResize();
 
 window.onresize = function(event) {
@@ -59,20 +79,10 @@ window.onresize = function(event) {
 function windowResize() {
 	var content = $(".plane");
 	var height = $(window).height();
-	var jumbotron = $(".jumbotron").height();
-	var infobar = $("#InfoBar").height();
-	if (typeof jumbotron === "number" && !isNaN(jumbotron)) {
-		height -= jumbotron;
-	}
-	if (typeof infobar === "number" && !isNaN(infobar)) {
-		height -= infobar;
-	}
 	var width = $(window).width();
-	console.log(width + " " + height);
 	var scale;
 	scale = Math.min(width / 1920, height / 971);
 	content.css({
 		transform : "scale(" + scale + ")" 
 	});
-	content.css("bottom", 0); // change this 0 to a more reasonable number to bring the plane downward
 }

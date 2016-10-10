@@ -20,11 +20,11 @@ public class PlaneController {
 	 * rest response with a 200 HTTP status, unless it's null, 
 	 * then returns a null and a not found status code
 	 */
-	@RequestMapping(value="")
+	@RequestMapping(value="getFormattedSeats/{flightId}")
 	public ResponseEntity<FormattedSeatsDTO> getFormattedFlightSeats(@PathVariable(value = "flightId") int flightId ) {
-		
+		System.out.println("In formatted seats request");
 		FormattedSeatsDTO seats = new FormattedSeatsDTO(dataService.findSeatsByFlight(dataService.findFlightById(flightId)));
-		
+		System.out.println(seats);
 		return new ResponseEntity<FormattedSeatsDTO>(seats, seats == null ? HttpStatus.NOT_FOUND : HttpStatus.ACCEPTED);
 	}
 }

@@ -1,5 +1,6 @@
 <div id="bgContainer">
 	<div class="plane" ng-controller="planeController as plane">
+		
 		<div class="seat-container">
 			<div class="plane-cockpit">
 				<div class="seat"></div>
@@ -7,32 +8,25 @@
 			</div><!--
 			
 			--><div class="plane-first" ng-repeat="row in plane.firstclass">
-				<div class="seat"></div>
-				<div class="seat"></div>
-				<div class="aisle"></div>
-				<div class="seat"></div>
-				<div class="seat"></div>
+				<div ng-repeat="seat in row track by $index">
+					<div class="seat"></div>
+					<div class="aisle" ng-show="$index == 1"></div>
+				</div>
 			</div><!--
 			--><div class="row-spacer"></div><!--
 			
 			--><div class="plane-buisness" ng-repeat="row in plane.buisclass">
-				<div class="seat"></div>
-				<div class="seat"></div>
-				<div class="seat"></div>
-				<div class="aisle"></div>
-				<div class="seat"></div>
-				<div class="seat"></div>
-				<div class="seat"></div>
+				<div ng-repeat="seat in row track by $index">
+					<div class="seat"></div>
+					<div class="aisle" ng-show="$index == 2"></div>
+				</div>
 			</div><!--
 			
 			--><div class="plane-economy" ng-repeat="row in plane.econclass">
-				<div class="seat"></div>
-				<div class="seat"></div>
-				<div class="seat"></div>
-				<div class="aisle"></div>
-				<div class="seat"></div>
-				<div class="seat"></div>
-				<div class="seat"></div>
+				<div ng-repeat="seat in row track by $index">
+					<div class="seat"></div>
+					<div class="aisle" ng-show="$index == 2"></div>
+				</div>
 			</div>
 		</div>
 	</div>
