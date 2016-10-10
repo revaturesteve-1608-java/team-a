@@ -26,13 +26,21 @@ angular.module("airline")
 		var password=document.getElementById("EmployeePasswordBox").value;
 		dataService.authenticate(username, password,
 			function(response){
-				response.data.authenticated=true;
+				$rootScope.authenticated=true;
 				$scope.setCurrentUser(response.data);
 			}, function(response) {
+				$rootScope.authenticated=false;
 				$scope.setCurrentUser($scope.errorUser);
 			}
 		);
 		$scope.loginVisible=false;
+	};
+	$scope.employeeLogout=function(){
+		$scope.setCurrentUser($scope.loadingUser);
+		document.getElementById("EmployeeUsernameBox").value = "";
+		document.getElementById("EmployeePasswordBox").value = "";
+		$rootScope.authenticated=false;
+		$scope.loginVisible=true;
 	};
 	$scope.slideReceipt=function(In)
 	{

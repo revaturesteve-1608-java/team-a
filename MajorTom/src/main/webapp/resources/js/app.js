@@ -17,8 +17,8 @@ app.controller('mainCtrl', function($scope, dataService){
 		$scope.currentUser = user;
 	};
 	$scope.isAdmin = function() {
-		if(!$scope.currentUser){return false;}
-		return !!$scope.currentUser.authenticated;
+		if($rootScope.authenticated){return false;}
+		return !!$rootScope.authenticated;
 	};
 	$scope.testAdminStatus = function() { /* REMOVE THIS METHOD WHEN DEBUGGING IS FINISHED. */
 		$scope.admintest=$scope.isAdmin();
