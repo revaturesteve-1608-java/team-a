@@ -22,6 +22,7 @@ app.controller("planeController", function(planeDataService) {
 	};
 	
 	this.selectionDisplay = "No seat selected";
+	this.selectedSeat;
 	
 	var me = this;
 	var flightId = 1402;
@@ -34,6 +35,7 @@ app.controller("planeController", function(planeDataService) {
 	this.selectSeat = function(seat){
 		console.log(seat.toSource());
 		this.selectionDisplay = "Selected seat: " + seat.seatId;
+		this.selectedSeat = seat;
 	};
 	
 //	this.firstclass = [[{
