@@ -40,10 +40,15 @@ public class Ticket {
 	@Fetch(FetchMode.JOIN)
 	Flight flight;
 	
+	@OneToOne
+	@JoinColumn(name="SEAT_TYPE_ID")
+	@Fetch(FetchMode.JOIN)
+	SeatType seatType;
+	
 	public Ticket() {
 		super();
 	}
-	public Ticket(Integer ticketId, String firstName, String lastName, String email, String phone, Flight flight) {
+	public Ticket(Integer ticketId, String firstName, String lastName, String email, String phone, Flight flight, SeatType seatType) {
 		super();
 		this.ticketId = ticketId;
 		this.firstName = firstName;
@@ -51,6 +56,7 @@ public class Ticket {
 		this.email = email;
 		this.phone = phone;
 		this.flight = flight;
+		this.seatType = seatType;
 	}
 	
 	public Integer getTicketId() {
@@ -89,9 +95,16 @@ public class Ticket {
 	public void setFlight(Flight flight) {
 		this.flight = flight;
 	}
+	public SeatType getSeatType() {
+		return seatType;
+	}
+	public void setSeatType(SeatType seatType) {
+		this.seatType = seatType;
+	}
 	@Override
 	public String toString() {
 		return "Ticket [ticketId=" + ticketId + ", firstName=" + firstName + ", lastName=" + lastName + ", email="
-				+ email + ", phone=" + phone + ", flight=" + flight + "]";
+				+ email + ", phone=" + phone + ", flight=" + flight + ", seatType=" + seatType + "]";
 	}
+
 }
