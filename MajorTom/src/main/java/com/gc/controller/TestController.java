@@ -44,18 +44,18 @@ public class TestController {
 		}
 	}
 
-	@RequestMapping(value = "sendFakeMail")
-	public void sendMail() {
-		// Create the application context
-		//ApplicationContext context = new ClassPathXmlApplicationContext("mail-beans.xml");
-
-		// Get the mailer instance
-		//MailManager mailer = (MailManager) context.getBean("mailService");
-
-		// Send a composed mail
-		mailer.sendMail("kyle.garner15@yahoo.com", "Test Subject", "Testing body");
-
-		// Send a pre-configured mail
-		//mailer.sendPreConfiguredMail("Exception occurred everywhere.. where are you ????");
-	}
+//	@RequestMapping(value = "sendFakeMail")
+//	public void sendMail() {
+//		// Create the application context
+//		//ApplicationContext context = new ClassPathXmlApplicationContext("mail-beans.xml");
+//
+//		// Get the mailer instance
+//		//MailManager mailer = (MailManager) context.getBean("mailService");
+//
+//		// Send a composed mail
+//		mailer.sendMail("kyle.garner15@yahoo.com", "Test Subject", "Testing body");
+//
+//		// Send a pre-configured mail
+//		//mailer.sendPreConfiguredMail("Exception occurred everywhere.. where are you ????");
+//	}
 }

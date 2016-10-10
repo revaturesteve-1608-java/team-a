@@ -4,6 +4,16 @@
 var app = angular.module("airline");
 
 app.controller("planeController", function(planeDataService) {
+	var me = this;
+	
+	this.getMessages = function() {
+		
+		dataService.get(function(response) {
+			console.log(response.data);
+			me.messages = response.data;
+		});
+	};
+
 	this.pilot = {
 		name: "Major Tom"
 	};
@@ -64,6 +74,7 @@ app.controller("planeController", function(planeDataService) {
 
 });
 
+
 app.service("planeDataService", function($http){
 	this.getFormattedSeats = function(flightId, callback) {
 		$http.get("rest/getFormattedSeats/"+flightId, flightId).then(callback);
@@ -86,3 +97,10 @@ function windowResize() {
 		transform : "scale(" + scale + ")" 
 	});
 }
+
+app.service('planeDataService', function($http){
+	this.findFlight = function(flightId, callback) {
+		$http.get('rest/findFlight/'+flightId, flightId).then(callback);
+	}
+});
+

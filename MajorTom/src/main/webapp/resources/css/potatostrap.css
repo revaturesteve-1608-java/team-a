@@ -46,20 +46,19 @@ body
 {
 	z-index:1000;
 	position:fixed;
-	float:left;
-	display:inline-block;
 	background-color:#FFFFFF;
 	color:#000000;
 	margin:5px;
 	padding:0.5em;
-	border-radius:0;
-	border-width:0.01em;
+	border-style:solid;
+	border-width:2px;
 	border-color:#000000;
 	font-size:12pt;
 	font-family:"Courier New", Courier, monospace;
 	font-weight:bold;
 	line-height:100%;
-	width:240px
+	width:240px;
+	height:400px;
 }
 
 #ReceiptModal > p
@@ -84,29 +83,51 @@ body
 	padding:0;
 }
 
+@keyframes slidekeyframe
+{
+	from{top:-360px;}
+	to{top:0;}
+}
+
+.ReceiptAnimIn
+{
+	animation:slidekeyframe 1s forwards;
+	-webkit-animation-name:slidekeyframe 1s forwards;
+	animation-direction:normal;
+	-webkit-animation-direction:normal;
+}
+
+.ReceiptAnimOut
+{
+	animation:slidekeyframe 1s forwards;
+	-webkit-animation-name:slidekeyframe 1s forwards;
+	animation-direction:reverse;
+	-webkit-animation-direction:reverse;
+}
+
 #info-box
 {
-z-index: 10000;
-position: relative;
-width: 275px;
-height: 80px;
-padding: 15px;
-background: #FFFFFF;
--webkit-border-radius: 10px;
--moz-border-radius: 10px;
-border-radius: 10px;
+	z-index: 10000;
+	position: relative;
+	width: 275px;
+	height: 80px;
+	padding: 15px;
+	background: #FFFFFF;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
 }
 
 #info-box:after
 {
-z-index: 10000;
-content: '';
-position: absolute;
-border-style: solid;
-border-width: 20px 15px 0;
-border-color: #FFFFFF transparent;
-display: block;
-width: 0;
-bottom: -20px;
-left: 122px;
+	z-index: 10000;
+	content: '';
+	position: absolute;
+	border-style: solid;
+	border-width: 20px 15px 0;
+	border-color: #FFFFFF transparent;
+	display: block;
+	width: 0;
+	bottom: -20px;
+	left: 122px;
 }

@@ -34,6 +34,18 @@ angular.module("airline")
 		);
 		$scope.loginVisible=false;
 	};
+	$scope.receiptAnimTimeout=null;
+	$scope.resetReceiptAnim=function(){
+		var receipt=document.getElementById("ReceiptModal");
+		receipt.classname="";
+		if(receiptAnimTimeout!=null){
+			window.clearTimeout($scope.receiptAnimTimeout);
+		}
+		$scope.receiptAnimTimeout=setTimeout(function(){
+			$scope.receiptAnimTimeout=null;
+			receipt.classname="ReceiptAnim";
+		},10);
+	};
 })
 .directive("airlineLoginBtn",function(){
 	return {
