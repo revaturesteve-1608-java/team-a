@@ -26,30 +26,31 @@ angular.module("airline")
 		var password=document.getElementById("EmployeePasswordBox").value;
 		dataService.authenticate(username, password,
 			function(response){
-				response.data.authenticated=true;
+				$rootScope.authenticated=true;
 				$scope.setCurrentUser(response.data);
 			}, function(response) {
+				$rootScope.authenticated=false;
 				$scope.setCurrentUser($scope.errorUser);
 			}
 		);
 		$scope.loginVisible=false;
 	};
-	$scope.receiptAnimTimeout=null;
-	$scope.resetReceiptAnim=function(){
-		var receipt=document.getElementById("ReceiptModal");
-		receipt.classname="";
-		if(receiptAnimTimeout!=null){
-			window.clearTimeout($scope.receiptAnimTimeout);
-		}
-		$scope.receiptAnimTimeout=setTimeout(function(){
-			$scope.receiptAnimTimeout=null;
-			receipt.classname="ReceiptAnim";
-		},10);
+	$scope.employeeLogout=function(){
+		$scope.setCurrentUser($scope.loadingUser);
+		document.getElementById("EmployeeUsernameBox").value = "";
+		document.getElementById("EmployeePasswordBox").value = "";
+		$rootScope.authenticated=false;
+		$scope.loginVisible=true;
 	};
+	$scope.slideReceipt=function(In)
+	{
+		$("#ReceiptModal").animate({top:(In?"0":"-360px")});
+	};
+	$scope.slideReceipt(false);
 })
 .directive("airlineLoginBtn",function(){
 	return {
 		template:
-			"<a href='' class='farbutton' data-ng-click='loginVisible=!loginVisible'>{{loginVisible?'Cancel':'Login'}}</a>"
+			"<a href='' class='farbutton' data-ng-click='employeeLogout()'>{{loginVisible?'Login':'Logout'}}</a>"
 	};
 });

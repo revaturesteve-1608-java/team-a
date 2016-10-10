@@ -11,7 +11,7 @@ import com.gc.model.Ticket;
 
 @Repository
 public interface SeatRepo extends JpaRepository<Seat, Integer> {
-	public List<Seat> findByFlight(Flight flight);
+	public List<Seat> findByFlightOrderBySeatIdAsc(Flight flight);
 
 	public Seat findByTicket(Ticket tick);
 }

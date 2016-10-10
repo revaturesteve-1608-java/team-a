@@ -17,8 +17,8 @@ app.controller('mainCtrl', function($scope, dataService){
 		$scope.currentUser = user;
 	};
 	$scope.isAdmin = function() {
-		if(!$scope.currentUser){return false;}
-		return !!$scope.currentUser.authenticated;
+		if($rootScope.authenticated){return false;}
+		return !!$rootScope.authenticated;
 	};
 	$scope.testAdminStatus = function() { /* REMOVE THIS METHOD WHEN DEBUGGING IS FINISHED. */
 		$scope.admintest=$scope.isAdmin();
@@ -43,6 +43,11 @@ app.controller('mainCtrl', function($scope, dataService){
 		$scope.newSeatInfo = "Loading...";
 		console.log('Getting seat, using: ' + ticketId + " " + seatId);
 		dataService.setSeat(ticketId, seatId, function(response){$scope.newSeatInfo = JSON.stringify(response);});
+	};
+	$scope.reassignSeat = function(ticketId, seatId) {
+		$scope.newSeatInfo2 = "Loading...";
+		console.log('Getting seat, using: ticket-' + ticketId + " seat-" + seatId);
+		dataService.setSeat(ticketId, seatId, function(response){$scope.newSeatInfo2 =  "Seat #"+JSON.stringify(response.data.seatId)+" has been reassigned to ticket #"+JSON.stringify(response.data.ticket.ticketId);});
 	};
 	$scope.findFlightByTicket = function(ticketId) {
 		$scope.flightByTicket = "Loading...";
@@ -85,5 +90,10 @@ app.service('dataService', function($http){
 		// Set the seat for the ticket
 		var data = JSON.stringify({"ticketId": ticketId, "seatId": seatId});
 		$http.post('rest/setSeat', data).then(callback, failure);
+	}
+	this.reassignSeat = function(ticketId, seatId, callback, failure) {
+		// Reassign the seat for the ticket
+		var data = JSON.stringify({"ticketId": ticketId, "seatId": seatId});
+		$http.post('rest/reassignSeat/', data).then(callback, failure);
 	}
 });
