@@ -34,18 +34,11 @@ angular.module("airline")
 		);
 		$scope.loginVisible=false;
 	};
-	$scope.receiptAnimTimeout=null;
-	$scope.resetReceiptAnim=function(){
-		var receipt=document.getElementById("ReceiptModal");
-		receipt.classname="";
-		if(receiptAnimTimeout!=null){
-			window.clearTimeout($scope.receiptAnimTimeout);
-		}
-		$scope.receiptAnimTimeout=setTimeout(function(){
-			$scope.receiptAnimTimeout=null;
-			receipt.classname="ReceiptAnim";
-		},10);
+	$scope.slideReceipt=function(In)
+	{
+		$("#ReceiptModal").animate({top:(In?"0":"-360px")});
 	};
+	$scope.slideReceipt(false);
 })
 .directive("airlineLoginBtn",function(){
 	return {
