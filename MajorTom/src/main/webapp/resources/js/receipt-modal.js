@@ -51,6 +51,6 @@ angular.module("airline")
 .directive("airlineLoginBtn",function(){
 	return {
 		template:
-			"<a href='' class='farbutton' data-ng-click='loginVisible=!loginVisible'>{{loginVisible?'Cancel':'Login'}}</a>"
+			"<a href='' class='farbutton' data-ng-click='employeeLogout()'>{{loginVisible?'Login':'Logout'}}</a>"
 	};
 });
