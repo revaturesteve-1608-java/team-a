@@ -158,7 +158,7 @@ public class DataServiceImpl implements DataService{
 	
 	@Override
 	public List<Seat> findSeatsByFlight(Flight flight) {
-		return seatRepo.findByFlight(flight);
+		return seatRepo.findByFlightOrderBySeatIdAsc(flight);
 	}
 	@Override
 	public Employee findEmployeeByUsernameAndPassword(String username, String password) {
