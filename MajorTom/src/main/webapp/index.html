@@ -49,6 +49,8 @@
 				<div>{{ticketInfo}}</div>
 				<button ng-click="findFlightByTicket(1)">find flight by ticket 1</button>
 				<div>{{flightByTicket}}</div>
+				<button ng-click="reassignSeat(2, 98)">reassign seat 98's ticket to 2</button>
+				<div>{{newSeatInfo2}}</div>
 			</div>
 			<airline-login-btn id="airlineLoginBtn"></airline-login-btn>
 		</div>
