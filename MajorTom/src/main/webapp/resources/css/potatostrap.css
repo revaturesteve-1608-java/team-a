@@ -75,34 +75,13 @@ body
 	border-style:solid;
 	margin-top:5px;
 	padding:0.1em;
+	z-index:999;
 }
 
 #HeaderContainer > div > h2, #HeaderContainer > div > label, #HeaderContainer > h1
 {
 	margin:0;
 	padding:0;
-}
-
-@keyframes slidekeyframe
-{
-	from{top:-360px;}
-	to{top:0;}
-}
-
-.ReceiptAnimIn
-{
-	animation:slidekeyframe 1s forwards;
-	-webkit-animation-name:slidekeyframe 1s forwards;
-	animation-direction:normal;
-	-webkit-animation-direction:normal;
-}
-
-.ReceiptAnimOut
-{
-	animation:slidekeyframe 1s forwards;
-	-webkit-animation-name:slidekeyframe 1s forwards;
-	animation-direction:reverse;
-	-webkit-animation-direction:reverse;
 }
 
 #info-box
