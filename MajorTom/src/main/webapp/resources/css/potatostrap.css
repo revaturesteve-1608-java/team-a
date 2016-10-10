@@ -75,6 +75,7 @@ body
 	border-style:solid;
 	margin-top:5px;
 	padding:0.1em;
+	z-index:999;
 }
 
 #HeaderContainer > div > h2, #HeaderContainer > div > label, #HeaderContainer > h1
