@@ -14,7 +14,7 @@ body
 
 .panel, .jumbotron
 {
-	background-color:#771166;
+	background-color:rgba(97,14,83,0.8);
 	color:#EEEEEE;
 }
 
@@ -44,11 +44,11 @@ body
 
 #ReceiptModal
 {
-	z-index:1000;
+	z-index:5;
 	position:fixed;
 	background-color:#FFFFFF;
 	color:#000000;
-	margin:5px;
+	margin:0px;
 	padding:0.5em;
 	border-style:solid;
 	border-width:2px;
@@ -68,14 +68,12 @@ body
 
 #HeaderContainer
 {
+	background-color:rgba(97,14,83,0.8);
+	color:#FFF;
 	position:fixed;
-	left:250px;
-	border-width:3px;
-	border-color:#000000!important;
-	border-style:solid;
-	margin-top:5px;
-	padding:0.1em;
-	z-index:999;
+	left:240px;
+	padding:20px;
+	z-index:10;
 }
 
 #HeaderContainer > div > h2, #HeaderContainer > div > label, #HeaderContainer > h1
@@ -91,7 +89,7 @@ body
 	width: 275px;
 	height: 80px;
 	padding: 15px;
-	background: #FFFFFF;
+	background: #FFF;
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
 	border-radius: 10px;
@@ -104,7 +102,7 @@ body
 	position: absolute;
 	border-style: solid;
 	border-width: 20px 15px 0;
-	border-color: #FFFFFF transparent;
+	border-color: #FFF transparent;
 	display: block;
 	width: 0;
 	bottom: -20px;

@@ -33,7 +33,6 @@ app.controller("planeController", function(planeDataService) {
 	});
 	
 	this.selectSeat = function(seat){
-		console.log(seat.toSource());
 		this.selectionDisplay = "Selected seat: " + seat.seatId;
 		this.selectedSeat = seat;
 	};
