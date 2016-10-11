@@ -5,12 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gc.dto.AuthenticationDTO;
+import com.gc.dto.ReassignSeatDTO;
 import com.gc.dto.SetSeatDTO;
 import com.gc.model.Employee;
 import com.gc.model.Flight;
@@ -23,7 +25,9 @@ public class ClientController {
 
 	@Autowired
 	DataService dataService;
-
+	
+	Employee emp;
+	
 	@RequestMapping("/findFlight/{flightId}")
 	public ResponseEntity<Flight> findFlightById(@PathVariable(value = "flightId") Integer flightId) {
 		System.out.println("flightId: " + flightId);
@@ -81,11 +85,14 @@ public class ClientController {
 	}
 	
 	@RequestMapping(value="/authenticate")
-	public ResponseEntity<Employee> authenticate(@RequestBody AuthenticationDTO data) {
+	public ResponseEntity<Employee> authenticate(Model model, @RequestBody AuthenticationDTO data) {
 		System.out.println(data);
-		Employee emp = dataService.findEmployeeByUsernameAndPassword(data.getUsername(), data.getPassword());
+		emp = dataService.findEmployeeByUsernameAndPassword(data.getUsername(), data.getPassword());
 		System.out.println(emp);
 		if(emp != null) {
+			int token = (int) (Math.random()*100000);
+			model.addAttribute("loginToken", token);
+			emp.setToken(token);
 			return new ResponseEntity<Employee>(emp, HttpStatus.ACCEPTED);
 		} else {
 			return new ResponseEntity<Employee>(emp, HttpStatus.FORBIDDEN);
@@ -108,10 +115,17 @@ public class ClientController {
 	}
 	
 	@RequestMapping(value="/reassignSeat")
-	public ResponseEntity<Seat> reassignSeat(@RequestBody SetSeatDTO data) {
+	public ResponseEntity<Seat> reassignSeat(Model model, @RequestBody ReassignSeatDTO data) {
+		
+		System.out.println("Token there?: "+emp.getToken());
 		System.out.println("Reassign Seat with data: "+data);
 		Ticket ticket = dataService.findTicketById(data.getTicketId());
 		Seat seat = dataService.findSeatById(data.getSeatId());
+		if(data.getLoginToken() == emp.getToken()){
+			System.out.println("Yeah, this can happen!");
+		} else {
+			System.out.println("This is ludacris, you can't do this! (But you will anyway... for now)");
+		}
 		if (ticket != null && seat != null) {
 			seat.setTicket(ticket);
 			dataService.saveSeat(seat);

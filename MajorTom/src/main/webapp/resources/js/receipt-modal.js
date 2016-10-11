@@ -1,5 +1,5 @@
 angular.module("airline")
-.controller("receiptController",function($scope,$rootScope,dataService){
+.controller("receiptController",function($scope,$rootScope,$location,dataService){
 	$scope.loginVisible=true;
 	$scope.loadingTicket={ticketId:"Loading...",firstName:"",lastName:""};
 	$scope.selectTicket($scope.loadingTicket);
@@ -26,8 +26,8 @@ angular.module("airline")
 		var password=document.getElementById("EmployeePasswordBox").value;
 		dataService.authenticate(username, password,
 			function(response){
-				$rootScope.authenticated=true;
 				$scope.setCurrentUser(response.data);
+				$rootScope.loginToken = response.data.token;
 			}, function(response) {
 				$rootScope.authenticated=false;
 				$scope.setCurrentUser($scope.errorUser);
@@ -36,10 +36,9 @@ angular.module("airline")
 		$scope.loginVisible=false;
 	};
 	$scope.employeeLogout=function(){
-		$scope.setCurrentUser($scope.loadingUser);
 		document.getElementById("EmployeeUsernameBox").value = "";
 		document.getElementById("EmployeePasswordBox").value = "";
-		$rootScope.authenticated=false;
+		$rootScope.loginToken = undefined;
 		$scope.loginVisible=true;
 	};
 	$scope.slideReceipt=function(In)

@@ -3,7 +3,7 @@
  */
 var app = angular.module("airline", ["ngRoute"]);
 
-app.controller('mainCtrl', function($scope, dataService){
+app.controller('mainCtrl', function($scope, $rootScope, dataService){
 	$scope.selectedTicket = null;
 	$scope.selectedFlight = null;
 	$scope.currentUser = null;
@@ -47,7 +47,7 @@ app.controller('mainCtrl', function($scope, dataService){
 	$scope.reassignSeat = function(ticketId, seatId) {
 		$scope.newSeatInfo2 = "Loading...";
 		console.log('Getting seat, using: ticket-' + ticketId + " seat-" + seatId);
-		dataService.setSeat(ticketId, seatId, function(response){$scope.newSeatInfo2 =  "Seat #"+JSON.stringify(response.data.seatId)+" has been reassigned to ticket #"+JSON.stringify(response.data.ticket.ticketId);});
+		dataService.reassignSeat(ticketId, seatId, function(response){$scope.newSeatInfo2 =  "Seat #"+JSON.stringify(seatId)+" has been reassigned to ticket #"+JSON.stringify(response.data.ticketId);});
 	};
 	$scope.findFlightByTicket = function(ticketId) {
 		$scope.flightByTicket = "Loading...";
@@ -66,7 +66,7 @@ app.config(function($routeProvider) {
 	});
 });
 
-app.service('dataService', function($http){
+app.service('dataService', function($http, $rootScope){
 	this.findFlight = function(flightId, callback) {
 		$http.get('rest/findFlight/'+flightId, flightId).then(callback);
 	}
@@ -93,7 +93,8 @@ app.service('dataService', function($http){
 	}
 	this.reassignSeat = function(ticketId, seatId, callback, failure) {
 		// Reassign the seat for the ticket
-		var data = JSON.stringify({"ticketId": ticketId, "seatId": seatId});
+		console.log("Reassigning, not setting");
+		var data = JSON.stringify({"ticketId": ticketId, "seatId": seatId, "loginToken": $rootScope.loginToken});
 		$http.post('rest/reassignSeat/', data).then(callback, failure);
 	}
 });
