@@ -40,8 +40,8 @@
 				<input type='text' id='TicketIDBox' size=20 placeholder='Ticket ID'/><br/>
 				<input type='button' value='Save Ticket' data-ng-click='saveTicketId()'/><br/>
 				<br/>
-				<input type='text' id='EmployeeUsernameBox' placeholder='Username'/><br/>
-				<input type='password' id='EmployeePasswordBox' placeholder='Password'/><br/>
+				<input type='text' id='EmployeeUsernameBox' placeholder='Username' ng-model="user.username"/><br/>
+				<input type='password' id='EmployeePasswordBox' placeholder='Password' ng-model="user.password"/><br/>
 				<input type='button' value='Login' data-ng-click='employeeLogin()'/><br/>
 				<br/>
 				
@@ -51,6 +51,8 @@
 				<div>{{ticketInfo}}</div>
 				<button ng-click="findFlightByTicket(1)">find flight by ticket 1</button>
 				<div>{{flightByTicket}}</div>
+				<button ng-click="reassignSeat(2, 98)">reassign seat 98's ticket to 2</button>
+				<div>{{newSeatInfo2}}</div>
 			</div>
 			<airline-login-btn id="airlineLoginBtn"></airline-login-btn>
 		</div>

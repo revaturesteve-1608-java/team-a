@@ -105,5 +105,20 @@ public class ClientController {
 		} else {
 			return new ResponseEntity<Seat>(seat, HttpStatus.BAD_REQUEST);
 		}
+	}
+	
+	@RequestMapping(value="/reassignSeat")
+	public ResponseEntity<Seat> reassignSeat(@RequestBody SetSeatDTO data) {
+		System.out.println("Reassign Seat with data: "+data);
+		Ticket ticket = dataService.findTicketById(data.getTicketId());
+		Seat seat = dataService.findSeatById(data.getSeatId());
+		if (ticket != null && seat != null) {
+			seat.setTicket(ticket);
+			dataService.saveSeat(seat);
+			System.out.println(seat);
+			return new ResponseEntity<Seat>(seat, HttpStatus.ACCEPTED);
+		} else {
+			return new ResponseEntity<Seat>(seat, HttpStatus.BAD_REQUEST);
+		}
 	} 
 }
