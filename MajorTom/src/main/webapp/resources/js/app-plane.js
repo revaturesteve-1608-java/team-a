@@ -36,6 +36,14 @@ app.controller("planeController", function(planeDataService) {
 		console.log(seat.toSource());
 		this.selectionDisplay = "Selected seat: " + seat.seatId;
 		this.selectedSeat = seat;
+        console.log("selecting...");
+
+        var socket = io();
+        socket.on('connect', function() {
+            $rootScope.$broadcast('seatClick', {
+                data: this.selectedSeat
+            });
+        });
 	};
 	
 //	this.firstclass = [[{
