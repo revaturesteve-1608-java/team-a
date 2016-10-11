@@ -3,7 +3,7 @@
 <head>
 	<meta charset="ISO-8859-1">
 	<title>Welcome</title>
-	<script defer src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+	<script defer src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 	<link rel="stylesheet" href="resources/css/potatostrap.css">
@@ -14,12 +14,15 @@
 	<script defer src="resources/js/app.js"></script>
 	<script defer src="resources/js/receipt-modal.js"></script>
 	<script defer src="resources/js/app-plane.js"></script>
-	<script defer src="resources/js/plane.js"></script>
 </head>
 <body data-ng-app="airline">
 	<div ng-controller="mainCtrl">
-		<h1 class="jumbotron panel">Major Tom Seat Reservation System</h1>
-		<div id="ReceiptModal" class="panel" data-ng-controller="receiptController">
+		<div id="ReceiptModal"
+			class="ReceiptAnim"
+			data-ng-controller="receiptController"
+			data-ng-mouseenter="slideReceipt(true);"
+			data-ng-mouseleave="slideReceipt(false);"
+			data-ng-class="{ReceiptAnimIn:receiptHover,ReceiptAnimOut:!receiptHover}">
 			<div data-ng-hide="loginVisible">
 				<div data-ng-show="currentUser==null">
 					<p>Ticket Number:</p><p>&nbsp#{{selectedTicket.ticketId}}</p>
@@ -35,18 +38,30 @@
 				<input type='text' id='TicketIDBox' size=20 placeholder='Ticket ID'/><br/>
 				<input type='button' value='Save Ticket' data-ng-click='saveTicketId()'/><br/>
 				<br/>
-				<input type='text' id='EmployeeUsernameBox' placeholder='Username'/><br/>
-				<input type='password' id='EmployeePasswordBox' placeholder='Password'/><br/>
+				<input type='text' id='EmployeeUsernameBox' placeholder='Username' ng-model="user.username"/><br/>
+				<input type='password' id='EmployeePasswordBox' placeholder='Password' ng-model="user.password"/><br/>
 				<input type='button' value='Login' data-ng-click='employeeLogin()'/><br/>
 				<br/>
+				
+				<button ng-click="setSeat(1, 98)">set seat 98's ticket to 1</button>
+				<div>{{newSeatInfo}}</div>
+				<button ng-click="findTicketBySeat(98)">get seat 98's ticket</button>
+				<div>{{ticketInfo}}</div>
+				<button ng-click="findFlightByTicket(1)">find flight by ticket 1</button>
+				<div>{{flightByTicket}}</div>
+				<button ng-click="reassignSeat(2, 98)">reassign seat 98's ticket to 2</button>
+				<div>{{newSeatInfo2}}</div>
 			</div>
 			<airline-login-btn id="airlineLoginBtn"></airline-login-btn>
 		</div>
-		<div id="InfoBar" class="panel">
-			<h2>Flight Number: #{{selectedFlight.flightId}}</h2>
-			<label class="tickerEntry">Airline: <span class="tickerValue">{{selectedFlight.airline.name}}</span></label>
-			<label class="tickerEntry">Model: <span class="tickerValue">{{selectedFlight.airplane.airplaneName}}</span></label>
-			<label class="tickerEntry">Destination: <span class="tickerValue">{{selectedFlight.destination.destinationName}}</span></label>
+		<div id="HeaderContainer" class="panel">
+			<h1 class="jumbotron" data-ng-show="selectedFlight==null">Major Tom Seat Reservation System</h1>
+			<div data-ng-show="selectedFlight!=null">
+				<h2>Flight Number: #{{selectedFlight.flightId}}</h2>
+				<label class="tickerEntry">Airline: <span class="tickerValue">{{selectedFlight.airline.name}}</span></label>
+				<label class="tickerEntry">Model: <span class="tickerValue">{{selectedFlight.airplane.airplaneName}}</span></label>
+				<label class="tickerEntry">Destination: <span class="tickerValue">{{selectedFlight.destination.destinationName}}</span></label>
+			</div>
 		</div>
 		<div id="view-container" data-ng-view></div>
 	</div>

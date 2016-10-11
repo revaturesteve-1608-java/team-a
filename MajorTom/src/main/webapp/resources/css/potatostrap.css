@@ -8,14 +8,11 @@ body
 
 .jumbotron
 {
-	margin:0px;
-	padding:0.15em 0.15em 0.2em 2em;
-	border-width:0.1em;
-	border-color:#000000;
+	padding:0.1em 2em 0.1em 1em;
 	text-size:14pt;
 }
 
-.panel
+.panel, .jumbotron
 {
 	background-color:#771166;
 	color:#EEEEEE;
@@ -48,29 +45,68 @@ body
 #ReceiptModal
 {
 	z-index:1000;
-	position:relative;
-	float:left;
-	display:inline-block;
+	position:fixed;
 	background-color:#FFFFFF;
 	color:#000000;
-	margin: 1em 1em 2em 0.5em;
-	padding: 1em 0.5em 4em 0.5em;
-	border-radius:0;
-	border-width:0.01em;
+	margin:5px;
+	padding:0.5em;
+	border-style:solid;
+	border-width:2px;
 	border-color:#000000;
 	font-size:12pt;
 	font-family:"Courier New", Courier, monospace;
 	font-weight:bold;
 	line-height:100%;
+	width:240px;
+	height:400px;
 }
+
 #ReceiptModal > p
 {
 	margin:0.05em 0.5em 0.05em 0.5em;
 }
 
-#InfoBar
+#HeaderContainer
 {
-	border-width:1px;
+	position:fixed;
+	left:250px;
+	border-width:3px;
 	border-color:#000000!important;
 	border-style:solid;
+	margin-top:5px;
+	padding:0.1em;
+	z-index:999;
+}
+
+#HeaderContainer > div > h2, #HeaderContainer > div > label, #HeaderContainer > h1
+{
+	margin:0;
+	padding:0;
+}
+
+#info-box
+{
+	z-index: 10000;
+	position: relative;
+	width: 275px;
+	height: 80px;
+	padding: 15px;
+	background: #FFFFFF;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
+
+#info-box:after
+{
+	z-index: 10000;
+	content: '';
+	position: absolute;
+	border-style: solid;
+	border-width: 20px 15px 0;
+	border-color: #FFFFFF transparent;
+	display: block;
+	width: 0;
+	bottom: -20px;
+	left: 122px;
 }

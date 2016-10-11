@@ -3,8 +3,7 @@ angular.module("airline")
 	$scope.loginVisible=true;
 	$scope.loadingTicket={ticketId:"Loading...",firstName:"",lastName:""};
 	$scope.selectTicket($scope.loadingTicket);
-	$scope.loadingFlight={flightId:"No flight selected."};
-	$scope.selectFlight($scope.loadingFlight);
+	$scope.selectFlight(null);
 	$scope.loadingUser={username:"Loading...",firstName:"",lastName:"",authenticated:false};
 	$scope.errorUser={username:"Not Found",firstName:"",lastName:"",authenticated:false};
 	$scope.setCurrentUser(null);
@@ -27,18 +26,31 @@ angular.module("airline")
 		var password=document.getElementById("EmployeePasswordBox").value;
 		dataService.authenticate(username, password,
 			function(response){
-				response.data.authenticated=true;
+				$rootScope.authenticated=true;
 				$scope.setCurrentUser(response.data);
 			}, function(response) {
+				$rootScope.authenticated=false;
 				$scope.setCurrentUser($scope.errorUser);
 			}
 		);
 		$scope.loginVisible=false;
 	};
+	$scope.employeeLogout=function(){
+		$scope.setCurrentUser($scope.loadingUser);
+		document.getElementById("EmployeeUsernameBox").value = "";
+		document.getElementById("EmployeePasswordBox").value = "";
+		$rootScope.authenticated=false;
+		$scope.loginVisible=true;
+	};
+	$scope.slideReceipt=function(In)
+	{
+		$("#ReceiptModal").animate({top:(In?"0":"-360px")});
+	};
+	$scope.slideReceipt(false);
 })
 .directive("airlineLoginBtn",function(){
 	return {
 		template:
-			"<a href='' class='farbutton' data-ng-click='loginVisible=!loginVisible'>{{loginVisible?'Cancel':'Login'}}</a>"
+			"<a href='' class='farbutton' data-ng-click='employeeLogout()'>{{loginVisible?'Login':'Logout'}}</a>"
 	};
 });

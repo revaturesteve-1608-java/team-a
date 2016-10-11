@@ -3,8 +3,6 @@ package com.gc.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,7 +31,7 @@ public class TestController {
 		System.out.println("test the ticket");
 		Seat s = dataService.findSeatById(1);
 		System.out.println("seat:" + s);
-		System.out.println("ticket:" + dataService.findTicketBySeat(s));
+	//	System.out.println("ticket:" + dataService.findTicketBySeat(s));
 	}
 
 	@RequestMapping(value = "testSeats")
@@ -46,18 +44,18 @@ public class TestController {
 		}
 	}
 
-	@RequestMapping(value = "sendFakeMail")
-	public void sendMail() {
-		// Create the application context
-		//ApplicationContext context = new ClassPathXmlApplicationContext("mail-beans.xml");
-
-		// Get the mailer instance
-		//MailManager mailer = (MailManager) context.getBean("mailService");
-
-		// Send a composed mail
-		mailer.sendMail("kyle.garner15@yahoo.com", "Test Subject", "Testing body");
-
-		// Send a pre-configured mail
-		//mailer.sendPreConfiguredMail("Exception occurred everywhere.. where are you ????");
-	}
+//	@RequestMapping(value = "sendFakeMail")
+//	public void sendMail() {
+//		// Create the application context
+//		//ApplicationContext context = new ClassPathXmlApplicationContext("mail-beans.xml");
+//
+//		// Get the mailer instance
+//		//MailManager mailer = (MailManager) context.getBean("mailService");
+//
+//		// Send a composed mail
+//		mailer.sendMail("kyle.garner15@yahoo.com", "Test Subject", "Testing body");
+//
+//		// Send a pre-configured mail
+//		//mailer.sendPreConfiguredMail("Exception occurred everywhere.. where are you ????");
+//	}
 }

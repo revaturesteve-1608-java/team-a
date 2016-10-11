@@ -1,0 +1,32 @@
+@CHARSET "UTF-8";
+
+.home-bg {
+	background-image: url("../images/airplaneseat.jpg");
+}
+
+.main-div {
+	width: 65%;
+	height: 30%;
+	background-color: rgba(145, 39, 110, 0.5);
+	position: absolute;
+  	left: 50%;
+  	top: 50%;
+  	transform: translate(-50%, -75%);
+  	text-align: center;
+}
+
+.main-div > h1 {
+	color: white;
+	font-family: "Impact", Times, serif;
+}
+
+.inner-div {
+	background-color: white;
+	height: 100%;
+}
+
+.inner-div > h3 {
+	color: #91276e;
+	padding: 45px;
+	font-family: "Trebuchet MS", Times, serif;
+}

@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -35,22 +36,27 @@ public class Ticket {
 	String phone;
 	
 	@OneToOne
-	@JoinColumn(name="SEAT_ID")
+	@JoinColumn(name="FLIGHT_ID")
 	@Fetch(FetchMode.JOIN)
-	Seat seat;
+	Flight flight;
 	
+	@OneToOne
+	@JoinColumn(name="SEAT_TYPE_ID")
+	@Fetch(FetchMode.JOIN)
+	SeatType seatType;
 	
 	public Ticket() {
 		super();
 	}
-	public Ticket(Integer ticketId, String firstName, String lastName, String email, String phone, Seat seat) {
+	public Ticket(Integer ticketId, String firstName, String lastName, String email, String phone, Flight flight, SeatType seatType) {
 		super();
 		this.ticketId = ticketId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.phone = phone;
-		this.seat = seat;
+		this.flight = flight;
+		this.seatType = seatType;
 	}
 	
 	public Integer getTicketId() {
@@ -83,16 +89,22 @@ public class Ticket {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public Seat getSeat() {
-		return seat;
+	public Flight getFlight() {
+		return flight;
 	}
-	public void setSeat(Seat seat) {
-		this.seat = seat;
+	public void setFlight(Flight flight) {
+		this.flight = flight;
 	}
-	
+	public SeatType getSeatType() {
+		return seatType;
+	}
+	public void setSeatType(SeatType seatType) {
+		this.seatType = seatType;
+	}
 	@Override
 	public String toString() {
 		return "Ticket [ticketId=" + ticketId + ", firstName=" + firstName + ", lastName=" + lastName + ", email="
-				+ email + ", phone=" + phone + ", seat=" + seat + "]";
+				+ email + ", phone=" + phone + ", flight=" + flight + ", seatType=" + seatType + "]";
 	}
+
 }

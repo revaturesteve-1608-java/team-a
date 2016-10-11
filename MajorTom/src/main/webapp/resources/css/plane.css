@@ -21,24 +21,25 @@ body {
 .seat-container {
 	position: relative;
 	height: 400px;
-	top: 284px;
-	left:-130px;
+	width: 1980px;
+	top: 286px;
+	left:134px;
 	margin: 0px;
 }
 
 .plane-cockpit {
 	display: inline-block;
-	padding: 124px 0 0 0;
+	padding: 4px 0 0 0;
 	margin-right: 208px;
 	height: 276px;
 	width: 39px;
 }
 
 .plane-cockpit .seat {
-	height: 48px;
+	height: 52px;
 	margin: 15px 0;
 	background-color: #888;
-	border: 2px solid black;
+	border: 3px solid black;
 	border-radius: 8px;
 }
 
@@ -51,9 +52,9 @@ body {
 
 .plane-first .seat {
 	background-color: #FFD700;
-	border: 2px solid black;
+	border: 3px solid black;
 	margin: 18px 0 18px 27px;
-	height: 48px;
+	height: 52px;
 	border-radius: 8px;
 }
 
@@ -66,11 +67,12 @@ body {
 
 .plane-buisness .seat {
 	background-color: #87CEEB;
-	border: 2px solid black;
+	border: 3px solid black;
 	margin: 4.166px 0 4.166px 30px;
-	height: 43px;
+	height: 47px;
 	border-radius: 8px;
 }
+
 
 .plane-economy {
 	display: inline-block;
@@ -81,10 +83,22 @@ body {
 
 .plane-economy .seat {
 	background-color: white;
-	border: 2px solid black;
+	border: 3px solid black;
 	margin: 4.166px 0 4.166px 18px;
-	height: 43px;
+	height: 47px;
 	border-radius: 8px;
+}
+
+.seat:hover {
+	-webkit-box-shadow: 0px 0px 2px 5px #88F;
+	-moz-box-shadow: 0px 0px 2px 5px #88F;
+	box-shadow: 0px 0px 2px 5px #88F;
+}
+
+.seat-selected {
+	-webkit-box-shadow: 0px 0px 2px 5px #88F;
+	-moz-box-shadow: 0px 0px 2px 5px #88F;
+	box-shadow: 0px 0px 2px 5px #88F;
 }
 
 .row-spacer {
@@ -97,4 +111,54 @@ body {
 
 .aisle {
 	height: 80px;
+}
+
+.selection-label {
+	position:absolute;
+	left: 300px;
+	top:100px;
+	font-size: 2em;
+	color:#000;
+}
+
+@keyframes animatedBackground {
+    from {
+        background-position: 100% 0;
+    }
+    to {
+        background-position: 0 0;
+    }
+}
+@-webkit-keyframes animatedBackground {
+    from {
+        background-position: 100% 0;
+    }
+    to {
+        background-position: 0 0;
+    }
+}
+@-ms-keyframes animatedBackground {
+    from {
+        background-position: 100% 0;
+    }
+    to {
+        background-position: 0 0;
+    }
+}
+@-moz-keyframes animatedBackground {
+    from {
+        background-position: 100% 0;
+    }
+    to {
+        background-position: 0 0;
+    }
+}
+
+#bgContainer {
+	background: url("../images/clouds-panorama.jpg") no-repeat fixed;
+    background-size: cover;
+    animation: animatedBackground 60s linear infinite;
+    -ms-animation: animatedBackground 60s linear infinite;
+    -moz-animation: animatedBackground 60s linear infinite;
+    -webkit-animation: animatedBackground 60s linear infinite;
 }
