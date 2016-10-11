@@ -43,7 +43,7 @@ angular.module("airline")
 	};
 	$scope.slideReceipt=function(In)
 	{
-		$("#ReceiptModal").animate({top:(In?"0":"-360px")});
+		$("#ReceiptModal").animate({top:(In?"0":"-320px")});
 	};
 	$scope.slideReceipt(false);
 })
