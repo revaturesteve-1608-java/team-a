@@ -157,8 +157,8 @@ body {
 #bgContainer {
 	background: url("../images/clouds-panorama.jpg") no-repeat fixed;
     background-size: cover;
-    animation: animatedBackground 60s linear infinite;
-    -ms-animation: animatedBackground 60s linear infinite;
-    -moz-animation: animatedBackground 60s linear infinite;
-    -webkit-animation: animatedBackground 60s linear infinite;
+    animation: animatedBackground 90s linear infinite;
+    -ms-animation: animatedBackground 90s linear infinite;
+    -moz-animation: animatedBackground 90s linear infinite;
+    -webkit-animation: animatedBackground 90s linear infinite;
 }
