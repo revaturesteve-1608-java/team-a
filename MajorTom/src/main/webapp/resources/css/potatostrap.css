@@ -93,6 +93,7 @@ body
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
 	border-radius: 10px;
+	transform: translate(0, 800%);
 }
 
 #info-box:after
@@ -107,4 +108,5 @@ body
 	width: 0;
 	bottom: -20px;
 	left: 122px;
+	transform: translate(0, 800%);
 }
