@@ -32,6 +32,8 @@
 					<p class="warning">Employee Access</p>
 					<p>User: {{currentUser.username}}</p>
 					<p>{{currentUser.firstName}} {{currentUser.lastName}}</p>
+					<button ng-click="reassignSeat(2, 98)">reassign seat 98's ticket to 2</button>
+				<div>{{newSeatInfo2}}</div>
 				</div>
 			</div>
 			<div data-ng-show="loginVisible">

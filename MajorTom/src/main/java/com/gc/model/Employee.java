@@ -24,53 +24,76 @@ public class Employee {
 	String firstName;
 	@Column(name="LAST_NAME")
 	String lastName;
+	transient int token;
 	
 	
 	public Employee() {
 		super();
 	}
-	public Employee(String username, String password, String firstName, String lastName) {
+	
+	public Employee(Integer employeeId, String username, String password, String firstName, String lastName, int token) {
 		super();
+		EmployeeId = employeeId;
 		this.username = username;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.token = token;
 	}
-	
+
 	public Integer getEmployeeId() {
 		return EmployeeId;
 	}
+
 	public void setEmployeeId(Integer employeeId) {
 		EmployeeId = employeeId;
 	}
+
 	public String getUsername() {
 		return username;
 	}
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
 	public String getPassword() {
 		return password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 	public String getFirstName() {
 		return firstName;
 	}
+
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
+
 	public String getLastName() {
 		return lastName;
 	}
+
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	
+
+	public int getToken() {
+		return token;
+	}
+
+	public void setToken(int token) {
+		this.token = token;
+	}
+
 	@Override
 	public String toString() {
 		return "Employee [EmployeeId=" + EmployeeId + ", username=" + username + ", password=" + password
-				+ ", firstName=" + firstName + ", lastName=" + lastName + "]";
+				+ ", firstName=" + firstName + ", lastName=" + lastName + ", token=" + token + "]";
 	}
+
+
 }
