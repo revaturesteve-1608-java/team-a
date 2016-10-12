@@ -19,12 +19,7 @@
 <body data-ng-app="airline">
 	<div ng-controller="mainCtrl">
 		
-		<div id="ReceiptModal"
-			class="ReceiptAnim"
-			data-ng-controller="receiptController"
-			data-ng-mouseenter="slideReceipt(true);"
-			data-ng-mouseleave="slideReceipt(false);"
-			data-ng-class="{ReceiptAnimIn:receiptHover,ReceiptAnimOut:!receiptHover}">
+		<div id="ReceiptModal" class="ReceiptAnim" data-ng-controller="receiptController">
 			<div data-ng-hide="loginVisible">
 				<div data-ng-show="currentUser==null">
 					<p>Ticket Number:</p><p>&nbsp#{{selectedTicket.ticketId}}</p>
@@ -57,6 +52,7 @@
 				<div>{{newSeatInfo2}}</div>
 			</div>
 			<airline-login-btn id="airlineLoginBtn"></airline-login-btn>
+			<div style="text-align:center;"><div id="ReceiptSlideButton" data-ng-click="toggleReceipt()"></div></div>
 		</div>
 		<div id="HeaderContainer" class="">
 			<h1 class="" data-ng-show="selectedFlight==null">Thomas Catalina Airport - Seat Reservations</h1>
