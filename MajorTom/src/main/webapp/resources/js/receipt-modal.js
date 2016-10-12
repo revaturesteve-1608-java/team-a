@@ -21,7 +21,8 @@ angular.module("airline")
 			$scope.selectFlight(response.data);
 		});
 		$scope.loginVisible=false;
-		$timeout(function(){
+		if($scope.ticketTimeoutID){$timeout.cancel($scope.ticketTimeoutID);}
+		$scope.ticketTimeoutID=$timeout(function(){
 			$scope.timeoutTicket(ticketid);
 		},60000);
 	};
