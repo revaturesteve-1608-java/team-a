@@ -41,6 +41,9 @@ app.controller('mainCtrl', function($scope, $rootScope, dataService){
 		console.log('Getting seat, using flight id: ' + flightId);
 		dataService.findSeatsByFlight(flightId, function(response){$scope.seatInfo = JSON.stringify(response);});
 	};
+	$rootScope.$on('seatClick', function(event, data) {
+		$scope.selectedSeat=data;
+	});
 	$scope.setSeat = function(ticketId, seatId) {
 		$scope.newSeatInfo = "Loading...";
 		console.log('Getting seat, using: ' + ticketId + " " + seatId);
