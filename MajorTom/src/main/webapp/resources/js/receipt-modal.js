@@ -43,9 +43,17 @@ angular.module("airline")
 	};
 	$scope.slideReceipt=function(In)
 	{
+		$scope.receiptOpen=In;
 		$("#ReceiptModal").animate({top:(In?"0":"-22vw")});
+		$("#ReceiptSlideButton").toggleClass("ReceiptSlideButtonUp");
+		$("#ReceiptSlideButton").toggleClass("ReceiptSlideButtonDown");
+	};
+	$scope.toggleReceipt=function()
+	{
+		$scope.slideReceipt(!$scope.receiptOpen);
 	};
 	$scope.slideReceipt(false);
+	$("#ReceiptSlideButton").removeClass("ReceiptSlideButtonUp");
 })
 .directive("airlineLoginBtn",function(){
 	return {
