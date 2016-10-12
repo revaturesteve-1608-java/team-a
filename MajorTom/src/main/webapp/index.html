@@ -18,15 +18,15 @@
 <body data-ng-app="airline">
 	<div ng-controller="mainCtrl as main">
 		<div id="ReceiptModal" class="ReceiptAnim" data-ng-controller="receiptController">
-			<div class="right-link" ng-hide="recieptIsLogin" ng-click="recieptIsLogin = true"><a href="">Employee Login</a></div>
+			<div class="right-link" ng-hide="recieptIsLogin" ng-click="recieptIsLogin = true; loginVisible=true"><a href="">Employee Login</a></div>
 			<div class="right-link" ng-show="recieptIsLogin" ng-click="recieptIsLogin = false"><a href="">Enter Ticket</a></div>
 			<div ng-hide="recieptIsLogin">
 				<input type="text" id="TicketIDBox" class="form-control" size=20 placeholder="Ticket ID"/>
 				<button type="button" data-ng-click="saveTicketId()" class="btn btn-primary">Go</button><br>
 			</div>
-			<div ng-show="recieptIsLogin">
-				<input type="text" class="form-control" size=20 placeholder="Username" ng-model="user.username"/><br>
-				<input type="text" class="form-control" size=20 placeholder="Password" ng-model="user.password"/><br>
+			<div ng-show="recieptIsLogin && loginVisible">
+				<input type="text" id="username" class="form-control" size=20 placeholder="Username" ng-model="user.username"/><br>
+				<input type="password" id="password" class="form-control" size=20 placeholder="Password" ng-model="user.password"/><br>
 				<button type="button" data-ng-click="employeeLogin()" class="btn btn-primary">Login</button><br>
 			</div>
 			<div data-ng-hide="loginVisible">
@@ -39,7 +39,8 @@
 					<p>User: {{currentUser.username}}</p>
 					<p>{{currentUser.firstName}} {{currentUser.lastName}}</p>
 					<button ng-click="reassignSeat(2, 98)">reassign seat 98's ticket to 2</button>
-				<div>{{newSeatInfo2}}</div>
+					<div>{{newSeatInfo2}}</div>
+					<airline-login-btn id="airlineLoginBtn"></airline-login-btn>
 				</div>
 			</div>
 			<div data-ng-show="loginVisible">
@@ -52,7 +53,6 @@
 				<button ng-click="reassignSeat(2, 98)">reassign seat 98's ticket to 2</button>
 				<div>{{newSeatInfo2}}</div>
 			</div>
-			<airline-login-btn id="airlineLoginBtn"></airline-login-btn>
 			<div class="receipt-slide" data-ng-click="toggleReceipt()">
 				<label>Login/Ticket Information</label>
 				<div class="receipt-arrow"></div>

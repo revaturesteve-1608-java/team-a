@@ -34,8 +34,8 @@ angular.module("airline")
 	};
 	$scope.employeeLogin=function(){
 		$scope.setCurrentUser($scope.loadingUser);
-		var username=document.getElementById("EmployeeUsernameBox").value;
-		var password=document.getElementById("EmployeePasswordBox").value;
+		var username=document.getElementById("username").value;
+		var password=document.getElementById("password").value;
 		dataService.authenticate(username, password,
 			function(response){
 				$scope.setCurrentUser(response.data);
@@ -48,10 +48,11 @@ angular.module("airline")
 		$scope.loginVisible=false;
 	};
 	$scope.employeeLogout=function(){
-		document.getElementById("EmployeeUsernameBox").value = "";
-		document.getElementById("EmployeePasswordBox").value = "";
+		document.getElementById("username").value = "";
+		document.getElementById("password").value = "";
 		$rootScope.loginToken = undefined;
 		$scope.loginVisible=true;
+		$scope.setCurrentUser(null)
 	};
 	$scope.slideReceipt=function(In)
 	{
