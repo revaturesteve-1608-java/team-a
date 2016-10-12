@@ -8,8 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
-import com.gc.dto.ReassignSeatDTO;
 import com.gc.model.MailManager;
+import com.gc.model.Seat;
 import com.gc.model.Ticket;
 import com.gc.service.DataService;
 
@@ -23,22 +23,21 @@ public class MailAspect {
 	@Autowired
 	DataService dataService;
 	
-	@Around("execution(* com.gc.controller.ClientController.reassignSeat(..))")
-	public ResponseEntity<Ticket> sendEmail(ProceedingJoinPoint jpp) throws Throwable{
-		System.out.println("This is firing off");
+	@Around("execution(* com.gc.controller.ClientController.reassignSeatAndEmail(..))")
+	public ResponseEntity<Seat> sendEmail(ProceedingJoinPoint jpp) throws Throwable{
 		jpp.proceed();
-		System.out.println("Can I get an Amen");
 		Object[] args = jpp.getArgs();
-		System.out.println("args[0]: "+args[0] +"args[1]: "+args[1]);
 		System.out.println("Class1: "+args[0].getClass() + "Class2:" + args[1].getClass());
-		ReassignSeatDTO data = (ReassignSeatDTO) args[1];
-		Ticket newTicketInfo = dataService.findTicketById(data.getTicketId());
-//		if (newTicketInfo != null) {
-//			System.out.println(newTicketInfo.getEmail());
-//			mailer.sendMail("kyle.james.garner@gmail.com", "This is the Ticket Info", "Dear "+ newTicketInfo.getFirstName()+",\n\n"+
-//								"\tYour flight info is as follows:\n" + "\tE-mail: "+newTicketInfo.getEmail()+
-//								"\n\n\tEnjoy Your Flight!\n\t\tRev-Thompson International Airport");
-//		}
-		return new ResponseEntity<Ticket>(newTicketInfo,newTicketInfo==null?HttpStatus.NOT_FOUND:HttpStatus.ACCEPTED);
+		Seat seat = (Seat) args[1];
+		Ticket ticket = (Ticket) args[2];
+		System.out.println(ticket.getEmail());
+//		mailer.sendMail("kyle.james.garner@gmail.com", "Your Seat Has Been Reassigned!", "Dear "+ ticket.getFirstName()+",\n\n"+
+//						"\tYour flight info is as follows:\n" +
+//						"\tTicket Number: " + ticket.getTicketId() + "\n" +
+//						"\tE-mail: "+ticket.getEmail() + "\n"
+//						"\tSeat Number: " + seat.getSeatId() + "\n" +
+//						"\tSeat Class: " + seat.getClass() + "\n" 
+//						"\n\tEnjoy Your Flight!\n\t\tRev-Thompson International Airport");
+		return new ResponseEntity<Seat>(seat,seat==null?HttpStatus.NOT_FOUND:HttpStatus.ACCEPTED);
 	}
 }
