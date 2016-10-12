@@ -56,6 +56,44 @@ app.controller('mainCtrl', function($scope, $rootScope, dataService){
 		console.log('Getting flight, using: ' + ticketId);
 		dataService.findFlightByTicket(ticketId, function(response){$scope.flightByTicket = JSON.stringify(response);});
 	};
+	
+	this.viewResize = function() {
+		var content = $(".plane");
+		var height = $(window).height();
+		var width = $(window).width();
+		var scale;
+		scale = Math.min(width / 1920, height / 971);
+		content.css({
+			transform : "scale(" + scale + ")" 
+		});
+	}
+	var me = this;
+	window.onresize = function(event) {
+		me.viewResize();
+	};
+	
+	/* MUST BE IN app.js TO ACCESS ROUTE CHANGE EVENT PROPERLY
+	 * A bit of a hack to get the view to resize automatically on page load.
+	 * After the view is received from the server, it waits a short time for it to change
+	 * then resizes the view. it repeats at scaling intervals to account for slow hardware
+	 */
+	$rootScope.$on("$routeChangeSuccess", function(event) {
+		setTimeout(function(){
+			me.viewResize();
+		}, 5);
+		setTimeout(function(){
+			me.viewResize();
+		}, 20);
+		setTimeout(function(){
+			me.viewResize();
+		}, 100);
+		setTimeout(function(){
+			me.viewResize();
+		}, 500);
+		setTimeout(function(){
+			me.viewResize();
+		}, 2500);
+	});
 });
 	
 app.config(function($routeProvider) {
