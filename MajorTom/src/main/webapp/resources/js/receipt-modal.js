@@ -40,6 +40,7 @@ angular.module("airline")
 		document.getElementById("password").value = "";
 		$rootScope.loginToken = undefined;
 		$scope.loginVisible=true;
+		$scope.setCurrentUser(null)
 	};
 	$scope.slideReceipt=function(In)
 	{
