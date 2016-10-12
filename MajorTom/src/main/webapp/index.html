@@ -49,16 +49,6 @@
 					<airline-login-btn id="airlineLoginBtn"></airline-login-btn>
 				</div>
 			</div>
-			<div data-ng-show="loginVisible">
-				<button ng-click="setSeat(1, 98)">set seat 98's ticket to 1</button>
-				<div>{{newSeatInfo}}</div>
-				<button ng-click="findTicketBySeat(98)">get seat 98's ticket</button>
-				<div>{{ticketInfo}}</div>
-				<button ng-click="findFlightByTicket(1)">find flight by ticket 1</button>
-				<div>{{flightByTicket}}</div>
-				<button ng-click="reassignSeat(2, 98)">reassign seat 98's ticket to 2</button>
-				<div>{{newSeatInfo2}}</div>
-			</div>
 			<div class="receipt-slide" data-ng-click="toggleReceipt()">
 				<label>Login/Ticket Information</label>
 				<div class="receipt-arrow"></div>
