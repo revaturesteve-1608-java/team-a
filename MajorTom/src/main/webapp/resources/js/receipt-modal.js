@@ -1,13 +1,15 @@
 angular.module("airline")
-.controller("receiptController",function($scope,$rootScope,$location,dataService){
+.controller("receiptController",function($scope,$rootScope,$location,dataService,$timeout){
 	$scope.loginVisible=true;
-	$scope.loadingTicket={ticketId:"Loading...",firstName:"",lastName:""};
+	$scope.loadingTicket={ticketId:"Loading..."};
+	$scope.errorTicket={ticketId:"Ticket Not Found."};
 	$scope.selectTicket($scope.loadingTicket);
 	$scope.selectFlight(null);
 	$scope.loadingUser={username:"Loading...",firstName:"",lastName:"",authenticated:false};
 	$scope.errorUser={username:"Not Found",firstName:"",lastName:"",authenticated:false};
 	$scope.setCurrentUser(null);
 	$scope.saveTicketId=function(){
+		if($scope.currentUse!=null){$scope.employeeLogout();}
 		$scope.selectTicket($scope.loadingTicket);
 		$scope.selectFlight($scope.loadingFlight);
 		var ticketidbox=document.getElementById("TicketIDBox");
@@ -19,6 +21,16 @@ angular.module("airline")
 			$scope.selectFlight(response.data);
 		});
 		$scope.loginVisible=false;
+		$timeout(function(){
+			$scope.timeoutTicket(ticketid);
+		},60000);
+	};
+	$scope.timeoutTicket=function(ticketid){
+		if(ticketid===undefined||$scope.selectedTicket.ticketId==ticketid)
+		{
+			$scope.selectTicket($scope.loadingTicket);
+			$scope.loginVisible=true;
+		}
 	};
 	$scope.employeeLogin=function(){
 		$scope.setCurrentUser($scope.loadingUser);
