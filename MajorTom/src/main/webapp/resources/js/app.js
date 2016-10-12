@@ -113,9 +113,6 @@ app.service('dataService', function($http, $rootScope){
 	this.findFlight = function(flightId, callback) {
 		$http.get('rest/findFlight/'+flightId, flightId).then(callback);
 	}
-	this.findFlightByTicket = function(ticketId, callback) {
-		$http.get('rest/findFlightByTicket/'+ticketId,ticketId).then(callback);
-	}
 	this.findTicket = function(ticketId, callback){
 		$http.get('rest/findTicket/'+ticketId, ticketId).then(callback);
 	}

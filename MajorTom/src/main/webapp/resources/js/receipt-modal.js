@@ -1,24 +1,20 @@
 angular.module("airline")
 .controller("receiptController",function($scope,$rootScope,$location,dataService,$timeout){
 	$scope.loginVisible=true;
-	$scope.loadingTicket={ticketId:"Loading..."};
-	$scope.errorTicket={ticketId:"Ticket Not Found."};
+	$scope.loadingTicket={ticketId:"Loading...",flight:null};
+	$scope.errorTicket={ticketId:"Ticket Not Found.",flight:null};
 	$scope.selectTicket($scope.loadingTicket);
-	$scope.selectFlight(null);
 	$scope.loadingUser={username:"Loading...",firstName:"",lastName:"",authenticated:false};
 	$scope.errorUser={username:"Not Found",firstName:"",lastName:"",authenticated:false};
 	$scope.setCurrentUser(null);
 	$scope.saveTicketId=function(){
 		if($scope.currentUse!=null){$scope.employeeLogout();}
 		$scope.selectTicket($scope.loadingTicket);
-		$scope.selectFlight($scope.loadingFlight);
 		var ticketidbox=document.getElementById("TicketIDBox");
 		var ticketid=ticketidbox.value;
 		dataService.findTicket(+ticketid,function(response){
 			$scope.selectTicket(response.data);
-		});
-		dataService.findFlightByTicket(+ticketid,function(response){
-			$scope.selectFlight(response.data);
+			console.log(response.data);
 		});
 		$scope.loginVisible=false;
 		if($scope.ticketTimeoutID){$timeout.cancel($scope.ticketTimeoutID);}

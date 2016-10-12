@@ -46,20 +46,6 @@ public class ClientController {
 		return new ResponseEntity<Ticket>(tick,tick==null?HttpStatus.NOT_FOUND:HttpStatus.ACCEPTED);
 	}
 
-	@RequestMapping("/findFlightByTicket/{ticketId}")
-	public ResponseEntity<Flight> findFlightByTicket(@PathVariable(value = "ticketId") Integer ticketId) {
-		Seat seat = dataService.findSeatByTicket(dataService.findTicketById(ticketId));
-		Flight flight = null;
-		// First see if the seat is null, short-circuiting if it is
-		// Then, if it's not null, get the flight from it.  Then check if that's null.
-		// After that, we can return the flight.
-		if (seat != null && (flight = seat.getFlight()) != null) {
-			return new ResponseEntity<Flight>(flight, HttpStatus.ACCEPTED);
-		} else {
-			return new ResponseEntity<Flight>((Flight) null, HttpStatus.NOT_FOUND);
-		}
-	}
-
 	@RequestMapping(value = "/findTicketBySeat/{seatId}")
 	public ResponseEntity<Ticket> findTicketBySeat(@PathVariable(value = "seatId") Integer seatId) {
 		Ticket ticket = dataService.findSeatById(seatId).getTicket();

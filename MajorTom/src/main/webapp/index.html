@@ -33,6 +33,12 @@
 				<div data-ng-show="currentUser==null">
 					<p>Ticket Number:</p><p>&nbsp#{{selectedTicket.ticketId}}</p>
 					<p>Passenger Name:</p><p>&nbsp{{selectedTicket.firstName}} {{selectedTicket.lastName}}</p>
+					<div data-ng-show="selectedTicket.flight!=null">
+						<p>Flight Number:</p><p>&nbsp{{selectedTicket.flight.flightId}}</p>
+						<p>Destination:</p><p>&nbsp{{selectedTicket.flight.destination.destinationName}}</p>
+						<p>Model:</p><p>&nbsp{{selectedTicket.flight.airplane.airplaneName}}</p>
+						<p>Airline:</p><p>&nbsp{{selectedTicket.flight.airline.name}}</p>
+					</div>
 				</div>
 				<div data-ng-show="currentUser!=null">
 					<p class="warning">Employee Access</p>

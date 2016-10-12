@@ -44,6 +44,11 @@ body
 	width:15vw;
 	height:26.18vw;
 }
+#ReceiptModal p
+{
+	padding:0.1em;
+	margin:0;
+}
 
 .receipt-slide {
 	position:absolute;
