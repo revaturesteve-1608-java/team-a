@@ -4,16 +4,16 @@
 	<meta charset="ISO-8859-1">
 	<title>Welcome</title>
 	<script defer src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" href="resources/css/potatostrap.css">
 	<link rel="stylesheet" href="resources/css/plane.css">
-	<script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script defer src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
 	<script defer src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.js"></script>
 	<script defer src="resources/js/app.js"></script>
 	<script defer src="resources/js/receipt-modal.js"></script>
 	<script defer src="resources/js/app-plane.js"></script>
+	<script defer src="resources/js/info.js"></script>
 </head>
 <body data-ng-app="airline">
 	<div ng-controller="mainCtrl as main">
@@ -23,20 +23,16 @@
 			<div ng-hide="recieptIsLogin">
 				<input type="text" id="TicketIDBox" class="form-control" size=20 placeholder="Ticket ID"/>
 				<button type="button" data-ng-click="saveTicketId()" class="btn btn-primary">Go</button><br>
-				<div data-ng-show="loginVisible">
-					<button ng-click="setSeat(1, 98)">set seat 98's ticket to 1</button>
-					<div>{{newSeatInfo}}</div>
-					<button ng-click="findTicketBySeat(98)">get seat 98's ticket</button>
-					<div>{{ticketInfo}}</div>
-					<button ng-click="findFlightByTicket(1)">find flight by ticket 1</button>
-					<div>{{flightByTicket}}</div>
-					<button ng-click="reassignSeat(2, 98)">reassign seat 98's ticket to 2</button>
-					<div>{{newSeatInfo2}}</div>
-					<div data-ng-show="currentUser==null">
-						<p>Ticket Number:</p><p>&nbsp#{{selectedTicket.ticketId}}</p>
-						<p>Passenger Name:</p><p>&nbsp{{selectedTicket.firstName}} {{selectedTicket.lastName}}</p>
-					</div>
-				</div>
+				<div data-ng-hide="loginVisible">
+				<button ng-click="setSeat(1, 98)">set seat 98's ticket to 1</button>
+				<div>{{newSeatInfo}}</div>
+				<button ng-click="findTicketBySeat(98)">get seat 98's ticket</button>
+				<div>{{ticketInfo}}</div>
+				<button ng-click="findFlightByTicket(1)">find flight by ticket 1</button>
+				<div>{{flightByTicket}}</div>
+				<button ng-click="reassignSeat(2, 98)">reassign seat 98's ticket to 2</button>
+				<div>{{newSeatInfo2}}</div>
+			</div>
 			</div>
 			<div ng-show="recieptIsLogin">
 				<input type="text" id ="username" class="form-control" size=20 placeholder="Username" ng-model="user.username"/><br>
@@ -57,7 +53,6 @@
 				<label>Login/Ticket Information</label>
 				<div class="receipt-arrow"></div>
 			</div>
->>>>>>> Stashed changes
 		</div>
 		<div id="HeaderContainer" class="">
 			<h1 class="" data-ng-show="selectedFlight==null">Thomas Catalina Airport - Seat Reservations</h1>
@@ -66,8 +61,18 @@
 				<label class="tickerEntry">Airline: <span class="tickerValue">{{selectedFlight.airline.name}}</span></label>
 				<label class="tickerEntry">Model: <span class="tickerValue">{{selectedFlight.airplane.airplaneName}}</span></label>
 				<label class="tickerEntry">Destination: <span class="tickerValue">{{selectedFlight.destination.destinationName}}</span></label>
+				<airline-login-btn id="airlineLoginBtn"></airline-login-btn>
+			<div class="receipt-slide" data-ng-click="toggleReceipt()">
+				<label>Login/Ticket Information</label>
+				<div class="receipt-arrow"></div>
 			</div>
 		</div>
+		<div id="HeaderContainer">Thomas Catalina Airport - Seat Reservations</div>
+		
+		<div id="big-container" data-ng-controller="infoController">
+			<div id="info-box" class="info-box" data-ng-show="infoVisible"><pre style="font-size:150%; border:none">{{infoContents}}</pre></div>
+		</div>
+		
 		<div id="view-container" data-ng-view></div>
 	</div>
 </body>

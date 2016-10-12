@@ -116,23 +116,32 @@ public class ClientController {
 	
 	@RequestMapping(value="/reassignSeat")
 	public ResponseEntity<Seat> reassignSeat(Model model, @RequestBody ReassignSeatDTO data) {
-		
 		System.out.println("Token there?: "+emp.getToken());
 		System.out.println("Reassign Seat with data: "+data);
 		Ticket ticket = dataService.findTicketById(data.getTicketId());
 		Seat seat = dataService.findSeatById(data.getSeatId());
-		if(data.getLoginToken() == emp.getToken()){
-			System.out.println("Yeah, this can happen!");
-		} else {
-			System.out.println("This is ludacris, you can't do this! (But you will anyway... for now)");
-		}
 		if (ticket != null && seat != null) {
-			seat.setTicket(ticket);
-			dataService.saveSeat(seat);
-			System.out.println(seat);
-			return new ResponseEntity<Seat>(seat, HttpStatus.ACCEPTED);
+			if(data.getLoginToken() == emp.getToken()){
+				System.out.println("Nice, you're an employee!");
+				ResponseEntity<Seat>resp = reassignSeatAndEmail(model, seat, ticket);
+				return resp;
+			} else if(seat.getTicket().getTicketId() == ticket.getTicketId()){
+				System.out.println("You currently hold the seat!");
+				ResponseEntity<Seat>resp = reassignSeatAndEmail(model, seat, ticket);
+				return resp;
+			} else {
+				System.out.println("This is ludacris, you can't do this!");
+				return new ResponseEntity<Seat>(seat, HttpStatus.BAD_REQUEST);
+			}
 		} else {
 			return new ResponseEntity<Seat>(seat, HttpStatus.BAD_REQUEST);
 		}
-	} 
+	}
+	
+	public ResponseEntity<Seat> reassignSeatAndEmail(Model model, Seat seat, Ticket ticket) {
+		seat.setTicket(ticket);
+		dataService.saveSeat(seat);
+		System.out.println(seat);
+		return new ResponseEntity<Seat>(seat, HttpStatus.ACCEPTED);
+	}
 }

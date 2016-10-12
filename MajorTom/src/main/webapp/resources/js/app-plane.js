@@ -3,7 +3,7 @@
  */
 var app = angular.module("airline");
 
-app.controller("planeController", function(planeDataService) {
+app.controller("planeController", function($scope, $rootScope, planeDataService) {
 	var me = this;
 	
 	this.getMessages = function() {
@@ -35,6 +35,8 @@ app.controller("planeController", function(planeDataService) {
 	this.selectSeat = function(seat){
 		this.selectionDisplay = "Selected seat: " + seat.seatId;
 		this.selectedSeat = seat;
+		// Trigger an event in the info controller (info.js)
+        $rootScope.$emit('seatClick', this.selectedSeat);
 	};
 	
 //	this.firstclass = [[{
