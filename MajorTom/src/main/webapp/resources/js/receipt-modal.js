@@ -45,15 +45,15 @@ angular.module("airline")
 	{
 		$scope.receiptOpen=In;
 		$("#ReceiptModal").animate({top:(In?"0":"-22vw")});
-		$("#ReceiptSlideButton").toggleClass("ReceiptSlideButtonUp");
-		$("#ReceiptSlideButton").toggleClass("ReceiptSlideButtonDown");
+		$(".receipt-arrow").toggleClass("receipt-arrow-up");
+		$(".receipt-arrow").toggleClass("receipt-arrow-down");
 	};
 	$scope.toggleReceipt=function()
 	{
 		$scope.slideReceipt(!$scope.receiptOpen);
 	};
 	$scope.slideReceipt(false);
-	$("#ReceiptSlideButton").removeClass("ReceiptSlideButtonUp");
+	$(".receipt-arrow").removeClass("receipt-arrow-up");
 })
 .directive("airlineLoginBtn",function(){
 	return {

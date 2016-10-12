@@ -45,25 +45,32 @@ body
 	height:26.18vw;
 }
 
-#ReceiptSlideButton
-{
+.receipt-slide {
 	position:absolute;
+	bottom:0.8vw;
+	width:90%;
+	background-color: rgba(255,255,255,0.8);
+	padding:0.8vw 0 0.5vw 0;
+	text-align:center;
+}
+
+.receipt-arrow
+{
 	display:inline-block;
-	bottom:0;
 	width:0;
 	height:0;
-	border-left:20px solid transparent;
-	border-right:20px solid transparent;
+	border-left:0.4vw solid transparent;
+	border-right:0.4vw solid transparent;
 }
-.ReceiptSlideButtonDown
+.receipt-arrow-down
 {
-	border-top:20px solid #444444;
+	border-top:0.4vw solid #AAA;
 	border-bottom:0px solid transparent;
 }
-.ReceiptSlideButtonUp
+.receipt-arrow-up
 {
 	border-top:0px solid transparent;
-	border-bottom:20px solid #444444;
+	border-bottom:0.4vw solid #AAA;
 }
 
 #HeaderContainer
