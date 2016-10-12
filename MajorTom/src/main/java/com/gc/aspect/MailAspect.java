@@ -4,14 +4,12 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
+import com.gc.dto.ReassignSeatDTO;
 import com.gc.model.MailManager;
-import com.gc.model.Seat;
 import com.gc.model.Ticket;
 import com.gc.service.DataService;
 
@@ -32,8 +30,9 @@ public class MailAspect {
 		System.out.println("Can I get an Amen");
 		Object[] args = jpp.getArgs();
 		System.out.println("args[0]: "+args[0] +"args[1]: "+args[1]);
-		int ticketId = (int) args[0];
-		Ticket newTicketInfo = dataService.findTicketById(ticketId);
+		System.out.println("Class1: "+args[0].getClass() + "Class2:" + args[1].getClass());
+		ReassignSeatDTO data = (ReassignSeatDTO) args[1];
+		Ticket newTicketInfo = dataService.findTicketById(data.getTicketId());
 //		if (newTicketInfo != null) {
 //			System.out.println(newTicketInfo.getEmail());
 //			mailer.sendMail("kyle.james.garner@gmail.com", "This is the Ticket Info", "Dear "+ newTicketInfo.getFirstName()+",\n\n"+
