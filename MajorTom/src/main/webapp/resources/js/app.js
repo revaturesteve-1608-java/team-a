@@ -4,6 +4,8 @@
 var app = angular.module("airline", ["ngRoute"]);
 
 app.controller('mainCtrl', function($scope, $rootScope, dataService){
+	this.recieptIsLogin = false;
+	
 	$scope.selectedTicket = null;
 	$scope.selectedFlight = null;
 	$scope.currentUser = null;

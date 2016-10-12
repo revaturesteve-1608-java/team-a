@@ -44,16 +44,16 @@ angular.module("airline")
 	$scope.slideReceipt=function(In)
 	{
 		$scope.receiptOpen=In;
-		$("#ReceiptModal").animate({top:(In?"0":"-320px")});
-		$("#ReceiptSlideButton").toggleClass("ReceiptSlideButtonUp");
-		$("#ReceiptSlideButton").toggleClass("ReceiptSlideButtonDown");
+		$("#ReceiptModal").animate({top:(In?"0":"-22vw")});
+		$(".receipt-arrow").toggleClass("receipt-arrow-up");
+		$(".receipt-arrow").toggleClass("receipt-arrow-down");
 	};
 	$scope.toggleReceipt=function()
 	{
 		$scope.slideReceipt(!$scope.receiptOpen);
 	};
 	$scope.slideReceipt(false);
-	$("#ReceiptSlideButton").removeClass("ReceiptSlideButtonUp");
+	$(".receipt-arrow").removeClass("receipt-arrow-up");
 })
 .directive("airlineLoginBtn",function(){
 	return {

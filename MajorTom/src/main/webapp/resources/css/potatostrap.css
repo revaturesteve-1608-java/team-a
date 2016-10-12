@@ -6,34 +6,6 @@ body
 	color:#880077;
 }
 
-.jumbotron
-{
-	padding:0.1em 2em 0.1em 1em;
-	text-size:14pt;
-}
-
-.panel, .jumbotron
-{
-	background-color:rgba(97,14,83,0.8);
-	color:#EEEEEE;
-}
-
-.farbutton
-{
-	text-align:right;
-	float:right;
-}
-
-.tickerEntry
-{
-	min-width:18em;
-	font-weight:bold;
-}
-.tickerValue
-{
-	font-weight:normal;
-}
-
 .warning
 {
 	color:darkred;
@@ -42,65 +14,75 @@ body
 	padding:0.1em;
 }
 
+.btn {
+	font-size:0.8vw;
+	padding:0.1vw 0.5vw;
+	margin:0.5vw 0 0.5vw 0.5vw;
+}
+.form-control {
+	display:inline-block;
+	width:10vw;
+}
+
+.right-link {
+	margin:0 0 0.8vw 6.25vw;
+}
+.right-link:hover {
+	text-decoration: underline;
+}
+
 #ReceiptModal
 {
 	z-index:5;
 	position:fixed;
-	background-color:#FFFFFF;
-	color:#000000;
-	margin:0px;
-	padding:0.5em;
-	border-style:solid;
-	border-width:2px;
-	border-color:#000000;
-	font-size:12pt;
+	background: linear-gradient(115deg,rgba(246, 248, 249, 0.8) 0%,rgba(229, 235, 238, 0.8) 50%,rgba(215, 222, 227, 0.8) 51%,rgba(245, 247, 249,0.8) 100%);
+	color:#000;
+	padding:0.75vw;
+	font-size:0.8vw;
 	font-family:"Courier New", Courier, monospace;
 	font-weight:bold;
-	line-height:100%;
-	width:240px;
-	height:400px;
+	width:15vw;
+	height:26.18vw;
 }
 
-#ReceiptModal > p
-{
-	margin:0.05em 0.5em 0.05em 0.5em;
-}
-
-#ReceiptSlideButton
-{
+.receipt-slide {
 	position:absolute;
+	bottom:0.8vw;
+	width:90%;
+	background-color: rgba(255,255,255,0.8);
+	padding:0.8vw 0 0.5vw 0;
+	text-align:center;
+}
+
+.receipt-arrow
+{
 	display:inline-block;
-	bottom:0;
 	width:0;
 	height:0;
-	border-left:20px solid transparent;
-	border-right:20px solid transparent;
+	border-left:0.4vw solid transparent;
+	border-right:0.4vw solid transparent;
 }
-.ReceiptSlideButtonDown
+.receipt-arrow-down
 {
-	border-top:20px solid #444444;
+	border-top:0.4vw solid #AAA;
 	border-bottom:0px solid transparent;
 }
-.ReceiptSlideButtonUp
+.receipt-arrow-up
 {
 	border-top:0px solid transparent;
-	border-bottom:20px solid #444444;
+	border-bottom:0.4vw solid #AAA;
 }
 
 #HeaderContainer
 {
 	background-color:rgba(97,14,83,0.8);
+	background: linear-gradient(135deg, rgba(65,121,173,0.8) 0%,rgba(58,155,220,0.8) 33%,rgba(35,145,219,0.8) 34%,rgba(134,197,234,0.8) 100%);
 	color:#FFF;
 	position:fixed;
-	left:240px;
-	padding:20px;
+	left:15vw;
+	padding:0.75vw;
+	font-size:1.86vw;
 	z-index:10;
-}
-
-#HeaderContainer > div > h2, #HeaderContainer > div > label, #HeaderContainer > h1
-{
-	margin:0;
-	padding:0;
 }
 
 #info-box
