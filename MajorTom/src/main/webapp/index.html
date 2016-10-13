@@ -62,7 +62,7 @@
 				
 				Select a flight
 				<br>
-				<select id="flightSelect" ng-model="selectedFlight" value="{{selectedFlight.flightId}}" ng-change="changeFlight(selectedFlight.flightId)" ng-options="flight as 'Flight ' + flight.flightId for flight in flightList"></select>
+				<select id="flightSelect" ng-model="selectedFlight" ng-change="changeFlight(selectedFlight.flightId)" ng-options="flight as 'Flight ' + flight.flightId for flight in flightList"></select>
     			<br>You selected: {{selectedFlight.flightId}}
 			</div>
 			<airline-login-btn id="airlineLoginBtn"></airline-login-btn>
