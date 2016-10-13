@@ -4,14 +4,16 @@ public class ReassignSeatDTO {
 
 	private int ticketId;
 	private int seatId;
+	private int seat2Id;
 	private int loginToken;
 	
 	public ReassignSeatDTO() {}
 
-	public ReassignSeatDTO(int ticketId, int seatId, int loginToken) {
+	public ReassignSeatDTO(int ticketId, int seatId, int seat2Id, int loginToken) {
 		super();
 		this.ticketId = ticketId;
 		this.seatId = seatId;
+		this.seat2Id = seat2Id;
 		this.loginToken = loginToken;
 	}
 
@@ -31,6 +33,14 @@ public class ReassignSeatDTO {
 		this.seatId = seatId;
 	}
 
+	public int getSeat2Id() {
+		return seat2Id;
+	}
+
+	public void setSeat2Id(int seat2Id) {
+		this.seat2Id = seat2Id;
+	}
+
 	public int getLoginToken() {
 		return loginToken;
 	}
@@ -41,7 +51,10 @@ public class ReassignSeatDTO {
 
 	@Override
 	public String toString() {
-		return "ReassignSeatDTO [ticketId=" + ticketId + ", seatId=" + seatId + ", loginToken=" + loginToken + "]";
+		return "ReassignSeatDTO [ticketId=" + ticketId + ", seatId=" + seatId + ", seat2Id=" + seat2Id + ", loginToken="
+				+ loginToken + "]";
 	}
+
+	
 	
 }
