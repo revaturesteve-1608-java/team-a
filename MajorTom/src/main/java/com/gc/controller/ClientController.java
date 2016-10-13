@@ -117,10 +117,11 @@ public class ClientController {
 		Ticket ticket = dataService.findTicketById(data.getTicketId());
 		Seat seat = dataService.findSeatById(data.getSeatId());
 		Seat seat2 = dataService.findSeatById(data.getSeat2Id());
+		System.out.println("Seat 2, is it null?: "+seat2);
 		if (ticket == null && data.getLoginToken() == emp.getToken()){
 			System.out.println("Nice, you're an employee!");
-			if(seat.getTicket() != null){
-				if(seat2.getTicket() != null){	
+			if(seat != null){
+				if(seat2 != null){
 					Ticket tempTicket = seat.getTicket();
 					seat.setTicket(seat2.getTicket());
 					seat2.setTicket(tempTicket);

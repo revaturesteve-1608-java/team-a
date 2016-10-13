@@ -15,4 +15,10 @@ infoApp.controller("infoController", function($scope, $rootScope, dataService) {
         $scope.infoVisible = true;
         $scope.infoContents = str;
     })
+    $scope.setFirstSelection = function(seat){
+    	$rootScope.firstSelect = seat;
+    }
+    $scope.setSecondSelection = function(seat){
+    	$rootScope.secondSelect = seat;
+    }
 });

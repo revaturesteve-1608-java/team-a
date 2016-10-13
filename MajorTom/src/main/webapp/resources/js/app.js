@@ -49,10 +49,12 @@ app.controller('mainCtrl', function($scope, $rootScope, dataService){
 		console.log('Getting seat, using: ' + ticketId + " " + seatId);
 		dataService.setSeat(ticketId, seatId, function(response){$scope.newSeatInfo = JSON.stringify(response);});
 	};
-	$scope.reassignSeat = function(ticketId, seatId) {
+	$scope.reassignSeat = function(ticketId, seatId, seat2Id) {
 		$scope.newSeatInfo2 = "Loading...";
-		console.log('Getting seat, using: ticket-' + ticketId + " seat-" + seatId);
-		dataService.reassignSeat(ticketId, seatId, function(response){$scope.newSeatInfo2 =  "Seat #"+JSON.stringify(seatId)+" has been reassigned to ticket #"+JSON.stringify(response.data.ticketId);});
+		console.log('Getting seat, using: ticket-' + ticketId + " seat-" + seatId + " seat2-" + seat2Id);
+		dataService.reassignSeat(ticketId, seatId, seat2Id, function(response){$scope.newSeatInfo2 =  "Seat #"+JSON.stringify(seatId)+" has been reassigned to ticket #"+JSON.stringify(response.data.ticketId);});
+		$scope.$root.firstSelect = null;
+		$scope.$root.secondSelect = null;
 	};
 	$scope.findFlightByTicket = function(ticketId) {
 		$scope.flightByTicket = "Loading...";
@@ -152,10 +154,10 @@ app.service('dataService', function($http, $rootScope){
 		var data = JSON.stringify({"ticketId": ticketId, "seatId": seatId});
 		$http.post('rest/setSeat', data).then(callback, failure);
 	}
-	this.reassignSeat = function(ticketId, seatId, callback, failure) {
+	this.reassignSeat = function(ticketId, seatId, seat2Id, callback, failure) {
 		// Reassign the seat for the ticket
 		console.log("Reassigning, not setting");
-		var data = JSON.stringify({"ticketId": ticketId, "seatId": seatId, "loginToken": $rootScope.loginToken});
+		var data = JSON.stringify({"ticketId": ticketId, "seatId": seatId, "seat2Id": seat2Id, "loginToken": $rootScope.loginToken});
 		$http.post('rest/reassignSeat/', data).then(callback, failure);
 	}
 	
