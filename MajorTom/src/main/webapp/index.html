@@ -47,9 +47,18 @@
 					<p>{{currentUser.firstName}} {{currentUser.lastName}}</p>
 					<button ng-click="reassignSeat(2, 98)">reassign seat 98's ticket to 2</button>
 					<div>{{newSeatInfo2}}</div>
+					
+					<br>Select a flight:
+					<br><select id="flightSelect" ng-model="selectedFlight" ng-change="changeFlight(selectedFlight.flightId)" ng-options="flight as 'Flight ' + flight.flightId for flight in flightList"></select>
+    				<br><br>
+    				<!--You selected: {{selectedFlight.flightId}}-->
 					<airline-login-btn id="airlineLoginBtn"></airline-login-btn>
 				</div>
 			</div>
+			
+			<!--  
+			Test buttons
+			
 			<div data-ng-show="loginVisible">
 				<button ng-click="setSeat(1, 98)">set seat 98's ticket to 1</button>
 				<div>{{newSeatInfo}}</div>
@@ -59,13 +68,9 @@
 				<div>{{flightByTicket}}</div>
 				<button ng-click="reassignSeat(2, 98)">reassign seat 98's ticket to 2</button>
 				<div>{{newSeatInfo2}}</div>
-				
-				Select a flight
-				<br>
-				<select id="flightSelect" ng-model="selectedFlight" ng-change="changeFlight(selectedFlight.flightId)" ng-options="flight as 'Flight ' + flight.flightId for flight in flightList"></select>
-    			<br>You selected: {{selectedFlight.flightId}}
 			</div>
-			<airline-login-btn id="airlineLoginBtn"></airline-login-btn>
+			-->
+			
 			<div class="receipt-slide" data-ng-click="toggleReceipt()">
 				<label>Login/Ticket Information</label>
 				<div class="receipt-arrow"></div>
