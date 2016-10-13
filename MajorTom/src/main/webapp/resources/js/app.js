@@ -66,6 +66,13 @@ app.controller('mainCtrl', function($scope, $rootScope, dataService){
 			break;
 		}
 	})
+
+	// This method is called when the admin changes the flight
+	// The flight id is then passed in
+	$scope.changeFlight = function(id) {
+		console.log(id);
+		
+	}
 	
 	this.viewResize = function() {
 		var content = $(".plane");
