@@ -106,14 +106,48 @@ public class ClientController {
 		System.out.println("Reassign Seat with data: "+data);
 		Ticket ticket = dataService.findTicketById(data.getTicketId());
 		Seat seat = dataService.findSeatById(data.getSeatId());
-		if (ticket != null && seat != null) {
-			if(data.getLoginToken() == emp.getToken()){
-				System.out.println("Nice, you're an employee!");
-				ResponseEntity<Seat>resp = reassignSeatAndEmail(model, seat, ticket);
-				return resp;
-			} else if(seat.getTicket().getTicketId() == ticket.getTicketId()){
+		Seat seat2 = dataService.findSeatById(data.getSeat2Id());
+		if (ticket == null && data.getLoginToken() == emp.getToken()){
+			System.out.println("Nice, you're an employee!");
+			if(seat.getTicket() != null){
+				if(seat2.getTicket() != null){	
+					Ticket tempTicket = seat.getTicket();
+					seat.setTicket(seat2.getTicket());
+					seat2.setTicket(tempTicket);
+					dataService.saveSeat(seat);
+					dataService.saveSeat(seat2);
+					ResponseEntity<Seat>resp = reassignSeatAndEmail(model, seat, seat2, ticket);
+					return resp;
+				} else {
+					System.out.println("Seat2 is null");
+					seat2.setTicket(seat.getTicket());
+					seat.setTicket(null);
+					dataService.saveSeat(seat);
+					dataService.saveSeat(seat2);
+					ResponseEntity<Seat>resp = reassignSeatAndEmail(model, seat, seat2, ticket);
+					return resp;
+				}
+			} else {
+				if(seat2.getTicket() != null){
+					System.out.println("Seat1 is null");
+					seat.setTicket(seat2.getTicket());
+					seat2.setTicket(null);
+					dataService.saveSeat(seat);
+					dataService.saveSeat(seat2);
+					ResponseEntity<Seat>resp = reassignSeatAndEmail(model, seat, seat2, ticket);
+					return resp;
+				}
+			}
+			ResponseEntity<Seat>resp = reassignSeatAndEmail(model, seat, seat2, ticket);
+			return resp;
+		} else if (ticket != null && seat != null) {
+			if(seat.getTicket().getTicketId() == ticket.getTicketId()){
 				System.out.println("You currently hold the seat!");
-				ResponseEntity<Seat>resp = reassignSeatAndEmail(model, seat, ticket);
+				ResponseEntity<Seat>resp = reassignSeatAndEmail(model, seat, seat2, ticket);
+				return resp;
+			} else if(seat.getTicket() == null){
+				seat.setTicket(ticket);
+				ResponseEntity<Seat>resp = reassignSeatAndEmail(model, seat, seat2, ticket);
 				return resp;
 			} else {
 				System.out.println("This is ludacris, you can't do this!");
@@ -124,10 +158,9 @@ public class ClientController {
 		}
 	}
 	
-	public ResponseEntity<Seat> reassignSeatAndEmail(Model model, Seat seat, Ticket ticket) {
-		seat.setTicket(ticket);
-		dataService.saveSeat(seat);
+	public ResponseEntity<Seat> reassignSeatAndEmail(Model model, Seat seat, Seat seat2, Ticket ticket) {
 		System.out.println(seat);
+		System.out.println(seat2);
 		return new ResponseEntity<Seat>(seat, HttpStatus.ACCEPTED);
 	}
 }
