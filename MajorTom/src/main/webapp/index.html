@@ -5,6 +5,7 @@
 	<title>Welcome</title>
 	<script defer src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="resources/css/homestrap.css">
 	<link rel="stylesheet" href="resources/css/potatostrap.css">
 	<link rel="stylesheet" href="resources/css/plane.css">
 	<script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -51,6 +52,11 @@
 				<div>{{flightByTicket}}</div>
 				<button ng-click="reassignSeat(2, 98)">reassign seat 98's ticket to 2</button>
 				<div>{{newSeatInfo2}}</div>
+				
+				Select a flight
+				<br>
+				<select id="flightSelect" ng-model="selectedFlight" ng-options="flight as 'Flight ' + flight.flightId for flight in flightList"></select>
+    			<br>You selected: {{selectedFlight.flightId}}
 			</div>
 			<airline-login-btn id="airlineLoginBtn"></airline-login-btn>
 			<div class="receipt-slide" data-ng-click="toggleReceipt()">
@@ -61,7 +67,7 @@
 		<div id="HeaderContainer">Thomas Catalina Airport - Seat Reservations</div>
 		
 		<div id="big-container" data-ng-controller="infoController">
-			<div id="info-box" class="info-box" data-ng-show="infoVisible"><pre style="font-size:150%; border:none">{{infoContents}}</pre></div>
+			<div id="info-box" class="info-box" data-ng-show="infoVisible"><pre style="font-size:150%; border:none; font-family:Courier New">{{infoContents}}</pre></div>
 		</div>
 		
 		<div id="view-container" data-ng-view></div>
