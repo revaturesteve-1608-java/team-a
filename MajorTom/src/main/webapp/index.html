@@ -19,28 +19,35 @@
 <body data-ng-app="airline">
 	<div id="mainCtrl" ng-controller="mainCtrl as main">
 		<div id="ReceiptModal" class="ReceiptAnim" data-ng-controller="receiptController">
-			<div class="right-link" ng-hide="recieptIsLogin" ng-click="recieptIsLogin = true"><a href="">Employee Login</a></div>
+			<div class="right-link" ng-hide="recieptIsLogin" ng-click="recieptIsLogin = true; loginVisible=true"><a href="">Employee Login</a></div>
 			<div class="right-link" ng-show="recieptIsLogin" ng-click="recieptIsLogin = false"><a href="">Enter Ticket</a></div>
 			<div ng-hide="recieptIsLogin">
 				<input type="text" id="TicketIDBox" class="form-control" size=20 placeholder="Ticket ID"/>
 				<button type="button" data-ng-click="saveTicketId()" class="btn btn-primary">Go</button><br>
 			</div>
-			<div ng-show="recieptIsLogin">
-				<input type="text" class="form-control" size=20 placeholder="Username" ng-model="user.username"/><br>
-				<input type="text" class="form-control" size=20 placeholder="Password" ng-model="user.password"/><br>
+			<div ng-show="recieptIsLogin && loginVisible">
+				<input type="text" id="username" class="form-control" size=20 placeholder="Username" ng-model="user.username"/><br>
+				<input type="password" id="password" class="form-control" size=20 placeholder="Password" ng-model="user.password"/><br>
 				<button type="button" data-ng-click="employeeLogin()" class="btn btn-primary">Login</button><br>
 			</div>
 			<div data-ng-hide="loginVisible">
 				<div data-ng-show="currentUser==null">
 					<p>Ticket Number:</p><p>&nbsp#{{selectedTicket.ticketId}}</p>
 					<p>Passenger Name:</p><p>&nbsp{{selectedTicket.firstName}} {{selectedTicket.lastName}}</p>
+					<div data-ng-show="selectedTicket.flight!=null">
+						<p>Flight Number:</p><p>&nbsp{{selectedTicket.flight.flightId}}</p>
+						<p>Destination:</p><p>&nbsp{{selectedTicket.flight.destination.destinationName}}</p>
+						<p>Model:</p><p>&nbsp{{selectedTicket.flight.airplane.airplaneName}}</p>
+						<p>Airline:</p><p>&nbsp{{selectedTicket.flight.airline.name}}</p>
+					</div>
 				</div>
 				<div data-ng-show="currentUser!=null">
 					<p class="warning">Employee Access</p>
 					<p>User: {{currentUser.username}}</p>
 					<p>{{currentUser.firstName}} {{currentUser.lastName}}</p>
 					<button ng-click="reassignSeat(2, 98)">reassign seat 98's ticket to 2</button>
-				<div>{{newSeatInfo2}}</div>
+					<div>{{newSeatInfo2}}</div>
+					<airline-login-btn id="airlineLoginBtn"></airline-login-btn>
 				</div>
 			</div>
 			<div data-ng-show="loginVisible">
@@ -67,7 +74,11 @@
 		<div id="HeaderContainer">Thomas Catalina Airport - Seat Reservations</div>
 		
 		<div id="big-container" data-ng-controller="infoController">
-			<div id="info-box" class="info-box" data-ng-show="infoVisible"><pre style="font-size:150%; border:none; font-family:Courier New">{{infoContents}}</pre></div>
+			<div id="info-box" class="info-box" data-ng-show="infoVisible">
+				<pre style="font-size:150%; border:none; font-family:Courier New">{{infoContents}}</pre><br/>
+				<input id="ReserveButton" type="button" data-ng-click="setSeat(selectedTicket.ticketId,selectedSeat.seatId);" value="Reserve This Seat"/>
+			</div>
+
 		</div>
 		
 		<div id="view-container" data-ng-view></div>
