@@ -24,7 +24,6 @@ app.controller("planeController", function($scope, $rootScope, planeDataService)
 	this.selectionDisplay = "No seat selected";
 	this.selectedSeat;
 	
-	var me = this;
 	var flightId = 1402;
 	planeDataService.getFormattedSeats(flightId, function(response){
 		me.firstclass = response.data.first;
@@ -40,6 +39,17 @@ app.controller("planeController", function($scope, $rootScope, planeDataService)
 //        console.log($("seat" + index).css("box-shadow"));
 //        console.log($("seat" + index).css("left"));
 	};
+	
+	$rootScope.$on('changeFlight', function(event, data) {
+		// This event is triggered when the admin changes the flight (and thus, wants the airplane to change)
+		planeDataService.getFormattedSeats(data, function(response) {
+			me.firstclass = response.data.first;
+			me.buisclass = response.data.buisness;
+			me.econclass = response.data.economy;
+		})
+	});
+	
+	
 });
 
 

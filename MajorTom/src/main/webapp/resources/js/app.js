@@ -74,7 +74,8 @@ app.controller('mainCtrl', function($scope, $rootScope, dataService){
 	// The flight id is then passed in
 	$scope.changeFlight = function(id) {
 		console.log(id);
-		
+		// Emit an event to app-plane.js to update the airplane
+		$rootScope.$emit('changeFlight', id);
 	}
 	
 	this.viewResize = function() {
