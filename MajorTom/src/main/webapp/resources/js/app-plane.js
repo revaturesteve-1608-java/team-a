@@ -37,6 +37,8 @@ app.controller("planeController", function($scope, $rootScope, planeDataService)
 		this.selectedSeat = seat;
 		// Trigger an event in the info controller (info.js)
         $rootScope.$emit('seatClick', this.selectedSeat);
+//        console.log($("seat" + index).css("box-shadow"));
+//        console.log($("seat" + index).css("left"));
 	};
 });
 

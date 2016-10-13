@@ -40,6 +40,16 @@ public class ClientController {
 		}
 	}
 	
+	@RequestMapping("/findAllFlights")
+	public ResponseEntity<List<Flight>> findAllFlights() {
+		List<Flight> list = dataService.findAllFlights();
+		if (list != null) {
+			return new ResponseEntity<List<Flight>>(list, HttpStatus.ACCEPTED);
+		} else {
+			return new ResponseEntity<List<Flight>>(list, HttpStatus.NOT_FOUND);
+		}
+	}
+	
 	@RequestMapping("/findTicket/{ticketId}")
 	public ResponseEntity<Ticket> findTicket(@PathVariable(value = "ticketId") Integer ticketId){
 		Ticket tick=dataService.findTicketById(ticketId);

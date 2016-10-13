@@ -60,6 +60,23 @@ app.controller('mainCtrl', function($scope, $rootScope, dataService){
 		dataService.findFlightByTicket(ticketId, function(response){$scope.flightByTicket = JSON.stringify(response);});
 	};
 	
+	dataService.findAllFlights(function(response) {
+		// Only do it for the first item (that's where the flights are)
+		// To get the first item, just use a for-each and take the first item
+		for (item in response) {
+			// Give the list of flights to the select
+			$scope.flightList = response[item];
+			break;
+		}
+	})
+
+	// This method is called when the admin changes the flight
+	// The flight id is then passed in
+	$scope.changeFlight = function(id) {
+		console.log(id);
+		
+	}
+	
 	this.viewResize = function() {
 		var content = $(".plane");
 		var height = $(window).height();
@@ -122,6 +139,9 @@ app.service('dataService', function($http, $rootScope){
 	this.findSeatsByFlight = function(flightId, callback) {
 		$http.get('rest/findSeatsByFlight/'+flightId, flightId).then(callback);
 	}
+	this.findAllFlights = function(callback) {
+		$http.get('rest/findAllFlights').then(callback);
+	}
 	this.authenticate = function(username, password, callback, failure) {
 		var data = JSON.stringify({"username": username, "password": password});
 		$http.post('rest/authenticate', data).then(callback, failure);
@@ -137,4 +157,5 @@ app.service('dataService', function($http, $rootScope){
 		var data = JSON.stringify({"ticketId": ticketId, "seatId": seatId, "loginToken": $rootScope.loginToken});
 		$http.post('rest/reassignSeat/', data).then(callback, failure);
 	}
+	
 });

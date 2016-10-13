@@ -5,6 +5,7 @@
 	<title>Welcome</title>
 	<script defer src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="resources/css/homestrap.css">
 	<link rel="stylesheet" href="resources/css/potatostrap.css">
 	<link rel="stylesheet" href="resources/css/plane.css">
 	<script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -16,7 +17,7 @@
 	<script defer src="resources/js/info.js"></script>
 </head>
 <body data-ng-app="airline">
-	<div ng-controller="mainCtrl as main">
+	<div id="mainCtrl" ng-controller="mainCtrl as main">
 		<div id="ReceiptModal" class="ReceiptAnim" data-ng-controller="receiptController">
 			<div class="right-link" ng-hide="recieptIsLogin" ng-click="recieptIsLogin = true; loginVisible=true"><a href="">Employee Login</a></div>
 			<div class="right-link" ng-show="recieptIsLogin" ng-click="recieptIsLogin = false"><a href="">Enter Ticket</a></div>
@@ -49,6 +50,22 @@
 					<airline-login-btn id="airlineLoginBtn"></airline-login-btn>
 				</div>
 			</div>
+			<div data-ng-show="loginVisible">
+				<button ng-click="setSeat(1, 98)">set seat 98's ticket to 1</button>
+				<div>{{newSeatInfo}}</div>
+				<button ng-click="findTicketBySeat(98)">get seat 98's ticket</button>
+				<div>{{ticketInfo}}</div>
+				<button ng-click="findFlightByTicket(1)">find flight by ticket 1</button>
+				<div>{{flightByTicket}}</div>
+				<button ng-click="reassignSeat(2, 98)">reassign seat 98's ticket to 2</button>
+				<div>{{newSeatInfo2}}</div>
+				
+				Select a flight
+				<br>
+				<select id="flightSelect" ng-model="selectedFlight" ng-change="changeFlight(selectedFlight.flightId)" ng-options="flight as 'Flight ' + flight.flightId for flight in flightList"></select>
+    			<br>You selected: {{selectedFlight.flightId}}
+			</div>
+			<airline-login-btn id="airlineLoginBtn"></airline-login-btn>
 			<div class="receipt-slide" data-ng-click="toggleReceipt()">
 				<label>Login/Ticket Information</label>
 				<div class="receipt-arrow"></div>
@@ -58,9 +75,10 @@
 		
 		<div id="big-container" data-ng-controller="infoController">
 			<div id="info-box" class="info-box" data-ng-show="infoVisible">
-				<pre style="font-size:150%; border:none">{{infoContents}}</pre><br/>
+				<pre style="font-size:100%; border:none; font-family:Courier New">{{infoContents}}</pre><br/>
 				<input id="ReserveButton" type="button" data-ng-click="setSeat(selectedTicket.ticketId,selectedSeat.seatId);" value="Reserve This Seat"/>
 			</div>
+
 		</div>
 		
 		<div id="view-container" data-ng-view></div>
