@@ -82,8 +82,8 @@
 			<div id="info-box" class="info-box" data-ng-show="infoVisible">
 				<pre style="font-size:100%; border:none; font-family:Courier New">{{infoContents}}</pre><br/>
 				<input ng-show="currentUser==null" id="ReserveButton" type="button" data-ng-click="setSeat(selectedTicket.ticketId,selectedSeat.seatId);" value="Reserve This Seat"/>
-				<input ng-hide="currentUser==null || $root.firstSelect!=null" id="ReserveButton" type="button" data-ng-click="$root.firstSelect=selectedSeat.seatId;" value="Swap This Passenger"/>
-				<input ng-hide="currentUser==null || $root.firstSelect==null || firstSelect == selectedSeat.seatId" id="ReserveButton" type="button" data-ng-click="$root.secondSelect=selectedSeat.seatId; reassignSeat(null, firstSelect, secondSelect);" value="Swap With This Seat"/>
+				<input ng-hide="currentUser==null || $root.firstSelect!=null" id="ReserveButton" type="button" data-ng-click="$root.firstSelect=selectedSeat;" value="Swap This Passenger"/>
+				<input ng-hide="currentUser==null || $root.firstSelect==null || $root.firstSelect.seatId == selectedSeat.seatId" id="ReserveButton" type="button" data-ng-click="$root.secondSelect=selectedSeat; reassignSeat(null, firstSelect, secondSelect); changeFlight(selectedFlight);" value="Swap With This Seat"/>
 			</div>
 
 		</div>

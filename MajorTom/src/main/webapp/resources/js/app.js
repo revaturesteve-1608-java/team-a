@@ -7,7 +7,7 @@ app.controller('mainCtrl', function($scope, $rootScope, dataService){
 	this.recieptIsLogin = false;
 	
 	$scope.selectedTicket = null;
-	$scope.selectedFlight = null;
+	$scope.selectedFlight = 1402;
 	$scope.currentUser = null;
 	$scope.selectTicket = function(ticket) {
 		$scope.selectedTicket=ticket;
@@ -49,10 +49,15 @@ app.controller('mainCtrl', function($scope, $rootScope, dataService){
 		console.log('Getting seat, using: ' + ticketId + " " + seatId);
 		dataService.setSeat(ticketId, seatId, function(response){$scope.newSeatInfo = JSON.stringify(response);});
 	};
-	$scope.reassignSeat = function(ticketId, seatId, seat2Id) {
+	$scope.reassignSeat = function(ticketId, seatId, seat2Id, flightId) {
 		$scope.newSeatInfo2 = "Loading...";
 		console.log('Getting seat, using: ticket-' + ticketId + " seat-" + seatId + " seat2-" + seat2Id);
-		dataService.reassignSeat(ticketId, seatId, seat2Id, function(response){$scope.newSeatInfo2 =  "Seat #"+JSON.stringify(seatId)+" has been reassigned to ticket #"+JSON.stringify(response.data.ticketId);});
+		dataService.reassignSeat(ticketId, seatId.seatId, seat2Id.seatId, function(response){$scope.newSeatInfo2 =  "Seat #"+JSON.stringify(seatId.seatId)+" has been reassigned to ticket #"+JSON.stringify(response.data.ticketId);});
+		$scope.changeFlight = function(id) {
+			console.log(id);
+			// Emit an event to app-plane.js to update the airplane
+			$rootScope.$emit('changeFlight', id);
+		}
 		$scope.$root.firstSelect = null;
 		$scope.$root.secondSelect = null;
 	};
