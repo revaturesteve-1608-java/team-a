@@ -3,9 +3,11 @@
  */
 var app = angular.module("airline", ["ngRoute"]);
 
-app.controller('mainCtrl', function($scope, dataService){
+app.controller('mainCtrl', function($scope, $rootScope, dataService){
+	this.recieptIsLogin = false;
+	
 	$scope.selectedTicket = null;
-	$scope.selectedFlight = null;
+	$scope.selectedFlight = 1402;
 	$scope.currentUser = null;
 	$scope.selectTicket = function(ticket) {
 		$scope.selectedTicket=ticket;
@@ -39,21 +41,87 @@ app.controller('mainCtrl', function($scope, dataService){
 		console.log('Getting seat, using flight id: ' + flightId);
 		dataService.findSeatsByFlight(flightId, function(response){$scope.seatInfo = JSON.stringify(response);});
 	};
+	$rootScope.$on('seatClick', function(event, data) {
+		$scope.selectedSeat=data;
+	});
 	$scope.setSeat = function(ticketId, seatId) {
 		$scope.newSeatInfo = "Loading...";
 		console.log('Getting seat, using: ' + ticketId + " " + seatId);
 		dataService.setSeat(ticketId, seatId, function(response){$scope.newSeatInfo = JSON.stringify(response);});
 	};
-	$scope.reassignSeat = function(ticketId, seatId) {
+	$scope.reassignSeat = function(ticketId, seatId, seat2Id, flightId) {
 		$scope.newSeatInfo2 = "Loading...";
-		console.log('Getting seat, using: ticket-' + ticketId + " seat-" + seatId);
-		dataService.setSeat(ticketId, seatId, function(response){$scope.newSeatInfo2 =  "Seat #"+JSON.stringify(response.data.seatId)+" has been reassigned to ticket #"+JSON.stringify(response.data.ticket.ticketId);});
+		console.log('Getting seat, using: ticket-' + ticketId + " seat-" + seatId + " seat2-" + seat2Id);
+		dataService.reassignSeat(ticketId, seatId.seatId, seat2Id.seatId, function(response){$scope.newSeatInfo2 =  "Seat #"+JSON.stringify(seatId.seatId)+" has been reassigned to ticket #"+JSON.stringify(response.data.ticketId);});
+		$scope.changeFlight = function(id) {
+			console.log(id);
+			// Emit an event to app-plane.js to update the airplane
+			$rootScope.$emit('changeFlight', id);
+		}
+		$scope.$root.firstSelect = null;
+		$scope.$root.secondSelect = null;
 	};
 	$scope.findFlightByTicket = function(ticketId) {
 		$scope.flightByTicket = "Loading...";
 		console.log('Getting flight, using: ' + ticketId);
 		dataService.findFlightByTicket(ticketId, function(response){$scope.flightByTicket = JSON.stringify(response);});
 	};
+	
+	dataService.findAllFlights(function(response) {
+		// Only do it for the first item (that's where the flights are)
+		// To get the first item, just use a for-each and take the first item
+		for (item in response) {
+			// Give the list of flights to the select
+			$scope.flightList = response[item];
+			break;
+		}
+	})
+
+	// This method is called when the admin changes the flight
+	// The flight id is then passed in
+	$scope.changeFlight = function(id) {
+		console.log(id);
+		// Emit an event to app-plane.js to update the airplane
+		$rootScope.$emit('changeFlight', id);
+	}
+	
+	this.viewResize = function() {
+		var content = $(".plane");
+		var height = $(window).height();
+		var width = $(window).width();
+		var scale;
+		scale = Math.min(width / 1920, height / 971);
+		content.css({
+			transform : "scale(" + scale + ")" 
+		});
+	}
+	var me = this;
+	window.onresize = function(event) {
+		me.viewResize();
+	};
+	
+	/* MUST BE IN app.js TO ACCESS ROUTE CHANGE EVENT PROPERLY
+	 * A bit of a hack to get the view to resize automatically on page load.
+	 * After the view is received from the server, it waits a short time for it to change
+	 * then resizes the view. it repeats at scaling intervals to account for slow hardware
+	 */
+	$rootScope.$on("$routeChangeSuccess", function(event) {
+		setTimeout(function(){
+			me.viewResize();
+		}, 5);
+		setTimeout(function(){
+			me.viewResize();
+		}, 20);
+		setTimeout(function(){
+			me.viewResize();
+		}, 100);
+		setTimeout(function(){
+			me.viewResize();
+		}, 500);
+		setTimeout(function(){
+			me.viewResize();
+		}, 2500);
+	});
 });
 	
 app.config(function($routeProvider) {
@@ -66,12 +134,9 @@ app.config(function($routeProvider) {
 	});
 });
 
-app.service('dataService', function($http){
+app.service('dataService', function($http, $rootScope){
 	this.findFlight = function(flightId, callback) {
 		$http.get('rest/findFlight/'+flightId, flightId).then(callback);
-	}
-	this.findFlightByTicket = function(ticketId, callback) {
-		$http.get('rest/findFlightByTicket/'+ticketId,ticketId).then(callback);
 	}
 	this.findTicket = function(ticketId, callback){
 		$http.get('rest/findTicket/'+ticketId, ticketId).then(callback);
@@ -82,6 +147,9 @@ app.service('dataService', function($http){
 	this.findSeatsByFlight = function(flightId, callback) {
 		$http.get('rest/findSeatsByFlight/'+flightId, flightId).then(callback);
 	}
+	this.findAllFlights = function(callback) {
+		$http.get('rest/findAllFlights').then(callback);
+	}
 	this.authenticate = function(username, password, callback, failure) {
 		var data = JSON.stringify({"username": username, "password": password});
 		$http.post('rest/authenticate', data).then(callback, failure);
@@ -91,9 +159,11 @@ app.service('dataService', function($http){
 		var data = JSON.stringify({"ticketId": ticketId, "seatId": seatId});
 		$http.post('rest/setSeat', data).then(callback, failure);
 	}
-	this.reassignSeat = function(ticketId, seatId, callback, failure) {
+	this.reassignSeat = function(ticketId, seatId, seat2Id, callback, failure) {
 		// Reassign the seat for the ticket
-		var data = JSON.stringify({"ticketId": ticketId, "seatId": seatId});
+		console.log("Reassigning, not setting");
+		var data = JSON.stringify({"ticketId": ticketId, "seatId": seatId, "seat2Id": seat2Id, "loginToken": $rootScope.loginToken});
 		$http.post('rest/reassignSeat/', data).then(callback, failure);
 	}
+	
 });

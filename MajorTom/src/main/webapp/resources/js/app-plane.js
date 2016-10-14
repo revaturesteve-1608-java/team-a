@@ -3,7 +3,7 @@
  */
 var app = angular.module("airline");
 
-app.controller("planeController", function(planeDataService) {
+app.controller("planeController", function($scope, $rootScope, planeDataService) {
 	var me = this;
 	
 	this.getMessages = function() {
@@ -24,7 +24,6 @@ app.controller("planeController", function(planeDataService) {
 	this.selectionDisplay = "No seat selected";
 	this.selectedSeat;
 	
-	var me = this;
 	var flightId = 1402;
 	planeDataService.getFormattedSeats(flightId, function(response){
 		me.firstclass = response.data.first;
@@ -33,48 +32,24 @@ app.controller("planeController", function(planeDataService) {
 	});
 	
 	this.selectSeat = function(seat){
-		console.log(seat.toSource());
 		this.selectionDisplay = "Selected seat: " + seat.seatId;
 		this.selectedSeat = seat;
+		// Trigger an event in the info controller (info.js)
+        $rootScope.$emit('seatClick', this.selectedSeat);
+//        console.log($("seat" + index).css("box-shadow"));
+//        console.log($("seat" + index).css("left"));
 	};
 	
-//	this.firstclass = [[{
-//		name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"
-//	}]];
-//	
-//	this.buisclass = [[{
-//		name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"
-//	}]];
-//
-//	this.econclass = [[{
-//		name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"}],
-//		[{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"},{name: "none"
-//	}]];
-
+	$rootScope.$on('changeFlight', function(event, data) {
+		// This event is triggered when the admin changes the flight (and thus, wants the airplane to change)
+		planeDataService.getFormattedSeats(data, function(response) {
+			me.firstclass = response.data.first;
+			me.buisclass = response.data.buisness;
+			me.econclass = response.data.economy;
+		})
+	});
+	
+	
 });
 
 
@@ -84,20 +59,5 @@ app.service("planeDataService", function($http){
 	}
 });
 
-window.onload = windowResize();
 
-window.onresize = function(event) {
-	windowResize();
-};
-
-function windowResize() {
-	var content = $(".plane");
-	var height = $(window).height();
-	var width = $(window).width();
-	var scale;
-	scale = Math.min(width / 1920, height / 971);
-	content.css({
-		transform : "scale(" + scale + ")" 
-	});
-}
 

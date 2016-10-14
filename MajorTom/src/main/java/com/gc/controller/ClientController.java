@@ -5,12 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gc.dto.AuthenticationDTO;
+import com.gc.dto.ReassignSeatDTO;
 import com.gc.dto.SetSeatDTO;
 import com.gc.model.Employee;
 import com.gc.model.Flight;
@@ -23,7 +25,9 @@ public class ClientController {
 
 	@Autowired
 	DataService dataService;
-
+	
+	Employee emp;
+	
 	@RequestMapping("/findFlight/{flightId}")
 	public ResponseEntity<Flight> findFlightById(@PathVariable(value = "flightId") Integer flightId) {
 		System.out.println("flightId: " + flightId);
@@ -36,24 +40,20 @@ public class ClientController {
 		}
 	}
 	
+	@RequestMapping("/findAllFlights")
+	public ResponseEntity<List<Flight>> findAllFlights() {
+		List<Flight> list = dataService.findAllFlights();
+		if (list != null) {
+			return new ResponseEntity<List<Flight>>(list, HttpStatus.ACCEPTED);
+		} else {
+			return new ResponseEntity<List<Flight>>(list, HttpStatus.NOT_FOUND);
+		}
+	}
+	
 	@RequestMapping("/findTicket/{ticketId}")
 	public ResponseEntity<Ticket> findTicket(@PathVariable(value = "ticketId") Integer ticketId){
 		Ticket tick=dataService.findTicketById(ticketId);
 		return new ResponseEntity<Ticket>(tick,tick==null?HttpStatus.NOT_FOUND:HttpStatus.ACCEPTED);
-	}
-
-	@RequestMapping("/findFlightByTicket/{ticketId}")
-	public ResponseEntity<Flight> findFlightByTicket(@PathVariable(value = "ticketId") Integer ticketId) {
-		Seat seat = dataService.findSeatByTicket(dataService.findTicketById(ticketId));
-		Flight flight = null;
-		// First see if the seat is null, short-circuiting if it is
-		// Then, if it's not null, get the flight from it.  Then check if that's null.
-		// After that, we can return the flight.
-		if (seat != null && (flight = seat.getFlight()) != null) {
-			return new ResponseEntity<Flight>(flight, HttpStatus.ACCEPTED);
-		} else {
-			return new ResponseEntity<Flight>((Flight) null, HttpStatus.NOT_FOUND);
-		}
 	}
 
 	@RequestMapping(value = "/findTicketBySeat/{seatId}")
@@ -81,11 +81,14 @@ public class ClientController {
 	}
 	
 	@RequestMapping(value="/authenticate")
-	public ResponseEntity<Employee> authenticate(@RequestBody AuthenticationDTO data) {
+	public ResponseEntity<Employee> authenticate(Model model, @RequestBody AuthenticationDTO data) {
 		System.out.println(data);
-		Employee emp = dataService.findEmployeeByUsernameAndPassword(data.getUsername(), data.getPassword());
+		emp = dataService.findEmployeeByUsernameAndPassword(data.getUsername(), data.getPassword());
 		System.out.println(emp);
 		if(emp != null) {
+			int token = (int) (Math.random()*100000);
+			model.addAttribute("loginToken", token);
+			emp.setToken(token);
 			return new ResponseEntity<Employee>(emp, HttpStatus.ACCEPTED);
 		} else {
 			return new ResponseEntity<Employee>(emp, HttpStatus.FORBIDDEN);
@@ -108,17 +111,67 @@ public class ClientController {
 	}
 	
 	@RequestMapping(value="/reassignSeat")
-	public ResponseEntity<Seat> reassignSeat(@RequestBody SetSeatDTO data) {
+	public ResponseEntity<Seat> reassignSeat(Model model, @RequestBody ReassignSeatDTO data) {
+		System.out.println("Token there?: "+emp.getToken());
 		System.out.println("Reassign Seat with data: "+data);
 		Ticket ticket = dataService.findTicketById(data.getTicketId());
 		Seat seat = dataService.findSeatById(data.getSeatId());
-		if (ticket != null && seat != null) {
-			seat.setTicket(ticket);
-			dataService.saveSeat(seat);
-			System.out.println(seat);
-			return new ResponseEntity<Seat>(seat, HttpStatus.ACCEPTED);
+		Seat seat2 = dataService.findSeatById(data.getSeat2Id());
+		System.out.println("Seat 2, is it null?: "+seat2);
+		if (ticket == null && data.getLoginToken() == emp.getToken()){
+			System.out.println("Nice, you're an employee!");
+			if(seat != null){
+				if(seat2 != null){
+					Ticket tempTicket = seat.getTicket();
+					seat.setTicket(seat2.getTicket());
+					seat2.setTicket(tempTicket);
+					dataService.saveSeat(seat);
+					dataService.saveSeat(seat2);
+					ResponseEntity<Seat>resp = reassignSeatAndEmail(model, seat, seat2, ticket);
+					return resp;
+				} else {
+					System.out.println("Seat2 is null");
+					seat2.setTicket(seat.getTicket());
+					seat.setTicket(null);
+					dataService.saveSeat(seat);
+					dataService.saveSeat(seat2);
+					ResponseEntity<Seat>resp = reassignSeatAndEmail(model, seat, seat2, ticket);
+					return resp;
+				}
+			} else {
+				if(seat2.getTicket() != null){
+					System.out.println("Seat1 is null");
+					seat.setTicket(seat2.getTicket());
+					seat2.setTicket(null);
+					dataService.saveSeat(seat);
+					dataService.saveSeat(seat2);
+					ResponseEntity<Seat>resp = reassignSeatAndEmail(model, seat, seat2, ticket);
+					return resp;
+				}
+			}
+			ResponseEntity<Seat>resp = reassignSeatAndEmail(model, seat, seat2, ticket);
+			return resp;
+		} else if (ticket != null && seat != null) {
+			if(seat.getTicket().getTicketId() == ticket.getTicketId()){
+				System.out.println("You currently hold the seat!");
+				ResponseEntity<Seat>resp = reassignSeatAndEmail(model, seat, seat2, ticket);
+				return resp;
+			} else if(seat.getTicket() == null){
+				seat.setTicket(ticket);
+				ResponseEntity<Seat>resp = reassignSeatAndEmail(model, seat, seat2, ticket);
+				return resp;
+			} else {
+				System.out.println("This is ludacris, you can't do this!");
+				return new ResponseEntity<Seat>(seat, HttpStatus.BAD_REQUEST);
+			}
 		} else {
 			return new ResponseEntity<Seat>(seat, HttpStatus.BAD_REQUEST);
 		}
-	} 
+	}
+	
+	public ResponseEntity<Seat> reassignSeatAndEmail(Model model, Seat seat, Seat seat2, Ticket ticket) {
+		System.out.println(seat);
+		System.out.println(seat2);
+		return new ResponseEntity<Seat>(seat, HttpStatus.ACCEPTED);
+	}
 }

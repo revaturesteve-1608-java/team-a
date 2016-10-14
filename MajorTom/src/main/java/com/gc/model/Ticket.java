@@ -46,11 +46,8 @@ public class Ticket {
 	SeatType seatType;
 	
 	public Ticket() {
-		super();
 	}
-	public Ticket(Integer ticketId, String firstName, String lastName, String email, String phone, Flight flight, SeatType seatType) {
-		super();
-		this.ticketId = ticketId;
+	public Ticket(String firstName, String lastName, String email, String phone, Flight flight, SeatType seatType) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
