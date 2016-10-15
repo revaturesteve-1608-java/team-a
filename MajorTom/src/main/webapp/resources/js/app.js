@@ -24,7 +24,7 @@ app.controller('mainCtrl', function($scope, $rootScope, dataService){
 		;}
 		return !!$rootScope.authenticated;
 	};
-	$scope.testAdminStatus = function() {  /* REMOVE THIS METHOD WHEN DEBUGGING IS FINISHED. */
+	$scope.testAdminStatus = function() { /* REMOVE THIS METHOD WHEN DEBUGGING IS FINISHED. */
 		$scope.admintest=$scope.isAdmin();
 	};
 	$scope.findFlight = function(flightId) {
