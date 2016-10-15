@@ -51,13 +51,10 @@ app.controller('mainCtrl', function($scope, $rootScope, dataService){
 	};
 	$scope.reassignSeat = function(ticketId, seatId, seat2Id, flightId) {
 		$scope.newSeatInfo2 = "Loading...";
-		console.log('Getting seat, using: ticket-' + ticketId + " seat-" + seatId + " seat2-" + seat2Id);
+		console.log('Getting seat, using: ticket-' + ticketId + " seat-" + seatId.seatId + " seat2-" + seat2Id.seatId);
 		dataService.reassignSeat(ticketId, seatId.seatId, seat2Id.seatId, function(response){$scope.newSeatInfo2 =  "Seat #"+JSON.stringify(seatId.seatId)+" has been reassigned to ticket #"+JSON.stringify(response.data.ticketId);});
-		$scope.changeFlight = function(id) {
-			console.log(id);
-			// Emit an event to app-plane.js to update the airplane
-			$rootScope.$emit('changeFlight', id);
-		}
+		setTimeout($('#seat'+seat2Id.seatId).addClass('seat-taken'), 2500);
+		setTimeout($('#seat'+seatId.seatId).removeClass('seat-taken'), 2500);
 		$scope.$root.firstSelect = null;
 		$scope.$root.secondSelect = null;
 	};
@@ -76,14 +73,6 @@ app.controller('mainCtrl', function($scope, $rootScope, dataService){
 			break;
 		}
 	})
-
-	// This method is called when the admin changes the flight
-	// The flight id is then passed in
-	$scope.changeFlight = function(id) {
-		console.log(id);
-		// Emit an event to app-plane.js to update the airplane
-		$rootScope.$emit('changeFlight', id);
-	}
 	
 	this.viewResize = function() {
 		var content = $(".plane");
