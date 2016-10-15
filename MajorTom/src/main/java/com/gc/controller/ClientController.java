@@ -142,13 +142,9 @@ public class ClientController {
 	
 	@RequestMapping(value="/isAdmin/{token}")
 	public ResponseEntity<Boolean> isAdmin(@PathVariable(value = "token") Integer token) {
-		System.out.println("token was" + token);
-		System.out.println("emp token was" + emp.getToken());
 		if(token == emp.getToken()){
-			System.out.println("returning true...");
 			return new ResponseEntity<Boolean>(true, HttpStatus.ACCEPTED);
 		} else {
-			System.out.println("returning false...");
 			return new ResponseEntity<Boolean>(false, HttpStatus.BAD_REQUEST);
 		}
 	}

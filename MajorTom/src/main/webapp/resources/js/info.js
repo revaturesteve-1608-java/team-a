@@ -13,23 +13,36 @@ infoApp.controller("infoController", function($scope, $rootScope, infoService) {
 //        	")\r\n\r\n" + data.flight.airline.name + "\r\n" + data.flight.airplane.airplaneName;
         var str = data.seatType.seatTypeName + " (Seat #" + data.seatId + ")";
         
-        var isAdminCheck = infoService.isAdmin();
-        console.log("response from isadmin:" + JSON.stringify(isAdminCheck));
-        // the code works but what it's returning is weird
-        // if invalid token it returns the same result as if it is a valid token
-        // although the cntrler is proper
-        // null tokens work
-        $scope.infoVisible = true;
-        $scope.infoContents = str;
+        infoService.fillInfo(str, data, $scope);
     })
 });
 
 infoApp.service('infoService', function($http, $rootScope){
-	this.isAdmin = function() {
+	this.fillInfo = function(str, data, $scope) {
 		if ($rootScope.loginToken == null) {
-			return false;
+			// No token
+	        $scope.infoVisible = true;
+	        $scope.infoContents = str;
 		} else {
-			return $http.get('rest/isAdmin/'+$rootScope.loginToken, $rootScope.loginToken);
+			// Async call and callback to check for admin
+			$http.get('rest/isAdmin/'+$rootScope.loginToken, $rootScope.loginToken).then(function(response) {
+				// Check HTTP status to get the result of the function
+				var status = response.status;
+				console.log(status);
+				
+		        $scope.infoVisible = true;
+		        if (status >= 400) {
+		        	// Wrong token
+		        	$scope.infoContents = str;
+		        } else {
+		        	// Correct token, show ticket info too
+		        	if (data.ticket != null) {
+		        		$scope.infoContents = str + "\r\n" + data.ticket.firstName + " " + data.ticket.lastName + "\r\n" + data.ticket.email + "\r\n" + data.ticket.phone;
+		        	} else {
+		        		$scope.infoContents = str;
+		        	}
+		        }
+			});
 		}
 	}
 	
