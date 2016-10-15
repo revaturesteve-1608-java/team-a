@@ -15,7 +15,7 @@ public class Employee {
 	@Column(name = "EMPLOYEE_ID")
 	@SequenceGenerator(allocationSize = 1, name = "employeeSeq", sequenceName = "EMPLOYEE_SEQ")
 	@GeneratedValue(generator = "employeeSeq", strategy = GenerationType.SEQUENCE)
-	Integer EmployeeId;
+	Integer employeeId;
 	@Column(name="USERNAME")
 	String username;
 	@Column(name="PASSWORD")
@@ -24,7 +24,7 @@ public class Employee {
 	String firstName;
 	@Column(name="LAST_NAME")
 	String lastName;
-	transient int token;
+	int token;
 	
 	
 	public Employee() {
@@ -33,7 +33,7 @@ public class Employee {
 	
 	public Employee(Integer employeeId, String username, String password, String firstName, String lastName, int token) {
 		super();
-		EmployeeId = employeeId;
+		this.employeeId = employeeId;
 		this.username = username;
 		this.password = password;
 		this.firstName = firstName;
@@ -42,11 +42,11 @@ public class Employee {
 	}
 
 	public Integer getEmployeeId() {
-		return EmployeeId;
+		return employeeId;
 	}
 
 	public void setEmployeeId(Integer employeeId) {
-		EmployeeId = employeeId;
+		this.employeeId = employeeId;
 	}
 
 	public String getUsername() {
@@ -91,7 +91,7 @@ public class Employee {
 
 	@Override
 	public String toString() {
-		return "Employee [EmployeeId=" + EmployeeId + ", username=" + username + ", password=" + password
+		return "Employee [EmployeeId=" + employeeId + ", username=" + username + ", password=" + password
 				+ ", firstName=" + firstName + ", lastName=" + lastName + ", token=" + token + "]";
 	}
 

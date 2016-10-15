@@ -40,8 +40,10 @@ public class Seat {
 	
 	
 	public Seat() {
+		super();
 	}
 	public Seat(SeatType seatType, Flight flight) {
+		super();
 		this.seatType = seatType;
 		this.flight = flight;
 	}

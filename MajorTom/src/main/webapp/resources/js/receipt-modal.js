@@ -1,29 +1,48 @@
 angular.module("airline")
 .controller("receiptController",function($scope,$rootScope,$location,dataService,$timeout){
-	$scope.loginVisible=true;
-	$scope.loadingTicket={ticketId:"Loading...",flight:null};
-	$scope.errorTicket={ticketId:"Ticket Not Found.",flight:null};
+	$scope.loginVisible = true;
+	$scope.loadingTicket = {
+		ticketId:"Loading...",
+		flight:null
+	};
+	$scope.errorTicket = {
+		ticketId:"Ticket Not Found.",
+		flight:null
+	};
 	$scope.selectTicket($scope.loadingTicket);
-	$scope.loadingUser={username:"Loading...",firstName:"",lastName:"",authenticated:false};
-	$scope.errorUser={username:"Not Found",firstName:"",lastName:"",authenticated:false};
+	$scope.loadingUser = {
+		username:"Loading...",
+		firstName:"",
+		lastName:"",
+		authenticated:false
+	};
+	$scope.errorUser = {
+		username:"Not Found",
+		firstName:"",
+		lastName:"",
+		authenticated:false
+	};
 	$scope.setCurrentUser(null);
 	$scope.saveTicketId=function(){
-		if($scope.currentUse!=null){$scope.employeeLogout();}
+		if($scope.currentUse!=null){
+			$scope.employeeLogout();
+		}
 		$scope.selectTicket($scope.loadingTicket);
 		var ticketidbox=document.getElementById("TicketIDBox");
 		var ticketid=ticketidbox.value;
 		dataService.findTicket(+ticketid,function(response){
 			$scope.selectTicket(response.data);
-			console.log(response.data);
 		});
 		$scope.loginVisible=false;
-		if($scope.ticketTimeoutID){$timeout.cancel($scope.ticketTimeoutID);}
+		if($scope.ticketTimeoutID){
+			$timeout.cancel($scope.ticketTimeoutID);
+		}
 		$scope.ticketTimeoutID=$timeout(function(){
 			$scope.timeoutTicket(ticketid);
 		},60000);
 	};
 	$scope.timeoutTicket=function(ticketid){
-		if(ticketid===undefined||$scope.selectedTicket.ticketId==ticketid)
+		if(ticketid === undefined || $scope.selectedTicket.ticketId === ticketid)
 		{
 			$scope.selectTicket($scope.loadingTicket);
 			$scope.loginVisible=true;
@@ -37,7 +56,7 @@ angular.module("airline")
 			function(response){
 				$scope.setCurrentUser(response.data);
 				$rootScope.loginToken = response.data.token;
-			}, function(response) {
+			}, function() {
 				$rootScope.authenticated=false;
 				$scope.setCurrentUser($scope.errorUser);
 			}

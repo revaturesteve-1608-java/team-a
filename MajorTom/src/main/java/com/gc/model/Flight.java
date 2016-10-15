@@ -36,17 +36,13 @@ public class Flight {
 	@JoinColumn(name = "AIRPLANE_ID")
 	@Fetch(FetchMode.JOIN)
 	Airplane airplane;
-	
-//	@OneToMany(fetch=FetchType.LAZY, mappedBy = "flight")
-//	@Fetch(FetchMode.JOIN)
-//	Set<Seat> seats;
-	
-	
 
 	
 	public Flight() {
+		super();
 	}
 	public Flight(Destination destination, Airline airline, Airplane airplane) {
+		super();
 		this.destination = destination;
 		this.airline = airline;
 		this.airplane = airplane;
@@ -76,12 +72,7 @@ public class Flight {
 	public void setAirplane(Airplane airplane) {
 		this.airplane = airplane;
 	}
-//	public Set<Seat> getSeats() {
-//		return seats;
-//	}
-//	public void setSeats(Set<Seat> seats) {
-//		this.seats = seats;
-//	}
+
 	
 	@Override
 	public String toString() {

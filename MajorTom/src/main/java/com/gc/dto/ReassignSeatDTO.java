@@ -7,7 +7,9 @@ public class ReassignSeatDTO {
 	private int seat2Id;
 	private int loginToken;
 	
-	public ReassignSeatDTO() {}
+	public ReassignSeatDTO() {
+		super();
+	}
 
 	public ReassignSeatDTO(int ticketId, int seatId, int seat2Id, int loginToken) {
 		super();
