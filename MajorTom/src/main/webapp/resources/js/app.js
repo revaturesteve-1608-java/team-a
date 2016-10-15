@@ -29,18 +29,14 @@ app.controller('mainCtrl', function($scope, $rootScope, dataService){
 	};
 	$scope.findFlight = function(flightId) {
 		$scope.flightInfo = "Loading...";
-		console.log('About To Get '+flightId);
-		console.log(flightId);
 		dataService.findFlight(flightId, function(response){$scope.flightInfo = response.data.flightId;});
 	};
 	$scope.findTicketBySeat = function(seatId) {
 		$scope.ticketInfo = "Loading...";
-		console.log('Getting ticket, using seat id: ' + seatId);
 		dataService.findTicketBySeat(seatId, function(response){$scope.ticketInfo = JSON.stringify(response);});
 	};
 	$scope.findSeatByFlight = function(flightId) {
 		$scope.seatInfo = "Loading...";
-		console.log('Getting seat, using flight id: ' + flightId);
 		dataService.findSeatsByFlight(flightId, function(response){$scope.seatInfo = JSON.stringify(response);});
 	};
 	$rootScope.$on('seatClick', function(event, data) {
@@ -48,12 +44,10 @@ app.controller('mainCtrl', function($scope, $rootScope, dataService){
 	});
 	$scope.setSeat = function(ticketId, seatId) {
 		$scope.newSeatInfo = "Loading...";
-		console.log('Getting seat, using: ' + ticketId + " " + seatId);
 		dataService.setSeat(ticketId, seatId, function(response){$scope.newSeatInfo = JSON.stringify(response);});
 	};
 	$scope.reassignSeat = function(ticketId, seatId, seat2Id) {
 		$scope.newSeatInfo2 = "Loading...";
-		console.log('Getting seat, using: ticket-' + ticketId + " seat-" + seatId.seatId + " seat2-" + seat2Id.seatId);
 		dataService.reassignSeat(ticketId, seatId.seatId, seat2Id.seatId, function(response){$scope.newSeatInfo2 =  "Seat #"+JSON.stringify(seatId.seatId)+" has been reassigned to ticket #"+JSON.stringify(response.data.ticketId);});
 		setTimeout($('#seat'+seat2Id.seatId).addClass('seat-taken'), 2500);
 		setTimeout($('#seat'+seatId.seatId).removeClass('seat-taken'), 2500);
@@ -62,18 +56,13 @@ app.controller('mainCtrl', function($scope, $rootScope, dataService){
 	};
 	$scope.findFlightByTicket = function(ticketId) {
 		$scope.flightByTicket = "Loading...";
-		console.log('Getting flight, using: ' + ticketId);
 		dataService.findFlightByTicket(ticketId, function(response){$scope.flightByTicket = JSON.stringify(response);});
 	};
 	
 	dataService.findAllFlights(function(response) {
 		// Only do it for the first item (that's where the flights are)
 		// To get the first item, just use a for-each and take the first item
-		for (var item in response) {
-			// Give the list of flights to the select
-			$scope.flightList = response[item];
-			break;
-		}
+		$scope.flightList = response.data;
 	})
 	
 	this.viewResize = function() {
@@ -152,7 +141,6 @@ app.service('dataService', function($http, $rootScope){
 	}
 	this.reassignSeat = function(ticketId, seatId, seat2Id, callback, failure) {
 		// Reassign the seat for the ticket
-		console.log("Reassigning, not setting");
 		var data = JSON.stringify({"ticketId": ticketId, "seatId": seatId, "seat2Id": seat2Id, "loginToken": $rootScope.loginToken});
 		$http.post('rest/reassignSeat/', data).then(callback, failure);
 	}

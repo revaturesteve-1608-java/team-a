@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "EMPLOYEE")
@@ -24,6 +25,7 @@ public class Employee {
 	String firstName;
 	@Column(name="LAST_NAME")
 	String lastName;
+	@Transient
 	int token;
 	
 	

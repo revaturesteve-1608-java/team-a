@@ -9,7 +9,6 @@ app.controller("planeController", function($scope, $rootScope, planeDataService)
 	this.getMessages = function() {
 		
 		dataService.get(function(response) {
-			console.log(response.data);
 			me.messages = response.data;
 		});
 	};

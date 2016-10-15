@@ -23,6 +23,6 @@ public class PlaneController {
 	@RequestMapping(value="getFormattedSeats/{flightId}")
 	public ResponseEntity<FormattedSeatsDTO> getFormattedFlightSeats(@PathVariable(value = "flightId") int flightId ) {
 		FormattedSeatsDTO seats = new FormattedSeatsDTO(dataService.findSeatsByFlight(dataService.findFlightById(flightId)));
-		return new ResponseEntity<>(seats, seats == null ? HttpStatus.NOT_FOUND : HttpStatus.ACCEPTED);
+		return new ResponseEntity<>(seats, seats.isEmpty() ? HttpStatus.NOT_FOUND : HttpStatus.ACCEPTED);
 	}
 }
