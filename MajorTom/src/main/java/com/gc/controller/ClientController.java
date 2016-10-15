@@ -87,7 +87,6 @@ public class ClientController {
 		System.out.println(emp);
 		if(emp != null) {
 			int token = (int) (Math.random()*100000);
-			model.addAttribute("loginToken", token);
 			emp.setToken(token);
 			return new ResponseEntity<Employee>(emp, HttpStatus.ACCEPTED);
 		} else {
@@ -139,5 +138,18 @@ public class ClientController {
 		dataService.saveSeat(seat);
 		System.out.println(seat);
 		return new ResponseEntity<Seat>(seat, HttpStatus.ACCEPTED);
+	}
+	
+	@RequestMapping(value="/isAdmin/{token}")
+	public ResponseEntity<Boolean> isAdmin(@PathVariable(value = "token") Integer token) {
+		System.out.println("token was" + token);
+		System.out.println("emp token was" + emp.getToken());
+		if(token == emp.getToken()){
+			System.out.println("returning true...");
+			return new ResponseEntity<Boolean>(true, HttpStatus.ACCEPTED);
+		} else {
+			System.out.println("returning false...");
+			return new ResponseEntity<Boolean>(false, HttpStatus.BAD_REQUEST);
+		}
 	}
 }
