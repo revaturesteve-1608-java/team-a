@@ -11,9 +11,15 @@ infoApp.controller("infoController", function($scope, $rootScope, infoService) {
 	// This event is triggered when a seat is clicked
     $rootScope.$on('seatClick', function(event, data) {
         var str = data.seatType.seatTypeName + " (Seat #" + data.seatId + ")";
-        
+        // Perform the rest of the functions after async call
         infoService.fillInfo(str, data, $scope);
     })
+    
+    // This event is used to hide the info box
+    $rootScope.$on('hideInfo', function(event) {
+    	$scope.infoVisible = false;
+    })
+    
     $scope.setFirstSelection = function(seat){
     	$rootScope.firstSelect = seat;
     }

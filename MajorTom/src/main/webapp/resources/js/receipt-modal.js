@@ -69,6 +69,7 @@ angular.module("airline")
 		$rootScope.loginToken = undefined;
 		$scope.loginVisible=true;
 		$scope.setCurrentUser(null)
+		$rootScope.$emit("hideInfo");
 	};
 	$scope.slideReceipt=function(In)
 	{
