@@ -5,7 +5,9 @@ public class AuthenticationDTO {
 	private String username;
 	private String password;
 	
-	public AuthenticationDTO() {}
+	public AuthenticationDTO() {
+		super();
+	}
 
 	public AuthenticationDTO(String username, String password) {
 		super();

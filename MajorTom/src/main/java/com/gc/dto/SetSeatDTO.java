@@ -5,7 +5,9 @@ public class SetSeatDTO {
 	private int ticketId;
 	private int seatId;
 	
-	public SetSeatDTO() {}
+	public SetSeatDTO() {
+		super();
+	}
 
 	public SetSeatDTO(int ticketId, int seatId) {
 		super();

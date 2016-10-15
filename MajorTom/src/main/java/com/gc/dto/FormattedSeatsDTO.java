@@ -10,6 +10,7 @@ public class FormattedSeatsDTO {
 	List<List<Seat>> buisness;
 	List<List<Seat>> economy;
 	public FormattedSeatsDTO() {
+		super();
 	}
 	public FormattedSeatsDTO(List<Seat> seats) {
 	

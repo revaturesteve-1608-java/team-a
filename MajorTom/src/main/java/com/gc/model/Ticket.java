@@ -6,7 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -46,8 +45,10 @@ public class Ticket {
 	SeatType seatType;
 	
 	public Ticket() {
+		super();
 	}
 	public Ticket(String firstName, String lastName, String email, String phone, Flight flight, SeatType seatType) {
+		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;

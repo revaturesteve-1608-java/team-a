@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.gc.model.MailManager;
 import com.gc.model.Seat;
-import com.gc.model.Ticket;
 import com.gc.service.DataService;
 
 @RestController

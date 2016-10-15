@@ -20,13 +20,11 @@ public class Airline {
 	@Column(name="AIRLINE_NAME")
 	String name;
 	
-//	@OneToMany(fetch=FetchType.LAZY, mappedBy="airline")
-//	@Fetch(FetchMode.JOIN)
-//	Set<Flight> flights;
-	
 	public Airline() {
+		super();
 	}
 	public Airline(String name) {
+		super();
 		this.name = name;
 	}
 	
@@ -42,12 +40,6 @@ public class Airline {
 	public void setName(String name) {
 		this.name = name;
 	}
-//	public Set<Flight> getFlights() {
-//		return flights;
-//	}
-//	public void setFlights(Set<Flight> flights) {
-//		this.flights = flights;
-//	}
 	
 	@Override
 	public String toString() {

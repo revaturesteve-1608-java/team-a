@@ -19,7 +19,9 @@ app.controller('mainCtrl', function($scope, $rootScope, dataService){
 		$scope.currentUser = user;
 	};
 	$scope.isAdmin = function() {
-		if($rootScope.authenticated){return false;}
+		if($rootScope.authenticated){
+			return false
+		;}
 		return !!$rootScope.authenticated;
 	};
 	$scope.testAdminStatus = function() { /* REMOVE THIS METHOD WHEN DEBUGGING IS FINISHED. */
@@ -49,7 +51,7 @@ app.controller('mainCtrl', function($scope, $rootScope, dataService){
 		console.log('Getting seat, using: ' + ticketId + " " + seatId);
 		dataService.setSeat(ticketId, seatId, function(response){$scope.newSeatInfo = JSON.stringify(response);});
 	};
-	$scope.reassignSeat = function(ticketId, seatId, seat2Id, flightId) {
+	$scope.reassignSeat = function(ticketId, seatId, seat2Id) {
 		$scope.newSeatInfo2 = "Loading...";
 		console.log('Getting seat, using: ticket-' + ticketId + " seat-" + seatId.seatId + " seat2-" + seat2Id.seatId);
 		dataService.reassignSeat(ticketId, seatId.seatId, seat2Id.seatId, function(response){$scope.newSeatInfo2 =  "Seat #"+JSON.stringify(seatId.seatId)+" has been reassigned to ticket #"+JSON.stringify(response.data.ticketId);});
@@ -67,7 +69,7 @@ app.controller('mainCtrl', function($scope, $rootScope, dataService){
 	dataService.findAllFlights(function(response) {
 		// Only do it for the first item (that's where the flights are)
 		// To get the first item, just use a for-each and take the first item
-		for (item in response) {
+		for (var item in response) {
 			// Give the list of flights to the select
 			$scope.flightList = response[item];
 			break;
@@ -85,7 +87,7 @@ app.controller('mainCtrl', function($scope, $rootScope, dataService){
 		});
 	}
 	var me = this;
-	window.onresize = function(event) {
+	window.onresize = function() {
 		me.viewResize();
 	};
 	
@@ -94,7 +96,7 @@ app.controller('mainCtrl', function($scope, $rootScope, dataService){
 	 * After the view is received from the server, it waits a short time for it to change
 	 * then resizes the view. it repeats at scaling intervals to account for slow hardware
 	 */
-	$rootScope.$on("$routeChangeSuccess", function(event) {
+	$rootScope.$on("$routeChangeSuccess", function() {
 		setTimeout(function(){
 			me.viewResize();
 		}, 5);
