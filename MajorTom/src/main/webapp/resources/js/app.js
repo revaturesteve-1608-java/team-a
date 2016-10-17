@@ -7,7 +7,7 @@ app.controller('mainCtrl', function($scope, $rootScope, dataService){
 	this.recieptIsLogin = false;
 	
 	$scope.selectedTicket = null;
-	$scope.selectedFlight = 1402;
+	$scope.selectedFlight = null;
 	$scope.currentUser = null;
 	$scope.selectTicket = function(ticket) {
 		$scope.selectedTicket=ticket;
@@ -49,6 +49,9 @@ app.controller('mainCtrl', function($scope, $rootScope, dataService){
 	$scope.reassignSeat = function(ticketId, seatId, seat2Id) {
 		$scope.newSeatInfo2 = "Loading...";
 		dataService.reassignSeat(ticketId, seatId.seatId, seat2Id.seatId, function(response){$scope.newSeatInfo2 =  "Seat #"+JSON.stringify(seatId.seatId)+" has been reassigned to ticket #"+JSON.stringify(response.data.ticketId);});
+		var tempTicket = seatId.ticket;
+		seatId.ticket = seat2Id.ticket;
+		seat2Id.ticket = tempTicket;
 		setTimeout($('#seat'+seat2Id.seatId).addClass('seat-taken'), 2500);
 		setTimeout($('#seat'+seatId.seatId).removeClass('seat-taken'), 2500);
 		$scope.$root.firstSelect = null;
