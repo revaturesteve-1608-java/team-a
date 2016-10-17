@@ -15,6 +15,16 @@
 	<script defer src="resources/js/receipt-modal.js"></script>
 	<script defer src="resources/js/app-plane.js"></script>
 	<script defer src="resources/js/info.js"></script>
+	<!-- JQUERY -->
+	
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
+	
+	<!-- ALERT -->
+	
+	<link href="resources/alert/css/alert.css" rel="stylesheet" />
+	<link href="resources/alert/themes/default/theme.css" rel="stylesheet" />
+	<script src="resources/alert/js/alert.js"></script>
 </head>
 <body data-ng-app="airline">
 	<div id="mainCtrl" ng-controller="mainCtrl as main">
@@ -63,7 +73,7 @@
 		<div id="big-container" data-ng-controller="infoController">
 			<div id="info-box" class="info-box" data-ng-show="infoVisible">
 				<pre style="font-size:100%; border:none; font-family:Courier New">{{infoContents}}</pre><br/>
-				<input ng-hide="currentUser!=null || $('#seat'+selectedSeat.seatId).hasClass('seat seat-taken')" id="ReserveButton" type="button" data-ng-click="setSeat(selectedTicket.ticketId,selectedSeat.seatId);" value="Reserve This Seat"/>
+				<input ng-hide="currentUser!=null || $('#seat'+selectedSeat.seatId).hasClass('seat seat-taken')" id="ReserveButton" type="button" data-ng-click="setSeat(selectedTicket.ticketId,selectedSeat.seatId,selectedSeat);" value="Reserve This Seat"/>
 				<input ng-hide="currentUser==null || $root.firstSelect!=null" id="ReserveButton" type="button" data-ng-click="$root.firstSelect=selectedSeat;" value="Swap This Passenger"/>
 				<input ng-hide="currentUser==null || $root.firstSelect==null || $root.firstSelect.seatId == selectedSeat.seatId" id="ReserveButton" type="button" data-ng-click="$root.secondSelect=selectedSeat; reassignSeat(null, firstSelect, secondSelect);" value="Swap With This Seat"/>
 			</div>
