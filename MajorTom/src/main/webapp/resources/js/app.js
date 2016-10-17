@@ -42,9 +42,12 @@ app.controller('mainCtrl', function($scope, $rootScope, $location, dataService){
 	$rootScope.$on('seatClick', function(event, data) {
 		$scope.selectedSeat=data;
 	});
-	$scope.setSeat = function(ticketId, seatId) {
+	$scope.setSeat = function(ticketId, seatId, seatInfo) {
 		$scope.newSeatInfo = "Loading...";
-		dataService.setSeat(ticketId, seatId, function(response){$scope.newSeatInfo = JSON.stringify(response);});
+		if (seatInfo.ticket==null){
+			dataService.setSeat(ticketId, seatId, function(response){$scope.newSeatInfo = JSON.stringify(response); $rootScope.$emit('changeFlight', $scope.selectedTicket.flight.flightId);});
+		} else {
+		}
 	};
 	$scope.reassignSeat = function(ticketId, seatId, seat2Id) {
 		$scope.newSeatInfo2 = "Loading...";
