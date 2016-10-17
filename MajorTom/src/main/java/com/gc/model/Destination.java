@@ -23,14 +23,12 @@ public class Destination {
 	@Column(name="DESTINATION_CODE", length=4)
 	String destinationCode;
 	
-//	@OneToMany(fetch=FetchType.LAZY, mappedBy="destination")
-//	@Fetch(FetchMode.JOIN)
-//	Set<Flight> flights;
-	
 	public Destination() {
+		super();
 	}
 	
 	public Destination(String destinationName, String destinationCode) {
+		super();
 		this.destinationName = destinationName;
 		this.destinationCode = destinationCode;
 	}
@@ -54,19 +52,11 @@ public class Destination {
 	public void setDestinationCode(String destinationCode) {
 		this.destinationCode = destinationCode;
 	}
-//	public Set<Flight> getFlights() {
-//		return flights;
-//	}
-//	public void setFlights(Set<Flight> flights) {
-//		this.flights = flights;
-//	}
 	
 	@Override
 	public String toString() {
 		return "Destination [destinationID=" + destinationID + ", destinationName=" + destinationName
-				+ ", destinationCode=" + destinationCode + 
-				//", flights=" + flights + 
-				"]";
+				+ ", destinationCode=" + destinationCode + "]";
 	}
 	
 }

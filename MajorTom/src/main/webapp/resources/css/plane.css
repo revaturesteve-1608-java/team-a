@@ -113,6 +113,10 @@ body {
 	height: 80px;
 }
 
+.seat.seat-taken {
+	background-color: #888;
+}
+
 @keyframes animatedBackground {
     from {
         background-position: 100% 0;

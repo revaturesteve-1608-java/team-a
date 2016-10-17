@@ -20,13 +20,11 @@ public class Airplane {
 	@Column(name="AIRPLANE_NAME")
 	String airplaneName;
 	
-//	@OneToMany(fetch=FetchType.LAZY, mappedBy="airplane")
-//	@Fetch(FetchMode.JOIN)
-//	Set<Flight> flights;
-	
 	public Airplane() {
+		super();
 	}
 	public Airplane(String airplaneName) {
+		super();
 		this.airplaneName = airplaneName;
 	}
 	
