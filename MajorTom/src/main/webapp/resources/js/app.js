@@ -57,7 +57,6 @@ app.controller('mainCtrl', function($scope, $rootScope, $location, dataService){
 		$scope.$root.firstSelect = null;
 		$scope.$root.secondSelect = null;
 		$rootScope.$emit('hideInfo');
-		$("#seat" + seat2Id.seatId).removeClass("seat-selected");
 	};
 	$scope.findFlightByTicket = function(ticketId) {
 		$scope.flightByTicket = "Loading...";

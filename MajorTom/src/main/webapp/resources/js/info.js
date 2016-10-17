@@ -15,9 +15,14 @@ infoApp.controller("infoController", function($scope, $rootScope, infoService) {
         infoService.fillInfo(str, data, $scope);
     })
     
-    // This event is used to hide the info box
+    // This event is used to hide the info box and selecting glow if it is on it
     $rootScope.$on('hideInfo', function(event) {
-    	$scope.infoVisible = false;
+    	if ($scope.infoContents) {
+    		$scope.infoVisible = false;
+    		var arr = $scope.infoContents.split("#");
+    		var arr2 = arr[1].split(")");
+    		$("#seat" + arr2[0]).removeClass("seat-selected");
+    	}
     })
     
     $scope.setFirstSelection = function(seat){
