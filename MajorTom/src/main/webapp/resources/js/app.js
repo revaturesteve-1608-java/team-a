@@ -3,7 +3,7 @@
  */
 var app = angular.module("airline", ["ngRoute"]);
 
-app.controller('mainCtrl', function($scope, $rootScope, dataService){
+app.controller('mainCtrl', function($scope, $rootScope, $location, dataService){
 	this.recieptIsLogin = false;
 	
 	$scope.selectedTicket = null;
@@ -64,6 +64,12 @@ app.controller('mainCtrl', function($scope, $rootScope, dataService){
 		// To get the first item, just use a for-each and take the first item
 		$scope.flightList = response.data;
 	})
+	
+	$scope.changeFlight = function(id) {
+		$location.path("b737");
+		// Emit an event to app-plane.js to update the airplane
+		$rootScope.$emit('changeFlight', id);
+	}
 	
 	this.viewResize = function() {
 		var content = $(".rout-container");

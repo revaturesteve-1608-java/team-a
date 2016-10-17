@@ -3,7 +3,7 @@
  */
 var app = angular.module("airline");
 
-app.controller("planeController", function($scope, $rootScope, planeDataService) {
+app.controller("planeController", function($scope, $rootScope, $location, planeDataService) {
 	var me = this;
 	
 	this.getMessages = function() {
