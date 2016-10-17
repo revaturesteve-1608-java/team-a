@@ -32,6 +32,7 @@ angular.module("airline")
 		var ticketid=ticketidbox.value;
 		dataService.findTicket(+ticketid,function(response){
 			$scope.selectTicket(response.data);
+			$location.path("b737");
 		});
 		$scope.loginVisible=false;
 		if($scope.ticketTimeoutID){
