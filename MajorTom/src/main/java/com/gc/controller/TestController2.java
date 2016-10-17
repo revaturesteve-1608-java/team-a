@@ -1,9 +1,14 @@
 package com.gc.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.gc.model.Flight;
+import com.gc.model.Seat;
+import com.gc.model.SeatType;
 import com.gc.service.DataService;
 
 @Controller
@@ -14,38 +19,38 @@ public class TestController2 {
 	
 	@RequestMapping(value="testCreateSeats")
 	public String TestSave() {
-//		Airplane airplane = dataService.findAirplaneByName("Boeing 737-800");
-//		
-//		Flight flight = dataService.findFlightById(1402);
-//		
-//		List<SeatType> seatTypes = dataService.findAllSeatTypes();
-//		
+//		dataService.saveAirplane(new Airplane("Boeing 737-200"));
+//		Airplane airplane = dataService.findAirplaneByName("Boeing 737-200");
+		
+//		dataService.saveFlight(new Flight(dataService.findDestinationById(5), dataService.findAirlineById(5), airplane));
+		Flight flight = dataService.findFlightById(3283);
+		
+		List<SeatType> seatTypes = dataService.findAllSeatTypes();
+		
 //		SeatType first = null;
 //		SeatType buisness = null;
-//		SeatType economy = null;
-//		
-//		for (SeatType type : seatTypes) {
+		SeatType economy = null;
+		
+		for (SeatType type : seatTypes) {
 //			if (type.getSeatTypeId() == 3)
 //				first = type;
-//		}
-//		for (SeatType type : seatTypes) {
+//
 //			if (type.getSeatTypeId() == 2)
 //				buisness = type;
+
+			if (type.getSeatTypeId() == 1)
+				economy = type;
+		}
+		
+//		for (int i = 0; i < 4; i++){
+//			dataService.saveSeat(new Seat(first, flight));
 //		}
-//		for (SeatType type : seatTypes) {
-//			if (type.getSeatTypeId() == 1)
-//				economy = type;
+//		for (int i = 0; i < 12; i++){
+//			dataService.saveSeat(new Seat(buisness, flight));
 //		}
-//		
-//		for (int i = 0; i < 16; i++){
-//			//dataService.saveSeat(new Seat(first, flight));
-//		}
-//		for (int i = 0; i < 48; i++){
-//			//dataService.saveSeat(new Seat(buisness, flight));
-//		}
-//		for (int i = 0; i < 96; i++){
-//			//dataService.saveSeat(new Seat(economy, flight));
-//		}
+		for (int i = 0; i < 6; i++){
+			dataService.saveSeat(new Seat(economy, flight));
+		}
 		
 		return "/index.html";
 	}

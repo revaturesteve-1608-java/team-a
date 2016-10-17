@@ -14,8 +14,7 @@ public class MailManager {
     @Autowired
     private SimpleMailMessage preConfiguredMessage;
     
-    
-    
+
     /**
      * This method will send compose and send the message 
      * */

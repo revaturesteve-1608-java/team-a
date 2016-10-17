@@ -9,7 +9,10 @@ public class FormattedSeatsDTO {
 	List<List<Seat>> first;
 	List<List<Seat>> buisness;
 	List<List<Seat>> economy;
+	boolean empty = true;
+	
 	public FormattedSeatsDTO() {
+		super();
 	}
 	public FormattedSeatsDTO(List<Seat> seats) {
 	
@@ -23,6 +26,7 @@ public class FormattedSeatsDTO {
 		
 		for (Seat seat : seats) {
 			if (seat.getSeatType().getSeatTypeId() == 1) {
+				empty = false;
 				rowEconomy.add(seat);
 				if (rowEconomy.size() == 6){
 					this.economy.add(rowEconomy);
@@ -30,6 +34,7 @@ public class FormattedSeatsDTO {
 				}
 			}
 			else if (seat.getSeatType().getSeatTypeId() == 2) {
+				empty = false;
 				rowBuisness.add(seat);
 				if (rowBuisness.size() == 6){
 					this.buisness.add(rowBuisness);
@@ -37,6 +42,7 @@ public class FormattedSeatsDTO {
 				}
 			}
 			else if (seat.getSeatType().getSeatTypeId() == 3) {
+				empty = false;
 				rowFirst.add(seat);
 				if (rowFirst.size() == 4){
 					this.first.add(rowFirst);
@@ -64,6 +70,11 @@ public class FormattedSeatsDTO {
 	public void setEconomy(List<List<Seat>> economy) {
 		this.economy = economy;
 	}
+	
+	public boolean isEmpty(){
+		return empty;
+	}
+	
 	@Override
 	public String toString() {
 		return "FormattedSeatsDTO [first=" + first + ", buisness=" + buisness + ", economy=" + economy + "]";

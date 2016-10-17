@@ -3,13 +3,12 @@
  */
 var app = angular.module("airline");
 
-app.controller("planeController", function($scope, $rootScope, planeDataService) {
+app.controller("planeController", function($scope, $rootScope, $location, planeDataService) {
 	var me = this;
 	
 	this.getMessages = function() {
 		
 		dataService.get(function(response) {
-			console.log(response.data);
 			me.messages = response.data;
 		});
 	};
@@ -36,10 +35,14 @@ app.controller("planeController", function($scope, $rootScope, planeDataService)
 		this.selectedSeat = seat;
 		// Trigger an event in the info controller (info.js)
         $rootScope.$emit('seatClick', this.selectedSeat);
-//        console.log($("seat" + index).css("box-shadow"));
-//        console.log($("seat" + index).css("left"));
 	};
 	
+//	$rootScope.$on('deleteOldTickets', function(event, data){
+//		for(i in me.firstclass){
+//			if(i.)
+//		}
+//	})
+//	
 	$rootScope.$on('changeFlight', function(event, data) {
 		// This event is triggered when the admin changes the flight (and thus, wants the airplane to change)
 		planeDataService.getFormattedSeats(data, function(response) {
@@ -47,6 +50,11 @@ app.controller("planeController", function($scope, $rootScope, planeDataService)
 			me.buisclass = response.data.buisness;
 			me.econclass = response.data.economy;
 		})
+	});
+	
+	$rootScope.$on('removeSelected', function(event, data) {
+		// This event is triggered when we want to null the selected seat
+		this.selectedSeat = null;
 	});
 	
 	
