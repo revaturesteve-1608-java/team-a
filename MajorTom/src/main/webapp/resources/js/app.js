@@ -66,7 +66,7 @@ app.controller('mainCtrl', function($scope, $rootScope, dataService){
 	})
 	
 	this.viewResize = function() {
-		var content = $(".plane");
+		var content = $(".rout-container");
 		var height = $(window).height();
 		var width = $(window).width();
 		var scale;
@@ -106,7 +106,11 @@ app.controller('mainCtrl', function($scope, $rootScope, dataService){
 	
 app.config(function($routeProvider) {
 	$routeProvider.when("/", {
-		templateUrl : "pages/b737-800-plane.html"
+		templateUrl : "pages/home.html"
+	});
+	
+	$routeProvider.when("/b737", {
+		templateUrl : "pages/Boeing_737.html"
 	});
 	
 	$routeProvider.when("/flight", {
