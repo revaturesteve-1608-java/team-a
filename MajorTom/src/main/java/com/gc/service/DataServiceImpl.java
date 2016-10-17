@@ -3,6 +3,7 @@ package com.gc.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -171,5 +172,9 @@ public class DataServiceImpl implements DataService{
 	@Override
 	public Seat findSeatByTicket(Ticket tick) {
 		return seatRepo.findByTicket(tick);
+	}
+	@Override
+	public int setTicketNullWhereTicketIdEquals(Integer id) {
+		return seatRepo.setTicketNullWhereTicketIdEquals(id);
 	}
 }

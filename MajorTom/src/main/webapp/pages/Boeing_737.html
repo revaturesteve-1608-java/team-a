@@ -8,7 +8,7 @@
 			
 			--><div class="plane-first" ng-repeat="row in plane.firstclass">
 				<div ng-repeat="seat in row track by $index">
-					<div id="{{'seat'+seat.seatId}}" class="seat {{seat.ticket.ticketId == null ? '' : 'seat-taken'}}" ng-class="'seat-selected': plane.selectedSeat.seatId==seat.seatId" ng-click="plane.selectSeat(seat)"></div>
+					<div id="{{'seat'+seat.seatId}}" class="seat {{seat.ticket.ticketId == null ? '' : 'seat-taken'}}" ng-class="{'seat-selected': plane.selectedSeat.seatId == seat.seatId}" ng-click="plane.selectSeat(seat)"></div>
 					<div class="aisle" ng-show="$index == 1"></div>
 				</div>
 			</div><!--
@@ -16,14 +16,14 @@
 			
 			--><div class="plane-buisness" ng-repeat="row in plane.buisclass">
 				<div ng-repeat="seat in row track by $index">
-					<div id="{{'seat'+seat.seatId}}" class="seat {{seat.ticket.ticketId == null ? '' : 'seat-taken'}}" ng-class="'seat-selected': plane.selectedSeat.seatId==seat.seatId" ng-click="plane.selectSeat(seat)"></div>
+					<div id="{{'seat'+seat.seatId}}" class="seat {{seat.ticket.ticketId == null ? '' : 'seat-taken'}}" ng-class="{'seat-selected': plane.selectedSeat.seatId == seat.seatId}" ng-click="plane.selectSeat(seat)"></div>
 					<div class="aisle" ng-show="$index == 2"></div>
 				</div>
 			</div><!--
 			
 			--><div class="plane-economy" ng-repeat="row in plane.econclass">
 				<div ng-repeat="seat in row track by $index">
-					<div id="{{'seat'+seat.seatId}}" class="seat {{seat.ticket.ticketId == null ? '' : 'seat-taken'}}" ng-class="'seat-selected': plane.selectedSeat.seatId==seat.seatId" ng-click="plane.selectSeat(seat)"></div>
+					<div id="{{'seat'+seat.seatId}}" class="seat {{seat.ticket.ticketId == null ? '' : 'seat-taken'}}" ng-class="{'seat-selected': plane.selectedSeat.seatId == seat.seatId}" ng-click="plane.selectSeat(seat)"></div>
 					<div class="aisle" ng-show="$index == 2"></div>
 				</div>
 			</div>

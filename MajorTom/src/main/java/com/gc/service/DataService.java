@@ -45,4 +45,5 @@ public interface DataService {
 	Employee findEmployeeByUsernameAndPassword(String username, String password);
 	Airplane findAirplaneByName(String string);
 	Seat findSeatByTicket(Ticket tick);
+	int setTicketNullWhereTicketIdEquals(Integer id);
 }
