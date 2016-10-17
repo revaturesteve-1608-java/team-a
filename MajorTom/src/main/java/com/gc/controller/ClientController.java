@@ -97,10 +97,16 @@ public class ClientController {
 		Ticket ticket = dataService.findTicketById(data.getTicketId());
 		Seat seat = dataService.findSeatById(data.getSeatId());
 		if (ticket != null && seat != null) {
-			dataService.setTicketNullWhereTicketIdEquals(ticket.getTicketId());
-			seat.setTicket(ticket);
-			dataService.saveSeat(seat);
-			return new ResponseEntity<>(seat, HttpStatus.ACCEPTED);
+			if (!seat.getSeatType().getSeatTypeName().equals(ticket.getSeatType().getSeatTypeName()) || seat.getTicket() != null) {
+				// Either that seat type was different than what the customer purchased
+				// or that seat already had a ticket
+				return new ResponseEntity<>(seat, HttpStatus.BAD_REQUEST);
+			} else {
+				dataService.setTicketNullWhereTicketIdEquals(ticket.getTicketId());
+				seat.setTicket(ticket);
+				dataService.saveSeat(seat);
+				return new ResponseEntity<>(seat, HttpStatus.ACCEPTED);
+			}
 		} else {
 			return new ResponseEntity<>(seat, HttpStatus.BAD_REQUEST);
 		}
