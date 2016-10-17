@@ -57,6 +57,7 @@ angular.module("airline")
 			function(response){
 				$scope.setCurrentUser(response.data);
 				$rootScope.loginToken = response.data.token;
+				$rootScope.$emit('hideInfo');
 			}, function() {
 				$rootScope.authenticated=false;
 				$scope.setCurrentUser($scope.errorUser);
@@ -89,6 +90,6 @@ angular.module("airline")
 .directive("airlineLoginBtn",function(){
 	return {
 		template:
-			"<a href='' class='farbutton' data-ng-click='employeeLogout()'>{{loginVisible?'Login':'Logout'}}</a>"
+			"<button class='farbutton btn btn-primary' data-ng-click='employeeLogout()'>{{loginVisible?'Login':'Logout'}}</button>"
 	};
 });
