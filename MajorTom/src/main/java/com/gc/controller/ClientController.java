@@ -158,6 +158,7 @@ public class ClientController {
 	
 	
 	public ResponseEntity<Seat> reassignSeatAndEmail(Seat seat) {
+		System.out.println("Getting in the email");
 		return new ResponseEntity<>(seat, HttpStatus.ACCEPTED);
 	}
 	
