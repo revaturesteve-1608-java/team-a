@@ -6,6 +6,7 @@ var infoApp = angular.module("airline");
 
 
 infoApp.controller("infoController", function($scope, $rootScope, infoService) {
+	// Initially, the info box is not visible
 	$scope.infoVisible = false;
 	
 	// This event is triggered when a seat is clicked
@@ -25,15 +26,18 @@ infoApp.controller("infoController", function($scope, $rootScope, infoService) {
     	}
     })
     
+    // Sets the first seat selection
     $scope.setFirstSelection = function(seat){
     	$rootScope.firstSelect = seat;
     }
+    // Sets the second seat selection
     $scope.setSecondSelection = function(seat){
     	$rootScope.secondSelect = seat;
     }
 });
 
 infoApp.service('infoService', function($http, $rootScope){
+	// Contains additional functionality to be used after seat click
 	this.fillInfo = function(str, data, $scope) {
 		if ($rootScope.loginToken == null) {
 			// No token
