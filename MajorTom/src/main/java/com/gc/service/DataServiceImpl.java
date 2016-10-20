@@ -23,6 +23,12 @@ import com.gc.model.Seat;
 import com.gc.model.SeatType;
 import com.gc.model.Ticket;
 
+/**
+ * Contains simple service wrappers for the Spring Data data access 
+ * methods that we used in the application
+ * 
+ * @author Craig
+ */
 @Service
 @Transactional
 public class DataServiceImpl implements DataService{
