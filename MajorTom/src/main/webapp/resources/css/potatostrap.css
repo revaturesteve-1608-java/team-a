@@ -98,24 +98,6 @@ body
 	width: 600px;
 	padding: 15px;
 	background: #FFF;
-	-webkit-border-radius: 10px;
-	-moz-border-radius: 10px;
-	border-radius: 10px;
 	word-wrap: break-word;
-	transform: translate(70vw, 0);
-}
-
-#info-box:after
-{
-	z-index: 9999;
-	content: '';
-	position: absolute;
-	border-style: solid;
-	border-width: 20px 15px 0;
-	border-color: #FFF transparent;
-	display: block;
-	width: 0;
-	bottom: -20px;
-	left: 300px;
 	transform: translate(70vw, 0);
 }
