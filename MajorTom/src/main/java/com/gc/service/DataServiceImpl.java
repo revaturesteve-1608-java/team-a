@@ -3,7 +3,6 @@ package com.gc.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +23,12 @@ import com.gc.model.Seat;
 import com.gc.model.SeatType;
 import com.gc.model.Ticket;
 
+/**
+ * Contains simple service wrappers for the Spring Data data access 
+ * methods that we used in the application
+ * 
+ * @author Craig
+ */
 @Service
 @Transactional
 public class DataServiceImpl implements DataService{

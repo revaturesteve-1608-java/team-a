@@ -5,6 +5,9 @@ import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 
+/**
+ * The mail manager service
+ */
 @Service("mailService")
 public class MailManager {
 
@@ -13,13 +16,14 @@ public class MailManager {
      
     @Autowired
     private SimpleMailMessage preConfiguredMessage;
-    
 
     /**
      * This method will send compose and send the message 
-     * */
-    public void sendMail(String to, String subject, String body) 
-    {
+     * @param to The recipient
+     * @param subject The subject
+     * @param body The body
+     */
+    public void sendMail(String to, String subject, String body) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(to);
         message.setSubject(subject);
@@ -29,9 +33,9 @@ public class MailManager {
  
     /**
      * This method will send a pre-configured message
-     * */
-    public void sendPreConfiguredMail(String message) 
-    {
+     * @param message The message
+     */
+    public void sendPreConfiguredMail(String message) {
         SimpleMailMessage mailMessage = new SimpleMailMessage(preConfiguredMessage);
         mailMessage.setText(message);
         mailSender.send(mailMessage);
