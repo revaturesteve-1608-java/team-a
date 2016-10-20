@@ -11,9 +11,13 @@ import org.springframework.stereotype.Component;
 import com.gc.dto.ReassignSeatDTO;
 import com.gc.model.MailManager;
 import com.gc.model.Seat;
-import com.gc.model.Ticket;
 import com.gc.service.DataService;
 
+/**
+ * Manages the emails sent by the application, using Spring Aspects
+ * 
+ * @author Kyle Garner
+ */
 @Aspect //Needed to tell it that it can use aspectj annotations
 @Component
 public class MailAspect {
@@ -24,11 +28,23 @@ public class MailAspect {
 	@Autowired
 	DataService dataService;
 	
+	/**
+	 * Sends an email to the specified email address informing the recipient that their 
+	 * seat reservation has been changed. Will need to be changed to seat2.getTicket.getEmail
+	 * from the static email address currently used
+	 * 
+	 * @param ProceedingJoinPoint specifying where the aspect should be run, generally taken 
+	 * care of by one of the AspectJ annotations
+	 * 
+	 * @return ResponseEntity<Seat> to pass the seat back from the AJAX request that the original 
+	 * function returned
+	 * 
+	 * @exception Throwable required by AspectJ
+	 */
 	@Around("execution(* com.gc.controller.ClientController.reassignSeat(..))")
 	public ResponseEntity<Seat> sendEmail(ProceedingJoinPoint jpp) throws Throwable{
 		Object[] args = jpp.getArgs();
 		ReassignSeatDTO seatDTO = (ReassignSeatDTO) args[1];
-		Ticket ticket = dataService.findTicketById(seatDTO.getTicketId());
 		Seat seat1 = dataService.findSeatById(seatDTO.getSeatId());
 		Seat seat2 = dataService.findSeatById(seatDTO.getSeat2Id());
 		System.out.println("Sending the email");
