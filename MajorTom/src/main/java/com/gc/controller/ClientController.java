@@ -21,9 +21,7 @@ import com.gc.model.Ticket;
 import com.gc.service.DataService;
 
 /**
- * Contains methods, mapped as RESTful services, to query and manipulate the database 
- * 
- * @author Craig Allen
+ * Contains methods, mapped as RESTful services, to query and manipulate the database
  */
 @RestController
 public class ClientController {
@@ -39,9 +37,7 @@ public class ClientController {
 	 * 
 	 * @param Integer the id of the flight to be found
 	 * 
-	 * @return ResponseEntity<Flight> the flight found by the database
-	 * 
-	 * @author Craig Allen
+	 * @return ResponseEntity<Flight> the flight found by the database, with a status of accepted or not found based on success
 	 */
 	@RequestMapping("/findFlight/{flightId}")
 	public ResponseEntity<Flight> findFlightById(@PathVariable(value = "flightId") Integer flightId) {
@@ -57,9 +53,7 @@ public class ClientController {
 	 * responds to an AngularJS request with either the list of all flights, 
 	 * and an OK status, or a null object and a NOT FOUND status if there are none
 	 *
-	 * @return ResponseEntity<List<Flight>> the list of flights from the database
-	 * 
-	 * @author Craig Allen
+	 * @return ResponseEntity<List<Flight>> the list of flights from the database, with a status of accepted or not found based on success
 	 */
 	@RequestMapping("/findAllFlights")
 	public ResponseEntity<List<Flight>> findAllFlights() {
@@ -78,9 +72,7 @@ public class ClientController {
 	 * 
 	 * @param Integer the id of the ticket to be found
 	 * 
-	 * @return ResponseEntity<Ticket> the ticket found by the database
-	 * 
-	 * @author Craig Allen
+	 * @return ResponseEntity<Ticket> the ticket found by the database, with a status of accepted or not found based on success
 	 */
 	@RequestMapping("/findTicket/{ticketId}")
 	public ResponseEntity<Ticket> findTicket(@PathVariable(value = "ticketId") Integer ticketId){
@@ -94,9 +86,7 @@ public class ClientController {
 	 * 
 	 * @param Integer the id of the seat to check
 	 * 
-	 * @return ResponseEntity<Ticket> the ticket found by the database
-	 * 
-	 * @author Craig Allen
+	 * @return ResponseEntity<Ticket> the ticket found by the database, with a status of accepted or not found based on success
 	 */
 	@RequestMapping(value = "/findTicketBySeat/{seatId}")
 	public ResponseEntity<Ticket> findTicketBySeat(@PathVariable(value = "seatId") Integer seatId) {
@@ -115,9 +105,7 @@ public class ClientController {
 	 * 
 	 * @param Integer the id of the flight to check
 	 * 
-	 * @return ResponseEntity<List<Seat>> the list of seats found by the database
-	 * 
-	 * @author Craig Allen
+	 * @return ResponseEntity<List<Seat>> the list of seats found by the database, with a status of accepted or not found based on success
 	 */
 	@RequestMapping(value = "/findSeatsByFlight/{flightId}")
 	public ResponseEntity<List<Seat>> findSeatsByFlight(@PathVariable(value = "flightId") Integer flightId) {
@@ -136,14 +124,13 @@ public class ClientController {
 	 * @param Model the login token passed back
 	 * @param AuthenticationDTO the data to check for authentication
 	 * 
-	 * @return ResponseEntity<Employee> employee with login token to use
-	 * 
-	 * @author Craig Allen
+	 * @return ResponseEntity<Employee> employee with login token to use, with a status of accepted or forbidden based on success
 	 */
 	@RequestMapping(value="/authenticate")
 	public ResponseEntity<Employee> authenticate(Model model, @RequestBody AuthenticationDTO data) {
 		emp = dataService.findEmployeeByUsernameAndPassword(data.getUsername(), data.getPassword());
 		if(emp != null) {
+			// If we have a valid login, give him/her a random authentication token 
 			int token = (int) (Math.random()*100000);
 			emp.setToken(token);
 			return new ResponseEntity<>(emp, HttpStatus.ACCEPTED);
@@ -157,9 +144,7 @@ public class ClientController {
 	 *
 	 * @param SetSeatDTO the data with the seat and ticket to pair up
 	 * 
-	 * @return ResponseEntity<Seat> the seat with attached ticket
-	 * 
-	 * @author Craig Allen
+	 * @return ResponseEntity<Seat> the seat with attached ticket, with a status of accepted or bad request based on success
 	 */
 	@RequestMapping(value="/setSeat")
 	public ResponseEntity<Seat> setSeat(@RequestBody SetSeatDTO data) {
@@ -171,7 +156,11 @@ public class ClientController {
 				// or that seat already had a ticket
 				return new ResponseEntity<>(seat, HttpStatus.BAD_REQUEST);
 			} else {
+				// If, for any reason, there are more seats containing this ticket, set them to null
+				// As it is not possible for one ticket to belong to multiple seats
 				dataService.setTicketNullWhereTicketIdEquals(ticket.getTicketId());
+				
+				// Set ticket for the selected seat
 				seat.setTicket(ticket);
 				dataService.saveSeat(seat);
 				return new ResponseEntity<>(seat, HttpStatus.ACCEPTED);
@@ -188,18 +177,19 @@ public class ClientController {
 	 * without a page refresh
 	 * @param ReassignSeatDTO the data with the two seats to switch
 	 * 
-	 * @return ResponseEntity<Seat> the new state of the first seat selected
-	 * 
-	 * @author Craig Allen
+	 * @return ResponseEntity<Seat> the new state of the first seat selected, with a status of accepted or bad request based on success
 	 */
 	@RequestMapping(value="/reassignSeat")
 	public ResponseEntity<Seat> reassignSeat(Model model, @RequestBody ReassignSeatDTO data) {
 		Ticket ticket = dataService.findTicketById(data.getTicketId());
 		Seat seat = dataService.findSeatById(data.getSeatId());
 		Seat seat2 = dataService.findSeatById(data.getSeat2Id());
-		if (ticket == null && data.getLoginToken() == emp.getToken()){
-			if(seat != null){
-				if(seat2 != null){
+		
+		// If ticket is null and tokens match
+		if (ticket == null && data.getLoginToken() == emp.getToken()) {
+			if(seat != null) {
+				if(seat2 != null) {
+					// Neither seat was null; swap the 2 seats
 					Ticket tempTicket = seat.getTicket();
 					seat.setTicket(seat2.getTicket());
 					seat2.setTicket(tempTicket);
@@ -207,24 +197,29 @@ public class ClientController {
 					dataService.saveSeat(seat2);
 					return new ResponseEntity<>(seat, HttpStatus.ACCEPTED);
 				} else {
+					// Seat 2 was null
 					seat.setTicket(null);
 					dataService.saveSeat(seat);
 					dataService.saveSeat(seat2);
 					return new ResponseEntity<>(seat, HttpStatus.ACCEPTED);
 				}
 			} else {
-				if(seat2.getTicket() != null){
+				if(seat2.getTicket() != null) {
+					// Seat 2's ticket was null
 					seat2.setTicket(null);
 					dataService.saveSeat(seat);
 					dataService.saveSeat(seat2);
 					return new ResponseEntity<>(seat, HttpStatus.ACCEPTED);
 				}
 			}
+			
+			// Return
 			return new ResponseEntity<>(seat, HttpStatus.ACCEPTED);
+			
 		} else if (ticket != null && seat != null) {
-			if(seat.getTicket().getTicketId() == ticket.getTicketId()){
+			if(seat.getTicket().getTicketId() == ticket.getTicketId()) {
 				return new ResponseEntity<>(seat, HttpStatus.ACCEPTED);
-			} else if(seat.getTicket() == null){
+			} else if(seat.getTicket() == null) {
 				seat.setTicket(ticket);
 				return new ResponseEntity<>(seat, HttpStatus.ACCEPTED);
 			} else {
@@ -240,12 +235,11 @@ public class ClientController {
 	 * 
 	 * @param Integer the employee login token to be checked
 	 * 
-	 * @return ResponseEntity<Boolean> whether or not the user is an admin
-	 * 
-	 * @author Craig Allen
+	 * @return ResponseEntity<Boolean> whether or not the user is an admin, with a status of accepted or bad request based on success
 	 */
 	@RequestMapping(value="/isAdmin/{token}")
 	public ResponseEntity<Boolean> isAdmin(@PathVariable(value = "token") Integer token) {
+		// If there is a matching token, this user is logged in as an employee ("admin")
 		if(token == emp.getToken()){
 			return new ResponseEntity<Boolean>(true, HttpStatus.ACCEPTED);
 		} else {
