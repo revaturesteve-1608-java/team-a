@@ -48,7 +48,7 @@ public class MailAspect {
 		Seat seat1 = dataService.findSeatById(seatDTO.getSeatId());
 		Seat seat2 = dataService.findSeatById(seatDTO.getSeat2Id());
 		// Sending the email
-		mailer.sendMail("kyle.james.garner@gmail.com", "Your Seat Has Been Reassigned!", "Dear "+ seat1.getTicket().getFirstName()+",\n\n"+
+		mailer.sendMail(seat1.getTicket().getEmail(), "Your Seat Has Been Reassigned!", "Dear "+ seat1.getTicket().getFirstName()+",\n\n"+
 						"\tYour flight info is as follows:\n" +
 						"\tTicket Number: " + seat1.getTicket().getTicketId() + "\n" +
 						"\tE-mail: " + seat1.getTicket().getEmail() + "\n" +
