@@ -48,7 +48,6 @@ infoApp.service('infoService', function($http, $rootScope){
 			$http.get('rest/isAdmin/'+$rootScope.loginToken, $rootScope.loginToken).then(function(response) {
 				// Check HTTP status to get the result of the function
 				var status = response.status;
-				console.log(status);
 				
 		        $scope.infoVisible = true;
 		        if (status >= 400) {
