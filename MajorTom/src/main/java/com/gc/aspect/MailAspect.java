@@ -45,7 +45,7 @@ public class MailAspect {
 	public ResponseEntity<Seat> sendEmail(ProceedingJoinPoint jpp) throws Throwable{
 		Object[] args = jpp.getArgs();
 		ReassignSeatDTO seatDTO = (ReassignSeatDTO) args[1];
-		Seat seat1 = dataService.findSeatById(seatDTO.getSeatId());
+		Seat seat1 = dataService.findSeatById(seatDTO.getSeatId()); 
 		Seat seat2 = dataService.findSeatById(seatDTO.getSeat2Id());
 		// Sending the email
 		mailer.sendMail(seat1.getTicket().getEmail(), "Your Seat Has Been Reassigned!", "Dear "+ seat1.getTicket().getFirstName()+",\n\n"+
