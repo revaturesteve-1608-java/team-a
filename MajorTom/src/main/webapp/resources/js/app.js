@@ -48,7 +48,10 @@ app.controller('mainCtrl', function($scope, $rootScope, $location, dataService){
 	$scope.setSeat = function(ticketId, seatId, seatInfo) {
 		$scope.newSeatInfo = "Loading...";
 		if (seatInfo.ticket==null){
-			dataService.setSeat(ticketId, seatId, function(response){$scope.newSeatInfo = JSON.stringify(response); $rootScope.$emit('changeFlight', $scope.selectedTicket.flight.flightId);});
+			dataService.setSeat(ticketId, seatId, function(response){
+				$scope.newSeatInfo = JSON.stringify(response); 
+				$rootScope.$emit('changeFlight', $scope.selectedTicket.flight.flightId);
+			});
 		}
 	};
 	// Asks the data service to swap 2 seats

@@ -17,7 +17,7 @@ infoApp.controller("infoController", function($scope, $rootScope, infoService) {
     })
     
     // This event is used to hide the info box and selecting glow if it is on it
-    $rootScope.$on('hideInfo', function(event) {
+    $rootScope.$on('hideInfo', function() {
     	if ($scope.infoContents) {
     		$scope.infoVisible = false;
     		var arr = $scope.infoContents.split("#");

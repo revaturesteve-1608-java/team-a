@@ -47,7 +47,7 @@ app.controller("planeController", function($scope, $rootScope, $location, planeD
 		})
 	});
 	
-	$rootScope.$on('removeSelected', function(event, data) {
+	$rootScope.$on('removeSelected', function() {
 		// This event is triggered when we want to null the selected seat
 		this.selectedSeat = null;
 	});

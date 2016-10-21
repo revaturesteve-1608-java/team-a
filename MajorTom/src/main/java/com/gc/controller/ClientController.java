@@ -241,9 +241,9 @@ public class ClientController {
 	public ResponseEntity<Boolean> isAdmin(@PathVariable(value = "token") Integer token) {
 		// If there is a matching token, this user is logged in as an employee ("admin")
 		if(token == emp.getToken()){
-			return new ResponseEntity<Boolean>(true, HttpStatus.ACCEPTED);
+			return new ResponseEntity<>(true, HttpStatus.ACCEPTED);
 		} else {
-			return new ResponseEntity<Boolean>(false, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
 		}
 	}
 }
