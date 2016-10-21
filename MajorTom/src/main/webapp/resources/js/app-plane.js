@@ -37,12 +37,7 @@ app.controller("planeController", function($scope, $rootScope, $location, planeD
         $rootScope.$emit('seatClick', this.selectedSeat);
 	};
 	
-//	$rootScope.$on('deleteOldTickets', function(event, data){
-//		for(i in me.firstclass){
-//			if(i.)
-//		}
-//	})
-//	
+
 	$rootScope.$on('changeFlight', function(event, data) {
 		// This event is triggered when the admin changes the flight (and thus, wants the airplane to change)
 		planeDataService.getFormattedSeats(data, function(response) {
