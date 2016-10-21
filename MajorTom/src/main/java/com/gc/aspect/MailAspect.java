@@ -9,9 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import com.gc.dto.ReassignSeatDTO;
-import com.gc.model.MailManager;
 import com.gc.model.Seat;
 import com.gc.service.DataService;
+import com.gc.service.MailManager;
 
 /**
  * Manages the emails sent by the application, using Spring Aspects

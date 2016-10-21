@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gc.model.MailManager;
 import com.gc.model.Seat;
 import com.gc.service.DataService;
+import com.gc.service.MailManager;
 
 @RestController
 public class TestController {
