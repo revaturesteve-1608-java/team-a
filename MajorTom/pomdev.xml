@@ -107,7 +107,7 @@
 					<server>devserver</server>
 					<username>script</username>
 					<password>welcome1</password>
-					<path>/majortomdev</path>
+					<path>/findTicket</path>
 				</configuration>
 			</plugin>
 		</plugins>

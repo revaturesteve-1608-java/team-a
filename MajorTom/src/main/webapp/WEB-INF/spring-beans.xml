@@ -70,14 +70,7 @@
             </props>
         </property>
     </bean>
-     
-    <!-- You can have some pre-configured messagess also which are ready to send -->
-    <bean id="preConfiguredMessage" class="org.springframework.mail.SimpleMailMessage">
-        <property name="to" value="kyle.james.garner@gmail.com"></property>
-        <property name="from" value="kyle.james.garner@gmail.com"></property>
-        <property name="subject" value="FATAL - Application crash. Save your job !!"/>
-    </bean>
-	
-	<!-- Find JPA Repositories -->
-	<jpa:repositories base-package="com.gc.dao" />
+
+    <!-- Find JPA Repositories -->
+    <jpa:repositories base-package="com.gc.dao" />
 </beans>
