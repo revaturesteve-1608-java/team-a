@@ -28,7 +28,7 @@ public class ClientController {
 	 * 
 	 * @return ResponseEntity<Ticket> the ticket found by the database, with a status of accepted or not found based on success
 	 */
-	@RequestMapping("/findTicket/{ticketId}")
+	@RequestMapping("/byId/{ticketId}")
 	public ResponseEntity<Ticket> findTicket(@PathVariable(value = "ticketId") Integer ticketId){
 		Ticket tick=ticketRepo.findOne(ticketId);
 		return new ResponseEntity<>(tick,tick==null?HttpStatus.NOT_FOUND:HttpStatus.ACCEPTED);
