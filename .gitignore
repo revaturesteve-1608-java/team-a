@@ -1,9 +1,9 @@
 *Servers/*
 *bin/*
 *RemoteSystemsTempFiles/*
-*target/*
+*target*
 *build/*
-*.settings/*
+*.settings*
 *.project
 *.classpath
 *.metadata/*   
