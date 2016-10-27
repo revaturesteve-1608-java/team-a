@@ -1,0 +1,44 @@
+@CHARSET "UTF-8";
+
+.home-bg {
+	background-image: url("../images/airplaneseat.jpg");
+}
+
+.main-div {
+	position: relative;
+	height: 400px;
+	width: 1200px;
+	top: 286px;
+	left:334px;
+	margin: 0px;
+}
+
+.header-div {
+	
+	height: 300px;
+	width: 100%;
+	background-color:rgba(97,14,83,0.8);
+	background: linear-gradient(135deg, rgba(65,121,173,0.8) 0%,rgba(58,155,220,0.8) 33%,rgba(35,145,219,0.8) 34%,rgba(134,197,234,0.8) 100%);
+	color:#FFF;
+  	text-align: center;
+}
+
+.inner-div {
+	
+	background-color: white;
+	height: 100%;
+}
+
+.header1{
+	color: #fff;
+	font-size:3em;
+}
+
+.header2{
+	color: #0046ff;
+	font-size:2.5em;
+}
+.header3{
+	color: #0046ff;
+	font-size:2em;
+}
