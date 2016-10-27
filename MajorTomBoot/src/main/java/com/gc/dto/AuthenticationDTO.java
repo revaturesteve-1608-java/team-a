@@ -1,10 +1,14 @@
 package com.gc.dto;
 
+import java.io.Serializable;
+
 /**
  * Data transfer object containing the necessary info to authenticate employees
  */
-public class AuthenticationDTO {
+public class AuthenticationDTO implements Serializable {
 
+	private static final long serialVersionUID = -4619161410746566565L;
+	
 	private String username;
 	private String password;
 	
