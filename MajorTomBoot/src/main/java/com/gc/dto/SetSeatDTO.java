@@ -1,10 +1,14 @@
 package com.gc.dto;
 
+import java.io.Serializable;
+
 /**
  * Data transfer object containing info related to setting seats
  */
-public class SetSeatDTO {
+public class SetSeatDTO implements Serializable {
 
+	private static final long serialVersionUID = 840054744840509755L;
+	
 	private int ticketId;
 	private int seatId;
 	

@@ -1,5 +1,6 @@
 package com.gc.dto;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,11 +9,13 @@ import com.gc.model.Seat;
 /**
  * Data transfer object containing info related to seating configurations
  */
-public class FormattedSeatsDTO {
+public class FormattedSeatsDTO implements Serializable {
 	
-	List<List<Seat>> first;
-	List<List<Seat>> buisness;
-	List<List<Seat>> economy;
+	private static final long serialVersionUID = 6794276503315971173L;
+	
+	private List<List<Seat>> first;
+	private List<List<Seat>> buisness;
+	private List<List<Seat>> economy;
 	boolean empty = true;
 	
 	/**

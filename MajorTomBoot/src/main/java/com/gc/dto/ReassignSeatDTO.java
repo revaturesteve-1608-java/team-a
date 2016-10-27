@@ -1,10 +1,14 @@
 package com.gc.dto;
 
+import java.io.Serializable;
+
 /**
  * Data transfer object containing info related to reassigning seats
  */
-public class ReassignSeatDTO {
+public class ReassignSeatDTO implements Serializable {
 
+	private static final long serialVersionUID = -1121263238078771967L;
+	
 	private int ticketId;
 	private int seatId;
 	private int seat2Id;
