@@ -144,7 +144,7 @@ public class ClientController {
 		emp = employeeRepo.findByUsernameAndPassword(data.getUsername(), data.getPassword());
 		if(emp != null) {
 			// If we have a valid login, give him/her a random authentication token 
-			int token = (int) (Math.random()*100000);
+			int token = (Java.util.Random.nextInt(100000);
 			emp.setToken(token);
 			return new ResponseEntity<>(emp, HttpStatus.ACCEPTED);
 		} else {

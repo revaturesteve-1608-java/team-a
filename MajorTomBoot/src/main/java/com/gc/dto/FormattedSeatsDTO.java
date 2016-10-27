@@ -13,9 +13,9 @@ public class FormattedSeatsDTO implements Serializable {
 	
 	private static final long serialVersionUID = 6794276503315971173L;
 	
-	List<List<Seat>> first;
-	List<List<Seat>> buisness;
-	List<List<Seat>> economy;
+	private List<List<Seat>> first;
+	private List<List<Seat>> buisness;
+	private List<List<Seat>> economy;
 	boolean empty = true;
 	
 	/**
